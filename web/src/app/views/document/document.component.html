@@ -1,0 +1,75 @@
+<ng-container *ngIf="document$ | async as inventory; else statusHandler">
+  <app-nav-bar [document]="inventory"></app-nav-bar>
+  <aside class="toolbar">
+    <div class="back visually-hidden-sm">
+      <a
+        class="link"
+        routerLink="/zoeken"
+        [queryParams]="{
+          id: undefined,
+          scan: undefined,
+          tab: undefined,
+          index: undefined
+        }"
+        queryParamsHandling="merge"
+      >
+        <app-svg-icon name="chevron-left"></app-svg-icon>
+        <span class="link-label">Terug naar zoekresultaat</span>
+      </a>
+    </div>
+    <div class="search-tools">
+      <ng-container *ngIf="loading$ | async">
+        <p class="search-text">Laden...</p>
+      </ng-container>
+      <p
+        *ngIf="hasQuery && inventory.totalHits > 1"
+        class="search-text visually-hidden-sm"
+      >
+        Resultaten gevonden in {{ inventory.totalHits }} scans
+      </p>
+      <p
+        *ngIf="hasQuery && inventory.totalHits === 1"
+        class="search-text visually-hidden-sm"
+      >
+        Resultaten gevonden in 1 scan
+      </p>
+      <p
+        *ngIf="hasQuery && inventory.totalHits === 0"
+        class="search-text visually-hidden-sm"
+      >
+        Geen resultaten gevonden
+      </p>
+      <form (submit)="onSubmitQuery($event)" class="search-form">
+        <input
+          aria-label="Voer een zoekterm in om binnen dit document te zoeken"
+          class="search-input"
+          type="text"
+          placeholder="Zoeken in document..."
+          [formControl]="search"
+        />
+        <button type="submit" class="search-button" aria-label="Zoeken">
+          <app-svg-icon name="search" variant="light"></app-svg-icon>
+        </button>
+      </form>
+    </div>
+  </aside>
+
+  <main id="main-content" class="document">
+    <div class="main">
+      <app-panes></app-panes>
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</ng-container>
+
+<ng-template #statusHandler>
+  <ng-container *ngIf="loading$ | async">
+    <app-document-placeholder></app-document-placeholder>
+  </ng-container>
+  <ng-container *ngIf="error$ | async as error">
+    <div class="error">
+      <h1>Er ging iets fout</h1>
+      <p>Probeer het later opnieuw</p>
+    </div>
+  </ng-container>
+</ng-template>

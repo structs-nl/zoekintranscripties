@@ -1,0 +1,42 @@
+<div class="text">
+  <ng-container *ngFor="let region of regions">
+    <div
+      class="region"
+      [class.region-active]="activeRegion === region"
+      (mouseenter)="changeRegion(region)"
+      (mouseleave)="changeActiveRegion.emit(undefined)"
+    >
+      <ng-container *ngFor="let line of region.lines">
+        <div class="line" *ngIf="line.length > 0">
+          <p>
+            <ng-container *ngFor="let token of line; let i = index">
+              <span
+                *ngIf="token.type"
+                [title]="'Herkend als ' + typeMap[token.type]"
+                [ngClass]="{
+                  name: true,
+                  'name-time': token.type === 'time',
+                  'name-location': token.type === 'location',
+                  'name-person': token.type === 'person',
+                  active: token | deepEqual: activeToken,
+                  query: token | includesToken: queryTokens
+                }"
+                (mouseenter)="changeActiveToken.emit(token)"
+                (mouseleave)="changeActiveToken.emit(undefined)"
+                >{{ token[modernized ? "modernized" : "original"] }}</span
+              >
+              <span
+                *ngIf="!token.type"
+                [class.active]="token | deepEqual: activeToken"
+                [class.query]="token | includesToken: queryTokens"
+                (mouseenter)="changeActiveToken.emit(token)"
+                (mouseleave)="changeActiveToken.emit(undefined)"
+                >{{ token[modernized ? "modernized" : "original"] }}</span
+              >{{ i !== line.length && " " }}
+            </ng-container>
+          </p>
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>

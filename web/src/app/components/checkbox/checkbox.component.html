@@ -1,0 +1,15 @@
+<div class="input">
+  <input
+    #checkbox
+    type="checkbox"
+    class="checkbox"
+    [id]="name"
+    [name]="name"
+    [checked]="checked"
+    [indeterminate]="partiallySelected"
+  />
+  <label class="label" (change)="onChange($event)" [for]="name">
+    <span class="label-title">{{ label }}</span>
+    <span class="label-count" *ngIf="count" [title]="'In deze toegang zijn ' + count + ' inventarisnummers gevonden die voldoen aan de zoekopdracht'">{{ count }}</span>
+  </label>
+</div>

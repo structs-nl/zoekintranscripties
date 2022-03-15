@@ -1,0 +1,25 @@
+<div class="node" *ngIf="tree">
+  <div class="node-title">
+    <div class="icon" *ngIf="!isTopLevel">
+      <app-svg-icon
+        variant="blue"
+        width="12"
+        height="12"
+        name="subdirectory-right"
+      ></app-svg-icon>
+    </div>
+    <p class="title">
+      <strong *ngIf="tree.value.id">{{ tree.value.id }}</strong>
+      {{ tree.value.title }}
+    </p>
+  </div>
+  <p class="description" *ngIf="tree.value.description">
+    {{ tree.value.description }}
+  </p>
+  <div class="list" [class.top-level]="isTopLevel">
+    <app-hierarchy-node
+      *ngFor="let subtree of tree.children"
+      [tree]="subtree"
+    ></app-hierarchy-node>
+  </div>
+</div>

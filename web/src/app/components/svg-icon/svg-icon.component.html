@@ -1,0 +1,15 @@
+<svg
+  *ngIf="name && icons[name]"
+  class="icon"
+  [class.light]="variant === 'light'"
+  [class.dark]="variant === 'dark'"
+  [class.blue]="variant === 'blue'"
+  xmlns="http://www.w3.org/2000/svg"
+  [attr.viewBox]="viewBox"
+  [attr.width]="width"
+  [attr.height]="height"
+  [attr.aria-labelledby]="name + '-title'"
+>
+  <title [id]="name + 'title'">{{ name }}</title>
+  <svg:path [attr.d]="icons[name]" fill-rule="even-odd"></svg:path>
+</svg>

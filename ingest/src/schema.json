@@ -1,0 +1,422 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "AnnotationImageBody": {
+            "properties": {
+                "@id": {
+                    "type": "string"
+                },
+                "@type": {
+                    "enum": [
+                        "Image"
+                    ],
+                    "type": "string"
+                },
+                "format": {
+                    "type": "string"
+                },
+                "height": {
+                    "type": "number"
+                },
+                "service": {
+                    "properties": {
+                        "@id": {
+                            "type": "string"
+                        },
+                        "@type": {
+                            "type": "string"
+                        },
+                        "profile": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "width": {
+                    "type": "number"
+                }
+            },
+            "type": "object"
+        },
+        "AnnotationPage<AnnotationPainting>": {
+            "properties": {
+                "items": {
+                    "items": {
+                        "$ref": "#/definitions/AnnotationPainting"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "enum": [
+                        "AnnotationPage"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "AnnotationPage<AnnotationSupplementing>": {
+            "properties": {
+                "items": {
+                    "items": {
+                        "$ref": "#/definitions/AnnotationSupplementing"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "enum": [
+                        "AnnotationPage"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "AnnotationPainting": {
+            "properties": {
+                "@type": {
+                    "enum": [
+                        "Annotation"
+                    ],
+                    "type": "string"
+                },
+                "body": {
+                    "$ref": "#/definitions/AnnotationImageBody"
+                },
+                "motivation": {
+                    "enum": [
+                        "painting"
+                    ],
+                    "type": "string"
+                },
+                "target": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "AnnotationSupplementing": {
+            "properties": {
+                "@type": {
+                    "enum": [
+                        "Annotation"
+                    ],
+                    "type": "string"
+                },
+                "body": {
+                    "$ref": "#/definitions/AnnotationTextBody"
+                },
+                "motivation": {
+                    "enum": [
+                        "supplementing"
+                    ],
+                    "type": "string"
+                },
+                "target": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "AnnotationTextBody": {
+            "properties": {
+                "@type": {
+                    "enum": [
+                        "Text"
+                    ],
+                    "type": "string"
+                },
+                "regions": {
+                    "items": {
+                        "$ref": "#/definitions/Region"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "Canvas": {
+            "properties": {
+                "@id": {
+                    "type": "string"
+                },
+                "@type": {
+                    "enum": [
+                        "Canvas"
+                    ],
+                    "type": "string"
+                },
+                "annotations": {
+                    "items": {
+                        "$ref": "#/definitions/AnnotationPage<AnnotationSupplementing>"
+                    },
+                    "type": "array"
+                },
+                "height": {
+                    "type": "number"
+                },
+                "items": {
+                    "items": {
+                        "$ref": "#/definitions/AnnotationPage<AnnotationPainting>"
+                    },
+                    "type": "array"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "width": {
+                    "type": "number"
+                }
+            },
+            "type": "object"
+        },
+        "EntityDate": {
+            "properties": {
+                "@id": {
+                    "type": "string"
+                },
+                "@type": {
+                    "enum": [
+                        "xsd:dateTime"
+                    ],
+                    "type": "string"
+                },
+                "dcterms:date": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "EntityName": {
+            "properties": {
+                "@id": {
+                    "type": "string"
+                },
+                "@type": {
+                    "enum": [
+                        "pnv:PersonName"
+                    ],
+                    "type": "string"
+                },
+                "literalName": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "EntityPlace": {
+            "properties": {
+                "@id": {
+                    "type": "string"
+                },
+                "@type": {
+                    "enum": [
+                        "https://rdf.histograph.io/PlaceInTime"
+                    ],
+                    "type": "string"
+                },
+                "rdfs:label": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "GeoGeometry": {
+            "properties": {
+                "geo:coordinates": {
+                    "items": {
+                        "items": {
+                            "type": "number"
+                        },
+                        "type": "array"
+                    },
+                    "type": "array"
+                },
+                "geo:type": {
+                    "enum": [
+                        "Polygon"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Line": {
+            "properties": {
+                "words": {
+                    "items": {
+                        "$ref": "#/definitions/Word"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "Manifest": {
+            "properties": {
+                "@id": {
+                    "type": "string"
+                },
+                "@type": {
+                    "enum": [
+                        "Manifest"
+                    ],
+                    "type": "string"
+                },
+                "items": {
+                    "items": {
+                        "$ref": "#/definitions/ManifestCanvas"
+                    },
+                    "type": "array"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "seeAlso": {
+                    "properties": {
+                        "rico:RecordSet": {
+                            "$ref": "#/definitions/RicoRecordSet"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "ManifestCanvas": {
+            "properties": {
+                "@id": {
+                    "type": "string"
+                },
+                "@type": {
+                    "enum": [
+                        "Canvas"
+                    ],
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Region": {
+            "properties": {
+                "geo:geometry": {
+                    "$ref": "#/definitions/GeoGeometry"
+                },
+                "lines": {
+                    "items": {
+                        "$ref": "#/definitions/Line"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "RicoRecord": {
+            "properties": {
+                "rico:Record": {
+                    "$ref": "#/definitions/RicoRecord"
+                },
+                "rico:hasDocumentaryFormType": {
+                    "type": "string"
+                },
+                "rico:identifier": {
+                    "type": "string"
+                },
+                "rico:managedBy": {
+                    "type": "string"
+                },
+                "rico:publishedBy": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "RicoRecordSet": {
+            "properties": {
+                "html:p": {
+                    "type": "string"
+                },
+                "rico:RecordSet": {
+                    "$ref": "#/definitions/RicoRecordSet"
+                },
+                "rico:date": {
+                    "type": "string"
+                },
+                "rico:hasRecordSetType": {
+                    "type": "string"
+                },
+                "rico:identifier": {
+                    "type": "string"
+                },
+                "rico:includedIn": {
+                    "$ref": "#/definitions/RicoRecordSet"
+                },
+                "rico:includes": {
+                    "items": {
+                        "$ref": "#/definitions/RicoRecordSet"
+                    },
+                    "type": "array"
+                },
+                "rico:isDescribedBy": {
+                    "$ref": "#/definitions/RicoRecord"
+                },
+                "rico:title": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Word": {
+            "properties": {
+                "geo:geometry": {
+                    "$ref": "#/definitions/GeoGeometry"
+                },
+                "modernized": {
+                    "type": "string"
+                },
+                "named_entity": {
+                    "type": "string"
+                },
+                "original": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "properties": {
+        "@context": {
+            "type": "string"
+        },
+        "@graph": {
+            "items": {
+                "anyOf": [
+                    {
+                        "$ref": "#/definitions/EntityDate"
+                    },
+                    {
+                        "$ref": "#/definitions/EntityName"
+                    },
+                    {
+                        "$ref": "#/definitions/EntityPlace"
+                    },
+                    {
+                        "$ref": "#/definitions/Manifest"
+                    },
+                    {
+                        "$ref": "#/definitions/Canvas"
+                    }
+                ]
+            },
+            "type": "array"
+        },
+        "versie": {
+            "type": "string"
+        }
+    },
+    "type": "object"
+}
+

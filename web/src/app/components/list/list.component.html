@@ -1,0 +1,56 @@
+<virtual-scroller
+  #scroll
+  [enableUnequalChildrenSizes]="true"
+  [items]="buffer"
+  [parentScroll]="scroll.window"
+  (vsStart)="fetchMore($event)"
+  (vsEnd)="fetchMore($event)"
+  (vsChange)="onChange($event)"
+>
+  <ng-container *ngIf="query || hasActiveFilters">
+    <app-search-result
+      *ngFor="let item of scroll.viewPortItems"
+      [result]="item"
+    ></app-search-result>
+  </ng-container>
+
+  <app-search-result-placeholder
+    *ngIf="loading"
+  ></app-search-result-placeholder>
+
+  <div *ngIf="error" class="empty">
+    <h2 class="title">Er ging iets fout...</h2>
+    <p>Probeer het (later) opnieuw</p>
+    <img
+      width="300"
+      height="300"
+      class="image"
+      src="assets/images/error.svg"
+      alt="Zoeken in archieven"
+    />
+  </div>
+
+  <div *ngIf="!loading && !error && !query && !hasActiveFilters" class="empty">
+    <h2 class="title">Zoeken in transcripties</h2>
+    <p>Voer uw zoektermen in om te beginnen met zoeken</p>
+    <img
+      width="300"
+      height="300"
+      class="image"
+      src="assets/images/search.svg"
+      alt="Zoeken in archieven"
+    />
+  </div>
+
+  <div *ngIf="!error && buffer.length === 0 && !loading" class="empty">
+    <h2 class="title">Geen resultaten gevonden</h2>
+    <p>Probeer een andere zoekopdracht of pas de filters aan.</p>
+    <img
+      width="300"
+      height="300"
+      class="image"
+      src="assets/images/empty.svg"
+      alt="Zoeken in archieven"
+    />
+  </div>
+</virtual-scroller>

@@ -1,0 +1,51 @@
+<div class="viewer-wrapper">
+  <div class="viewer-buttons">
+    <button
+      id="document-zoom-in"
+      data-testid="viewer-zoom-in"
+      class="viewer-action"
+      title="Inzoomen"
+    >
+      <app-svg-icon name="zoom-in" variant="light"></app-svg-icon>
+    </button>
+    <button
+      id="document-zoom-out"
+      data-testid="viewer-zoom-out"
+      class="viewer-action"
+      title="Uitzoomen"
+    >
+      <app-svg-icon name="zoom-out" variant="light"></app-svg-icon>
+    </button>
+    <button
+      id="document-zoom-home"
+      data-testid="viewer-zoom-home"
+      class="viewer-action"
+      title="Passend in venster"
+    >
+      <app-svg-icon name="window" variant="light"></app-svg-icon>
+    </button>
+    <button
+      id="document-rotate-left"
+      data-testid="viewer-rotate-left"
+      class="viewer-action"
+      title="Roteer scan naar links"
+    >
+      <app-svg-icon name="rotate-left" variant="light" viewBox="0 0 32 32"></app-svg-icon>
+    </button>
+    <button
+      id="document-rotate-right"
+      data-testid="viewer-rotate-right"
+      class="viewer-action"
+      title="Roteer scan naar rechts"
+    >
+      <app-svg-icon name="rotate-right" variant="light" viewBox="0 0 32 32"></app-svg-icon>
+    </button>
+  </div>
+
+  <div
+    [style.height.px]="canvasHeight"
+    id="document-viewer"
+    class="viewer"
+    data-testid="document-viewer"
+  ></div>
+</div>

@@ -1,0 +1,46 @@
+{
+  "entryFile": "src/index.ts",
+  "noImplicitAdditionalProperties": "throw-on-extras",
+  "controllerPathGlobs": ["src/**/controller.ts"],
+  "spec": {
+    "outputDirectory": "src/routes",
+    "specVersion": 3,
+    "specMerging": "recursive",
+    "spec": {
+      "servers": [
+        {
+          "url": "https://ingest.zoekintranscripties.nl",
+          "description": "Production"
+        },
+        {
+          "url": "http://localhost:5000",
+          "description": "Development"
+        }
+      ],
+      "paths": {
+        "/upload": {
+          "post": {
+            "requestBody": {
+              "content": {
+                "multipart/form-data": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "file": {
+                        "type": "string",
+                        "format": "binary"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "routes": {
+    "routesDir": "src/routes"
+  }
+}

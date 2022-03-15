@@ -1,0 +1,16 @@
+.loader {
+  padding: 20px;
+}
+
+.empty {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.image {
+  padding: 20px;
+}
+
+.title {
+  color: var(--primary-color);
+}

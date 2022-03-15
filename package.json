@@ -1,0 +1,54 @@
+{
+  "name": "na-transcripties-zoeken-tonen",
+  "version": "0.1.0",
+  "description": "",
+  "scripts": {
+    "start": "lerna run start:dev --parallel",
+    "test": "lerna run test --parallel",
+    "lint": "npm run lint:ts && npm run lint:style",
+    "lint:ts": "eslint . --ext .ts,.component.html",
+    "lint:style": "stylelint \"web/src/**/*.css\"",
+    "postinstall": "lerna bootstrap"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/cleancode-ams/na-transcripties-zoeken-tonen.git"
+  },
+  "contributors": [
+    "Tom Dalenberg <tom@dalenberg.nl>",
+    "Robert Goené <robert@goene.nl>"
+  ],
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/cleancode-ams/na-transcripties-zoeken-tonen#readme",
+  "devDependencies": {
+    "@angular-eslint/eslint-plugin": "0.1.0-beta.1",
+    "@angular-eslint/eslint-plugin-template": "0.1.0-beta.1",
+    "@angular-eslint/template-parser": "0.1.0-beta.1",
+    "@angular/compiler": "^10.0.11",
+    "@typescript-eslint/eslint-plugin": "^3.9.1",
+    "@typescript-eslint/parser": "^3.9.1",
+    "eslint": "^7.7.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "lerna": "^2.11.0",
+    "stylelint": "^13.6.1",
+    "stylelint-config-standard": "^20.0.0",
+    "typescript": "^3.9.7"
+  },
+  "dependencies": {
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "moo": "^0.5.1",
+    "prettier": "^2.0.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,component.html}": "eslint . --ext .ts,.component.html --fix",
+    "*.{ts,css,md}": "prettier --write",
+    "*.css": "stylelint \"web/src/**/*.css\""
+  }
+}

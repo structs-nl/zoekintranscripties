@@ -1,0 +1,68 @@
+.text {
+  line-height: 1.5;
+  counter-reset: line;
+}
+
+.region {
+  counter-reset: line;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  padding-left: 2px;
+  border-bottom: 1px solid var(--secondary-color);
+}
+
+.region:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.line {
+  display: flex;
+  align-items: flex-start;
+}
+
+.line p {
+  flex: 1;
+  margin: 0;
+}
+
+.line::before {
+  font-family: monospace, sans-serif;
+  counter-increment: line;
+  content: counter(line);
+  color: var(--primary-color);
+  display: block;
+  width: 22px;
+  text-align: right;
+  font-size: 12px;
+  margin-top: 2px;
+  margin-right: 8px;
+}
+
+.query {
+  background-color: rgba(240, 11, 11, 0.2);
+}
+
+.name-location {
+  border-bottom: 2px dotted var(--primary-color);
+}
+
+.name-person {
+  text-decoration: underline wavy rgb(241, 7, 7);
+}
+
+.name-time {
+  border-bottom: 2px dashed rgb(97, 141, 47);
+}
+
+@media (min-width: 600px) {
+  .region-active {
+    padding-left: 0;
+    border-left: 2px solid var(--primary-color);
+  }
+
+  .active,
+  .text span:hover {
+    background-color: rgba(240, 11, 11, 0.2);
+  }
+}

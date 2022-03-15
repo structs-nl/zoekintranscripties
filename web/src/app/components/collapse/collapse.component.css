@@ -1,0 +1,19 @@
+.section {
+  border-bottom: 1px solid #e2e8f0;
+  padding: 20px;
+}
+
+.title {
+  font-size: 14px;
+  color: var(--primary-color);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 0;
+  background: none;
+  padding: 0;
+  width: 100%;
+}

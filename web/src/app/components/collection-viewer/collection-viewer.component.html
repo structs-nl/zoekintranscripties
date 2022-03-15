@@ -1,0 +1,153 @@
+<div class="actions">
+  <p *ngIf="loading$ | async">Laden...</p>
+  <div class="action-buttons" *ngIf="naViewer">
+    <button
+      *ngIf="query"
+      title="Ga naar vorige zoekresultaat"
+      data-testid="viewer-previous-result"
+      [disabled]="(hasPreviousResult$ | async) === false"
+      class="action action-btn"
+      type="button"
+      (click)="previousResult($event)"
+    >
+      <app-svg-icon name="backward"></app-svg-icon>
+      <span class="action-label visually-hidden-sm">
+        Vorige hit
+      </span>
+    </button>
+    <button
+      type="button"
+      [disabled]="!naViewer.hasPrevious"
+      (click)="previous()"
+      data-testid="viewer-previous"
+      class="action"
+    >
+      <app-svg-icon
+        name="chevron-left"
+        [variant]="naViewer.hasPrevious ? 'dark' : 'medium'"
+      ></app-svg-icon>
+      <span class="action-label visually-hidden-sm">
+        Vorige scan
+      </span>
+    </button>
+    <form (submit)="onSubmitChangePage($event)" class="action page-selector">
+      <input
+        aria-label="Huidige pagina"
+        class="page-input"
+        type="number"
+        [formControl]="pageIndex"
+        (blur)="onSubmitChangePage($event)"
+        type="number"
+        min="0"
+        [max]="manifest.totalPages"
+        data-testid="viewer-page-input"
+      />
+      <button
+        class="visually-hidden-sm page-button"
+        data-testid="viewer-page-button"
+        title="Ga naar pagina"
+      >
+        Ga
+      </button>
+      <span class="page-total visually-hidden-sm" data-testid="viewer-total"
+        >van {{ manifest.totalPages }}</span
+      >
+    </form>
+    <button
+      type="button"
+      [disabled]="!naViewer.hasNext"
+      (click)="next()"
+      class="action"
+      data-testid="viewer-next"
+    >
+      <span class="action-label visually-hidden-sm">
+        Volgende scan
+      </span>
+      <app-svg-icon
+        name="chevron-right"
+        [variant]="naViewer.hasNext ? 'dark' : 'medium'"
+      ></app-svg-icon>
+    </button>
+    <button
+      *ngIf="query"
+      [disabled]="(hasNextResult$ | async) === false"
+      data-testid="viewer-next-result"
+      class="action action-btn"
+      title="Ga naar volgend zoekresultaat"
+      (click)="nextResult($event)"
+    >
+      <span class="action-label visually-hidden-sm">
+        Volgende hit
+      </span>
+      <app-svg-icon name="forward"></app-svg-icon>
+    </button>
+  </div>
+</div>
+
+<div class="viewer-buttons">
+  <button
+    id="zoom-in"
+    data-testid="viewer-zoom-in"
+    class="viewer-action"
+    title="Inzoomen"
+  >
+    <app-svg-icon name="zoom-in" variant="light"></app-svg-icon>
+  </button>
+  <button
+    id="zoom-out"
+    data-testid="viewer-zoom-out"
+    class="viewer-action"
+    title="Uitzoomen"
+  >
+    <app-svg-icon name="zoom-out" variant="light"></app-svg-icon>
+  </button>
+  <button
+    (click)="zoomFit()"
+    data-testid="viewer-zoom-home"
+    class="viewer-action"
+    title="Passend in venster"
+  >
+    <app-svg-icon name="window" variant="light"></app-svg-icon>
+  </button>
+  <!-- <button
+    id="rotate-left"
+    data-testid="viewer-rotate-left"
+    class="viewer-action"
+    title="Roteer scan naar links"
+  >
+    <app-svg-icon name="rotate-left" variant="light" viewBox="0 0 32 32"></app-svg-icon>
+  </button>
+  <button
+    id="rotate-right"
+    data-testid="viewer-rotate-right"
+    class="viewer-action"
+    title="Roteer scan naar rechts"
+  >
+    <app-svg-icon name="rotate-right" variant="light" viewBox="0 0 32 32"></app-svg-icon>
+  </button> -->
+</div>
+<div
+  class="viewer"
+  id="collection-viewer"
+  data-testid="viewer-collection-viewer"
+></div>
+
+<div class="visually-hidden">
+  <ul>
+    <li *ngFor="let transcription of transcriptions">
+      <h2>
+        <a
+          routerLink="/zoeken/scan"
+          [queryParams]="{
+            scan: transcription.id,
+            tab: undefined
+          }"
+          queryParamsHandling="merge"
+          [attr.tabindex]="-1"
+        >
+          {{ transcription.label }}
+        </a>
+      </h2>
+    </li>
+  </ul>
+</div>

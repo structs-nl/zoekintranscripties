@@ -1,0 +1,269 @@
+/* Update variables in polyfills.ts as well for IE11 browser support */
+:root {
+  --primary-color: #007bc7;
+  --secondary-color: #cce0f1;
+  --lightest: #f7fafd;
+  --darker: #4b4646;
+}
+
+body {
+  background-color: var(--lightest);
+  color: var(--darker);
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  padding: 0;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 4px 0 14px;
+}
+
+h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 4px 0;
+}
+
+p {
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 4px 0 14px;
+}
+
+a {
+  color: #065a8e;
+}
+
+input,
+button {
+  font-family: inherit;
+  font-size: 16px;
+}
+
+ul {
+  margin: 0 0 20px;
+  padding: 0 0 0 20px;
+}
+
+hr {
+  background-color: var(--secondary-color);
+  height: 2px;
+  border: 0;
+  margin: 14px 0;
+}
+
+button {
+  cursor: pointer;
+  margin: 0;
+}
+
+.highlight {
+  background-color: rgba(240, 11, 11, 0.2);
+}
+
+/* NOTE: fixes bug where ios would render too large font-sizes */
+@media screen and (max-device-width: 480px) {
+  body {
+    -webkit-text-size-adjust: none;
+  }
+}
+
+/* NOTE: custom select styles */
+.select {
+  display: inline-block;
+  margin: 2px 0;
+  border: 1px solid var(--secondary-color);
+  background-color: #fff;
+  border-radius: 5px;
+  overflow: hidden;
+  color: var(--darker);
+  padding: 6px 20px 6px 10px;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  box-sizing: border-box;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23333333%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat, repeat;
+  background-position: right 0.7em top 50%, 0 0;
+  background-size: 0.65em auto, 100%;
+}
+
+@media (max-width: 600px) {
+  .select {
+    max-width: 100px;
+  }
+}
+
+.select::-ms-expand {
+  display: none;
+}
+
+.select option {
+  font-weight: normal;
+}
+
+/* NOTE: global helpers functions */
+.openseadragon-container:focus {
+  outline: 2px solid var(--primary-color);
+}
+
+.visually-hidden {
+  position: absolute;
+  opacity: 0;
+  height: 0;
+  font-size: 1px;
+  left: -99999px;
+}
+
+.truncate {
+  text-overflow: ellipsis;
+  min-width: 100px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+@media (max-width: 799px) {
+  .visually-hidden-sm {
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    font-size: 1px;
+    left: -99999px;
+  }
+}
+
+/* NOTE: Global styles for range slider */
+.noUi-target,
+.noUi-target * {
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-user-select: none;
+  -ms-touch-action: none;
+  touch-action: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.noUi-target {
+  position: relative;
+  background: #fafafa;
+}
+
+.noUi-base,
+.noUi-connects {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.noUi-connects {
+  overflow: hidden;
+  z-index: 0;
+}
+
+.noUi-connect,
+.noUi-origin {
+  will-change: transform;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  -ms-transform-origin: 0 0;
+  -webkit-transform-origin: 0 0;
+  -webkit-transform-style: preserve-3d;
+  transform-origin: 0 0;
+  transform-style: flat;
+}
+
+.noUi-connect {
+  height: 100%;
+  width: 100%;
+  background-color: var(--primary-color);
+}
+
+.noUi-origin {
+  height: 10%;
+  width: 10%;
+}
+
+.noUi-horizontal .noUi-origin {
+  height: 0;
+}
+
+.noUi-handle {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  position: absolute;
+  border: 2px solid var(--primary-color);
+  display: block;
+  border-radius: 50%;
+  background: #fff;
+  cursor: default;
+}
+
+.noUi-touch-area {
+  height: 100%;
+  width: 100%;
+}
+
+.noUi-state-tap .noUi-connect,
+.noUi-state-tap .noUi-origin {
+  -webkit-transition: transform 0.3s;
+  transition: transform 0.3s;
+}
+
+.noUi-state-drag * {
+  cursor: inherit !important;
+}
+
+.noUi-horizontal {
+  height: 4px;
+}
+
+.noUi-horizontal .noUi-handle {
+  width: 18px;
+  height: 18px;
+  right: -10px;
+  top: -6px;
+}
+
+.noUi-draggable {
+  cursor: ew-resize;
+}
+
+.noUi-active {
+  box-shadow: inset 0 0 1px #fff, inset 0 1px 7px #ddd, 0 3px 6px -3px #bbb;
+}
+
+/* NOTE: tree component */
+.tree-children {
+  padding-left: 12px;
+}
+
+.browsehappy {
+  display: block;
+  position: relative;
+  margin: 0;
+  padding: 30px 20px;
+  background: yellow;
+  font-size: 20px;
+  text-align: center;
+}

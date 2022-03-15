@@ -1,0 +1,105 @@
+<div *ngIf="result" class="search-result">
+  <div class="inner">
+    <h2 class="title">
+      <a
+        class="title-link"
+        [attr.aria-label]="'Bekijk het inventarisnummer'"
+        [routerLink]="['document']"
+        [queryParams]="{
+          id: result.id,
+          index: 1,
+          tab:
+            result.highlights.length > 0 &&
+            descriptionHighlightSize === result.highlights.length
+              ? 'meta'
+              : undefined
+        }"
+        queryParamsHandling="merge"
+      >
+        <span *ngIf="result.title" [innerHTML]="result.title"></span>
+        <span *ngIf="!result.title">Geen titel beschikbaar</span>
+      </a>
+    </h2>
+    <div class="metadata">
+      <div class="meta archive">
+        <app-svg-icon
+          name="folder-outline"
+          width="12"
+          height="12"
+        ></app-svg-icon>
+        <span class="meta-text">{{ result.archive }}</span>
+      </div>
+      <div class="meta archive">
+        <app-svg-icon
+          name="folder-outline"
+          width="12"
+          height="12"
+        ></app-svg-icon>
+        <span class="meta-text">{{ result.access }}</span>
+      </div>
+      <div class="meta" *ngIf="date">
+        <app-svg-icon name="calendar" width="12" height="12"></app-svg-icon>
+        <span class="meta-text">{{ date }}</span>
+      </div>
+      <div class="meta">
+        <app-svg-icon name="document" width="12" height="12"></app-svg-icon>
+        <span class="meta-text">Inventarisnr: {{ result.inventory }}</span>
+      </div>
+    </div>
+    <div
+      class="highlights"
+      *ngIf="result.highlights && result.highlights.length > 0"
+    >
+      <ng-container *ngFor="let highlight of result.highlights; let i = index">
+        <ng-container *ngIf="i < 5">
+          <a
+            class="highlight"
+            *ngIf="highlight.type === 'description'"
+            [routerLink]="['document']"
+            [queryParams]="{
+              id: result.id,
+              tab: 'meta'
+            }"
+            queryParamsHandling="merge"
+          >
+            <span class="highlight-text" [innerHTML]="highlight.text"></span>
+            <span class="highlight-page">
+              Naar beschrijving
+              <app-svg-icon name="chevron-right"></app-svg-icon>
+            </span>
+          </a>
+          <a
+            class="highlight"
+            *ngIf="highlight.type !== 'description'"
+            [routerLink]="['scan']"
+            [queryParams]="{
+              id: result.id,
+              scan: highlight.page
+            }"
+            queryParamsHandling="merge"
+          >
+            <span class="highlight-text" [innerHTML]="highlight.text"></span>
+            <span class="highlight-page">
+              Naar scan
+              <app-svg-icon name="chevron-right"></app-svg-icon>
+            </span>
+          </a>
+        </ng-container>
+      </ng-container>
+      <a
+        *ngIf="result.totalHits > 5"
+        class="more"
+        [attr.aria-label]="
+          'Bekijk alle zoekresultaten binnen dit inventarisnummer'
+        "
+        [routerLink]="['document']"
+        [queryParams]="{
+          id: result.id
+        }"
+        queryParamsHandling="merge"
+      >
+        Bekijk alle {{ result.totalHits }} scans met resultaten
+      </a>
+    </div>
+  </div>
+</div>

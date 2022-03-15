@@ -1,0 +1,170 @@
+<h1 class="title">Zoekhulp</h1>
+
+<mat-dialog-content class="modal">
+  <table class="table">
+    <thead>
+      <tr>
+        <th><p class="example">"Voorbeeld zoekopdracht"</p></th>
+        <th><p>Uitleg bij het voorbeeld</p></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <p class="example">
+            batavia schip
+          </p>
+        </td>
+        <td>
+          <p>
+            beide termen moeten voorkomen
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p class="example">
+            “den haag”
+          </p>
+        </td>
+        <td>
+          <p>
+            termen moeten naast elkaar voorkomen
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p class="example">
+            batavia NOT schip
+          </p>
+        </td>
+        <td>
+          <p>
+            batavia moet voorkomen en schip mag niet voorkomen
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p class="example">
+            amsterdam OR rotterdam
+          </p>
+        </td>
+        <td>
+          <p>
+            één van de twee termen moet voorkomen
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p class="example">
+            (amsterdam OR rotterdam) NOT schip
+          </p>
+        </td>
+        <td>
+          <p>
+            je kan ook een combinatie maken van verschillende opties
+          </p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Geavanceerd</h2>
+
+  <table class="table">
+    <tbody>
+      <tr>
+        <td>
+          <p class="example">
+            amsterdam~
+          </p>
+        </td>
+        <td>
+          <p>
+            amsterdam of een variant die één karakter verschilt moet voorkomen
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p class="example">
+            ?aar
+          </p>
+        </td>
+        <td>
+          <p>
+            een vraagteken staat voor een willekeurig karakter: paar, daar,
+            waar, ect
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p class="example">
+            ams*
+          </p>
+        </td>
+        <td>
+          <p>
+            een ster staat voor geen of meerdere willekeurige karakters: ams,
+            amstel, amsterdam, ect
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p class="example">
+            “schip batavia”~10
+          </p>
+        </td>
+        <td>
+          <p>schip en batavia moeten maximaal 10 woorden van elkaar staan</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p class="example">
+            schip^3
+          </p>
+        </td>
+        <td>
+          <p>
+            schip is drie keer belangrijker in de weging
+          </p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Expert</h2>
+
+  <table class="table">
+    <tbody>
+      <tr>
+        <td>
+          <p class="example">/reguliere expressie/</p>
+        </td>
+        <td>
+          <p>
+            Je kan gebruik maken de volgende expressies:
+            <code>{{ ". * ? + | a{1,3} [abc] [^z]" }}</code
+            >. Zie de
+            <a
+              href="https://www.elastic.co/guide/en/elasticsearch/reference/current/regexp-syntax.html"
+              target="_blank"
+              nofollow
+              noreferrer
+              >complete syntax beschrijving</a
+            >.
+          </p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button class="close" mat-dialog-close cdkFocusInitial>Sluiten</button>
+</mat-dialog-actions>

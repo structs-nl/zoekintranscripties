@@ -1,0 +1,28 @@
+.node-title {
+  display: flex;
+  align-items: flex-start;
+}
+
+.title {
+  font-size: 12px;
+  margin: 0;
+  font-weight: 500;
+}
+
+.icon {
+  padding: 4px 4px 0 0;
+}
+
+.list {
+  padding-left: 0;
+}
+
+.top-level {
+  padding-left: 0;
+}
+
+.description {
+  font-size: 12px;
+  line-height: 1.4;
+  margin-left: 16px;
+}

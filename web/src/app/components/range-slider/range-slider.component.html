@@ -1,0 +1,55 @@
+<div class="wrapper">
+  <div class="buckets" *ngIf="buckets">
+    <div
+      *ngFor="let bucket of buckets"
+      [style.width.%]="(1 / buckets.length) * 100"
+      [matTooltip]="
+        'Van ' +
+        bucket.label +
+        '-' +
+        (bucket.label + interval) +
+        ' zijn ' +
+        bucket.count +
+        ' inventarisnummers gevonden die voldoen aan de zoekopdracht'
+      "
+    >
+      <div
+        class="bar"
+        [class.active]="
+          bucket.label >= computedValue[0] && bucket.label <= computedValue[1]
+        "
+        [style.height.px]="bucket | calculateHeight: buckets"
+      >
+        <!-- <span class="bar-count">{{ bucket.count }}</span> -->
+      </div>
+    </div>
+  </div>
+
+  <div #slider class="slider"></div>
+
+  <div class="inputs">
+    <input
+      class="input"
+      name="lower"
+      (change)="updateRange($event)"
+      [step]="step"
+      [value]="computedValue[0]"
+      [min]="min"
+      [max]="computedValue[1]"
+      type="number"
+      aria-label="Jaartal begin"
+    />
+    <span class="text">tot</span>
+    <input
+      class="input"
+      name="upper"
+      (change)="updateRange($event)"
+      [step]="step"
+      [value]="computedValue[1]"
+      [min]="computedValue[0]"
+      [max]="max"
+      type="number"
+      aria-label="Jaartal einde"
+    />
+  </div>
+</div>

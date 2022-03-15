@@ -1,0 +1,28 @@
+<ng-container *ngIf="isMobile">
+  <select
+    [attr.aria-label]="'Selecteer een weergave'"
+    [formControl]="selectMobile"
+    class="select"
+  >
+    <option *ngFor="let option of options" [value]="option.value">{{
+      viewNamesMap[option.value]
+    }}</option>
+  </select>
+</ng-container>
+<ng-container *ngIf="!isMobile">
+  <div class="link-group">
+    <button
+      *ngFor="let option of options"
+      class="link"
+      [class.active]="option.value | includes: activeOptions"
+      (click)="onToggleView(option)"
+    >
+      <input
+        type="checkbox"
+        [checked]="option.value | includes: activeOptions"
+        [id]="option.value"
+      />
+      <label [for]="option.value">{{ viewNamesMap[option.value] }}</label>
+    </button>
+  </div>
+</ng-container>

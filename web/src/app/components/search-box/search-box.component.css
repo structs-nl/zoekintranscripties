@@ -1,0 +1,37 @@
+.search-form {
+  position: relative;
+}
+
+.search {
+  border: 2px solid #cce0f1;
+  border-radius: 26px;
+  padding: 14px 20px;
+  background-color: #fff;
+  width: 100%;
+  box-sizing: border-box;
+  padding-right: 50px;
+}
+
+.search:focus {
+  outline: 0;
+  border-color: #007bc7;
+}
+
+.name {
+  font-weight: bold;
+  font-size: 12px;
+  color: var(--primary-color);
+}
+
+.search-actions {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 6px 10px;
+}
+
+.search-button {
+  background: none;
+  border: 0;
+  padding: 10px;
+}

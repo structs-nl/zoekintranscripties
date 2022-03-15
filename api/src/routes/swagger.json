@@ -1,0 +1,1245 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"Description": {
+				"properties": {
+					"count": {
+						"type": "number",
+						"format": "double"
+					},
+					"label": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"count",
+					"label"
+				],
+				"type": "object"
+			},
+			"AnnotationImageBody": {
+				"properties": {
+					"@id": {
+						"type": "string"
+					},
+					"@type": {
+						"type": "string",
+						"enum": [
+							"Image"
+						],
+						"nullable": false
+					},
+					"format": {
+						"type": "string"
+					},
+					"service": {
+						"properties": {
+							"profile": {
+								"type": "string"
+							},
+							"@type": {
+								"type": "string"
+							},
+							"@id": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"profile",
+							"@type",
+							"@id"
+						],
+						"type": "object"
+					},
+					"height": {
+						"type": "string"
+					},
+					"width": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"@id",
+					"@type",
+					"format",
+					"service",
+					"height",
+					"width"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AnnotationPainting": {
+				"properties": {
+					"@type": {
+						"type": "string",
+						"enum": [
+							"Annotation"
+						],
+						"nullable": false
+					},
+					"motivation": {
+						"type": "string",
+						"enum": [
+							"painting"
+						],
+						"nullable": false
+					},
+					"body": {
+						"$ref": "#/components/schemas/AnnotationImageBody"
+					},
+					"target": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"@type",
+					"motivation",
+					"body",
+					"target"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AnnotationPage_AnnotationPainting_": {
+				"properties": {
+					"type": {
+						"type": "string",
+						"enum": [
+							"AnnotationPage"
+						],
+						"nullable": false
+					},
+					"items": {
+						"items": {
+							"$ref": "#/components/schemas/AnnotationPainting"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"type",
+					"items"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"GeoGeometry": {
+				"properties": {
+					"geo:type": {
+						"type": "string",
+						"enum": [
+							"Polygon"
+						],
+						"nullable": false
+					},
+					"geo:coordinates": {
+						"items": {
+							"items": {
+								"type": "string"
+							},
+							"type": "array"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"geo:type",
+					"geo:coordinates"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Word": {
+				"properties": {
+					"geo:geometry": {
+						"$ref": "#/components/schemas/GeoGeometry"
+					},
+					"original": {
+						"type": "string"
+					},
+					"modernized": {
+						"type": "string"
+					},
+					"named_entity": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"geo:geometry",
+					"original"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Line": {
+				"properties": {
+					"words": {
+						"items": {
+							"$ref": "#/components/schemas/Word"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"words"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Region": {
+				"properties": {
+					"geo:geometry": {
+						"$ref": "#/components/schemas/GeoGeometry"
+					},
+					"lines": {
+						"items": {
+							"$ref": "#/components/schemas/Line"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"geo:geometry",
+					"lines"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AnnotationTextBody": {
+				"properties": {
+					"@type": {
+						"type": "string",
+						"enum": [
+							"Text"
+						],
+						"nullable": false
+					},
+					"regions": {
+						"items": {
+							"$ref": "#/components/schemas/Region"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"@type",
+					"regions"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AnnotationSupplementing": {
+				"properties": {
+					"@type": {
+						"type": "string",
+						"enum": [
+							"Annotation"
+						],
+						"nullable": false
+					},
+					"motivation": {
+						"type": "string",
+						"enum": [
+							"supplementing"
+						],
+						"nullable": false
+					},
+					"body": {
+						"$ref": "#/components/schemas/AnnotationTextBody"
+					},
+					"target": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"@type",
+					"motivation",
+					"body",
+					"target"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AnnotationPage_AnnotationSupplementing_": {
+				"properties": {
+					"type": {
+						"type": "string",
+						"enum": [
+							"AnnotationPage"
+						],
+						"nullable": false
+					},
+					"items": {
+						"items": {
+							"$ref": "#/components/schemas/AnnotationSupplementing"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"type",
+					"items"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Canvas": {
+				"properties": {
+					"@id": {
+						"type": "string"
+					},
+					"@type": {
+						"type": "string",
+						"enum": [
+							"Canvas"
+						],
+						"nullable": false
+					},
+					"label": {
+						"type": "string"
+					},
+					"height": {
+						"type": "number",
+						"format": "double"
+					},
+					"width": {
+						"type": "number",
+						"format": "double"
+					},
+					"items": {
+						"items": {
+							"$ref": "#/components/schemas/AnnotationPage_AnnotationPainting_"
+						},
+						"type": "array"
+					},
+					"annotations": {
+						"items": {
+							"$ref": "#/components/schemas/AnnotationPage_AnnotationSupplementing_"
+						},
+						"type": "array"
+					},
+					"queryTokens": {
+						"items": {
+							"$ref": "#/components/schemas/Word"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"@id",
+					"@type",
+					"label",
+					"height",
+					"width",
+					"items",
+					"annotations"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"EntityDate": {
+				"properties": {
+					"@id": {
+						"type": "string"
+					},
+					"@type": {
+						"type": "string",
+						"enum": [
+							"xsd:dateTime"
+						],
+						"nullable": false
+					},
+					"dcterms:date": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"@id",
+					"@type",
+					"dcterms:date"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"EntityName": {
+				"properties": {
+					"@id": {
+						"type": "string"
+					},
+					"@type": {
+						"type": "string",
+						"enum": [
+							"pnv:PersonName"
+						],
+						"nullable": false
+					},
+					"literalName": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"@id",
+					"@type",
+					"literalName"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"EntityPlace": {
+				"properties": {
+					"@id": {
+						"type": "string"
+					},
+					"@type": {
+						"type": "string",
+						"enum": [
+							"https://rdf.histograph.io/PlaceInTime"
+						],
+						"nullable": false
+					},
+					"rdfs:label": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"@id",
+					"@type",
+					"rdfs:label"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NamedEntity": {
+				"anyOf": [
+					{
+						"$ref": "#/components/schemas/EntityDate"
+					},
+					{
+						"$ref": "#/components/schemas/EntityName"
+					},
+					{
+						"$ref": "#/components/schemas/EntityPlace"
+					}
+				]
+			},
+			"EntityResponseLD": {
+				"properties": {
+					"@context": {
+						"type": "string"
+					},
+					"@graph": {
+						"items": {
+							"anyOf": [
+								{
+									"$ref": "#/components/schemas/Canvas"
+								},
+								{
+									"$ref": "#/components/schemas/NamedEntity"
+								}
+							]
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"@context",
+					"@graph"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ValidateErrorJSON": {
+				"properties": {
+					"message": {
+						"type": "string",
+						"enum": [
+							"Validation failed"
+						],
+						"nullable": false
+					},
+					"details": {
+						"properties": {},
+						"additionalProperties": {},
+						"type": "object"
+					}
+				},
+				"required": [
+					"message",
+					"details"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NotFoundJSON": {
+				"properties": {
+					"message": {
+						"type": "string",
+						"enum": [
+							"Not found"
+						],
+						"nullable": false
+					}
+				},
+				"required": [
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"InternalServerErrorJSON": {
+				"properties": {
+					"message": {
+						"type": "string",
+						"enum": [
+							"Something went wrong"
+						],
+						"nullable": false
+					}
+				},
+				"required": [
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ManifestCanvas": {
+				"properties": {
+					"@id": {
+						"type": "string"
+					},
+					"@type": {
+						"type": "string",
+						"enum": [
+							"Canvas"
+						],
+						"nullable": false
+					},
+					"label": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"@id",
+					"@type",
+					"label"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"RicoRecord": {
+				"properties": {
+					"rico:hasDocumentaryFormType": {
+						"type": "string"
+					},
+					"rico:identifier": {
+						"type": "string"
+					},
+					"rico:publishedBy": {
+						"type": "string"
+					},
+					"rico:managedBy": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"rico:hasDocumentaryFormType",
+					"rico:identifier",
+					"rico:publishedBy",
+					"rico:managedBy"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"RicoRecordSet": {
+				"properties": {
+					"rico:identifier": {
+						"type": "string"
+					},
+					"rico:title": {
+						"type": "string"
+					},
+					"rico:hasRecordSetType": {
+						"type": "string"
+					},
+					"rico:date": {
+						"type": "string"
+					},
+					"html:p": {
+						"type": "string"
+					},
+					"rico:isDescribedBy": {
+						"$ref": "#/components/schemas/RicoRecord"
+					},
+					"rico:includedIn": {
+						"$ref": "#/components/schemas/RicoRecordSet"
+					},
+					"rico:includes": {
+						"items": {
+							"$ref": "#/components/schemas/RicoRecordSet"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"rico:identifier",
+					"rico:title",
+					"rico:hasRecordSetType"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Manifest": {
+				"properties": {
+					"@id": {
+						"type": "string"
+					},
+					"@type": {
+						"type": "string",
+						"enum": [
+							"Manifest"
+						],
+						"nullable": false
+					},
+					"label": {
+						"type": "string"
+					},
+					"totalPages": {
+						"type": "number",
+						"format": "double"
+					},
+					"items": {
+						"items": {
+							"$ref": "#/components/schemas/ManifestCanvas"
+						},
+						"type": "array"
+					},
+					"queryTerms": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"seeAlso": {
+						"properties": {
+							"rico:recordSet": {
+								"$ref": "#/components/schemas/RicoRecordSet"
+							}
+						},
+						"required": [
+							"rico:recordSet"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"@id",
+					"@type",
+					"label",
+					"items",
+					"seeAlso"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"InventoryResponseLD": {
+				"properties": {
+					"@context": {
+						"type": "string"
+					},
+					"@graph": {
+						"items": {
+							"anyOf": [
+								{
+									"$ref": "#/components/schemas/Canvas"
+								},
+								{
+									"$ref": "#/components/schemas/Manifest"
+								}
+							]
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"@context",
+					"@graph"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"InventoryBodyParams": {
+				"properties": {
+					"query": {
+						"type": "string"
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Highlight": {
+				"properties": {
+					"page": {
+						"type": "string"
+					},
+					"text": {
+						"type": "string"
+					},
+					"type": {
+						"type": "string",
+						"enum": [
+							"modern",
+							"original",
+							"description"
+						]
+					}
+				},
+				"required": [
+					"text",
+					"type"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"SearchResult": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"title": {
+						"type": "string"
+					},
+					"date": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"archive": {
+						"type": "string"
+					},
+					"access": {
+						"type": "string"
+					},
+					"inventory": {
+						"type": "string"
+					},
+					"totalHits": {
+						"type": "number",
+						"format": "double"
+					},
+					"highlights": {
+						"items": {
+							"$ref": "#/components/schemas/Highlight"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"title",
+					"date",
+					"archive",
+					"access",
+					"inventory",
+					"highlights"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Bucket": {
+				"properties": {
+					"count": {
+						"type": "number",
+						"format": "double"
+					},
+					"label": {
+						"type": "string"
+					},
+					"value": {
+						"type": "string"
+					},
+					"hasChildren": {
+						"type": "boolean"
+					},
+					"children": {
+						"items": {
+							"$ref": "#/components/schemas/Bucket"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"count",
+					"label",
+					"value"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"SearchAggregations": {
+				"properties": {
+					"nameTypes": {
+						"properties": {
+							"buckets": {
+								"items": {
+									"$ref": "#/components/schemas/Bucket"
+								},
+								"type": "array"
+							}
+						},
+						"required": [
+							"buckets"
+						],
+						"type": "object"
+					},
+					"histogram": {
+						"properties": {
+							"buckets": {
+								"items": {
+									"$ref": "#/components/schemas/Bucket"
+								},
+								"type": "array"
+							},
+							"interval": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"buckets",
+							"interval"
+						],
+						"type": "object"
+					},
+					"descriptions": {
+						"properties": {
+							"buckets": {
+								"items": {
+									"$ref": "#/components/schemas/Bucket"
+								},
+								"type": "array"
+							}
+						},
+						"required": [
+							"buckets"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"histogram",
+					"descriptions"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Record_string.Expansion-Array_": {
+				"properties": {},
+				"type": "object",
+				"description": "Construct a type with a set of properties K of type T"
+			},
+			"SearchResults": {
+				"properties": {
+					"hits": {
+						"items": {
+							"$ref": "#/components/schemas/SearchResult"
+						},
+						"type": "array"
+					},
+					"total": {
+						"type": "number",
+						"format": "double"
+					},
+					"aggregations": {
+						"$ref": "#/components/schemas/SearchAggregations"
+					},
+					"expansions": {
+						"$ref": "#/components/schemas/Record_string.Expansion-Array_"
+					},
+					"query": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"hits",
+					"total",
+					"aggregations",
+					"query"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NameType": {
+				"type": "string",
+				"enum": [
+					"person",
+					"location",
+					"time"
+				]
+			},
+			"SearchParams": {
+				"properties": {
+					"query": {
+						"type": "string"
+					},
+					"limit": {
+						"type": "number",
+						"format": "double"
+					},
+					"offset": {
+						"type": "number",
+						"format": "double"
+					},
+					"from": {
+						"type": "number",
+						"format": "double"
+					},
+					"to": {
+						"type": "number",
+						"format": "double"
+					},
+					"inventory": {
+						"type": "string"
+					},
+					"nameType": {
+						"items": {
+							"$ref": "#/components/schemas/NameType"
+						},
+						"type": "array"
+					},
+					"descriptionPrefix": {
+						"type": "string"
+					},
+					"descriptions": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"expansions": {
+						"properties": {},
+						"additionalProperties": {
+							"items": {
+								"type": "string"
+							},
+							"type": "array"
+						},
+						"type": "object"
+					},
+					"sort": {
+						"type": "string",
+						"enum": [
+							"relevance",
+							"date-asc",
+							"date-desc",
+							"alphabet-asc",
+							"alphabet-desc"
+						]
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "transcripties-zoeken-tonen-api",
+		"version": "0.0.0",
+		"contact": {}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/entity": {
+			"post": {
+				"operationId": "SearchEntity",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/EntityResponseLD"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/NotFoundJSON"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateErrorJSON"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/InternalServerErrorJSON"
+								}
+							}
+						}
+					}
+				},
+				"description": "Fetch a specific entity including search results",
+				"security": [],
+				"parameters": [
+					{
+						"description": "The complete id of the entity you are looking for",
+						"in": "query",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						},
+						"example": "https://archief.nl/doc/transcriptie/nl-hana/1.04.02/7660/0021"
+					}
+				],
+				"requestBody": {
+					"required": false,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"query": {
+										"type": "string"
+									}
+								},
+								"type": "object"
+							}
+						}
+					}
+				}
+			},
+			"get": {
+				"operationId": "GetEntity",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/EntityResponseLD"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/NotFoundJSON"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateErrorJSON"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/InternalServerErrorJSON"
+								}
+							}
+						}
+					}
+				},
+				"description": "Fetch a specific entity",
+				"security": [],
+				"parameters": [
+					{
+						"description": "The complete id of the entity you are looking for",
+						"in": "query",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						},
+						"example": "https://archief.nl/doc/transcriptie/nl-hana/1.04.02/7660/0021"
+					}
+				]
+			}
+		},
+		"/inventory": {
+			"post": {
+				"operationId": "Get",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/InventoryResponseLD"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/NotFoundJSON"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateErrorJSON"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/InternalServerErrorJSON"
+								}
+							}
+						}
+					}
+				},
+				"description": "Fetch a specific inventory",
+				"security": [],
+				"parameters": [
+					{
+						"description": "The complete id of the inventory you are looking for",
+						"in": "query",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						},
+						"example": "https://archief.nl/doc/transcriptie/nl-hana/1.04.02/7660"
+					},
+					{
+						"description": "The amount of pages you want the inventory to include",
+						"in": "query",
+						"name": "limit",
+						"required": false,
+						"schema": {
+							"type": "string"
+						},
+						"example": "10"
+					},
+					{
+						"description": "The position to start including the pages from",
+						"in": "query",
+						"name": "offset",
+						"required": false,
+						"schema": {
+							"type": "string"
+						},
+						"example": "0"
+					}
+				],
+				"requestBody": {
+					"required": false,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/InventoryBodyParams"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/search": {
+			"post": {
+				"operationId": "Search",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SearchResults"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Failed",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidateErrorJSON"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/InternalServerErrorJSON"
+								}
+							}
+						}
+					}
+				},
+				"description": "Search in transcriptions of inventories of a number of archives",
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/SearchParams"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "https://api.zoekintranscripties.nl",
+			"description": "Production"
+		},
+		{
+			"url": "http://localhost:8080",
+			"description": "Development"
+		}
+	]
+}

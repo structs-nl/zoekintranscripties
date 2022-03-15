@@ -1,0 +1,147 @@
+<ng-container *ngIf="inventory$ | async as inventory">
+  <div class="panes-container" #panes>
+    <div class="panes">
+      <a
+        class="pane-link"
+        routerLinkActive="pane-active"
+        [routerLink]="[]"
+        [queryParams]="{ tab: 'meta' }"
+        queryParamsHandling="merge"
+        aria-label="Metagegevens"
+        title="Metagegevens"
+        #paneMeta="routerLinkActive"
+      >
+        <ng-container *ngIf="paneMeta.isActive">
+          <app-svg-icon
+            name="info"
+            variant="blue"
+            width="24"
+            height="24"
+          ></app-svg-icon>
+        </ng-container>
+        <ng-container *ngIf="!paneMeta.isActive">
+          <app-svg-icon
+            name="info"
+            variant="light"
+            width="24"
+            height="24"
+          ></app-svg-icon>
+        </ng-container>
+      </a>
+      <a
+        class="pane-link"
+        routerLinkActive="pane-active"
+        [routerLink]="[]"
+        [queryParams]="{ tab: 'download' }"
+        queryParamsHandling="merge"
+        aria-label="Download"
+        title="Download"
+        #paneDownload="routerLinkActive"
+      >
+        <ng-container *ngIf="paneDownload.isActive">
+          <app-svg-icon
+            name="download"
+            variant="blue"
+            width="24"
+            height="24"
+          ></app-svg-icon>
+        </ng-container>
+        <ng-container *ngIf="!paneDownload.isActive">
+          <app-svg-icon
+            name="download"
+            variant="light"
+            width="24"
+            height="24"
+          ></app-svg-icon>
+        </ng-container>
+      </a>
+    </div>
+
+    <ng-container *ngIf="pane$ | async as pane">
+      <div class="pane">
+        <a
+          [routerLink]="[]"
+          [queryParams]="{ tab: undefined }"
+          queryParamsHandling="merge"
+          aria-label="Sluiten"
+          class="close-button"
+          ><app-svg-icon name="close"></app-svg-icon
+        ></a>
+        <ng-container *ngIf="pane === 'meta'">
+          <h2>Metagegevens</h2>
+          <ng-container *ngIf="inventory.hierarchies.length === 0">
+            <p>Geen gegevens beschikbaar.</p>
+          </ng-container>
+          <ng-container *ngIf="inventory.hierarchies.length > 0">
+            <h3>Archiefinstelling</h3>
+            <p>{{ inventory.hierarchies[0].archive }}</p>
+            <h3>Toegang</h3>
+            <p>{{ inventory.hierarchies[0].access }} - {{ inventory.hierarchies[0].archives[0].title }}</p>
+            <h3>Inventarisnummer</h3>
+            <p>{{ inventory.hierarchies[0].inventory }}</p>
+            <ng-container *ngIf="transcription$ | async as transcription">
+              <h3>Volgnummer</h3>
+              <p>{{ transcription.label }}</p>
+            </ng-container>
+            <ng-container *ngIf="inventory.hierarchies | tree as hierarchy">
+              <h3>Reeksen</h3>
+              <app-hierarchy-node
+                [isTopLevel]="true"
+                [tree]="hierarchy"
+              ></app-hierarchy-node>
+            </ng-container>
+            <h3>Rechten</h3>
+            <p>
+              <a
+                href="https://www.nationaalarchief.nl/research/gebruik-van-scans-van-fotos-kaarten-en-documenten"
+                rel="noopener"
+                target="_blank"
+                >CCO</a
+              >
+            </p>
+          </ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="pane === 'download'">
+          <h2>Downloads</h2>
+          <ng-container
+            *ngIf="
+              transcription$ | async as transcription;
+              else inventoryTemplate
+            "
+          >
+            <a
+              class="download"
+              target="_blank"
+              [href]="transcription.id | entityUrl"
+              >Download JSON-LD</a
+            >
+            <a
+              class="download"
+              target="_blank"
+              [href]="transcription.defaultImage"
+              >Download JPG origineel formaat</a
+            >
+            <h3>Wat mag ik met deze afbeelding?</h3>
+            <p>U kunt deze afbeelding rechtenvrij en gratis (her)gebruiken.</p>
+            <p>
+              <a
+                target="_blank"
+                href="https://www.nationaalarchief.nl/research/gebruik-van-scans-van-fotos-kaarten-en-documenten"
+                >Gebruik van scans van foto's, kaarten en documenten.</a
+              >
+            </p>
+          </ng-container>
+          <ng-template #inventoryTemplate>
+            <a
+              class="download"
+              target="_blank"
+              [href]="inventory.id | entityUrl"
+              >Download JSON-LD</a
+            >
+          </ng-template>
+        </ng-container>
+      </div>
+    </ng-container>
+  </div>
+</ng-container>

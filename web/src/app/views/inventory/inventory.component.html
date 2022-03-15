@@ -1,0 +1,11 @@
+<div class="viewer">
+  <ng-container *ngIf="inventory$ | async as inventory">
+    <ng-container *ngIf="transcriptions$ | async as transcriptions">
+      <collection-viewer
+        [transcriptions]="transcriptions"
+        [manifest]="inventory"
+        [limit]="10"
+      ></collection-viewer>
+    </ng-container>
+  </ng-container>
+</div>

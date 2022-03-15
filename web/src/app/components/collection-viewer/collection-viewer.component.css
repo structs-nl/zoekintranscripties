@@ -1,0 +1,168 @@
+/* stylelint-disable selector-pseudo-element-no-unknown */
+:host {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 190px);
+}
+
+:host ::ng-deep .scan-overlay:hover,
+:host ::ng-deep .scan-overlay:focus {
+  position: relative;
+  outline: 2px solid var(--primary-color);
+  box-shadow: 0 4px 10px var(--primary-color);
+}
+
+:host ::ng-deep .scan-overlay:focus::after,
+:host ::ng-deep .scan-overlay:hover::after {
+  content: "Klik om te bekijken";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  font-size: 16px;
+  text-decoration: none;
+  background-color: var(--primary-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  background-color: #fff;
+  border-bottom: 1px solid #d8d8d8;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.action-buttons:last-of-type {
+  border-left: 1px solid #d8d8d8;
+}
+
+.action {
+  display: flex !important;
+  align-items: center;
+  border: 0;
+  border-right: 1px solid #d8d8d8;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: bold;
+  background: transparent;
+}
+
+button.action:disabled {
+  cursor: default;
+}
+
+button.action:disabled ::ng-deep path {
+  fill: #ccc;
+}
+
+button.action:hover:not(:disabled) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+button.action:active:not(:disabled) {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.action-label {
+  margin: 0 6px;
+}
+
+.viewer {
+  flex: 1;
+  cursor: grab;
+}
+
+.viewer-buttons {
+  display: flex;
+  position: absolute;
+  right: 10px;
+  top: 60px;
+  z-index: 100;
+}
+
+.viewer-action {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 50px;
+  height: 50px;
+  margin: 5px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+}
+
+.viewer-action:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.page-selector {
+  display: flex;
+  align-items: center;
+}
+
+.page-input {
+  width: 30px;
+  padding: 5px;
+  border: 1px solid #d8d8d8;
+  font-size: 16px;
+}
+
+.page-button {
+  background: transparent;
+  border: 0;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 7px;
+  height: 30px;
+  background-color: #d8d8d8;
+  color: var(--dark);
+}
+
+.page-total {
+  font-weight: normal;
+  margin-left: 6px;
+  font-size: 14px;
+}
+
+@media (max-width: 599px) {
+  .viewer {
+    margin-left: 50px;
+    width: calc(100% - 50px);
+  }
+
+  .actions {
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (min-width: 600px) {
+  .action {
+    padding: 12px 20px;
+  }
+
+  .actions {
+    height: 55px;
+  }
+
+  .viewer {
+    width: 100%;
+  }
+
+  .page-input {
+    width: 52px;
+    padding: 5px;
+    border: 1px solid #d8d8d8;
+    font-size: 14px;
+  }
+}

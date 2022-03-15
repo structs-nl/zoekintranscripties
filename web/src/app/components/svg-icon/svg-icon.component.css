@@ -1,0 +1,15 @@
+.icon {
+  display: block;
+}
+
+.dark path {
+  fill: #333;
+}
+
+.light path {
+  fill: #fff;
+}
+
+.blue path {
+  fill: var(--primary-color);
+}

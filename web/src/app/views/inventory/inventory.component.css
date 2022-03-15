@@ -1,0 +1,21 @@
+:host {
+  flex: 1;
+  display: block;
+}
+
+.viewer {
+  flex: 1;
+}
+
+.empty {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.image {
+  padding: 20px;
+}
+
+.title {
+  color: var(--primary-color);
+}

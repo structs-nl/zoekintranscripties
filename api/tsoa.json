@@ -1,0 +1,25 @@
+{
+  "entryFile": "src/index.ts",
+  "noImplicitAdditionalProperties": "throw-on-extras",
+  "controllerPathGlobs": ["src/**/controller.ts"],
+  "spec": {
+    "outputDirectory": "src/routes",
+    "specVersion": 3,
+    "specMerging": "recursive",
+    "spec": {
+      "servers": [
+        {
+          "url": "https://api.zoekintranscripties.nl",
+          "description": "Production"
+        },
+        {
+          "url": "http://localhost:8080",
+          "description": "Development"
+        }
+      ]
+    }
+  },
+  "routes": {
+    "routesDir": "src/routes"
+  }
+}

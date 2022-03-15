@@ -1,0 +1,161 @@
+<app-nav-bar></app-nav-bar>
+<div class="search">
+  <div class="sidebar">
+    <aside #sidebar class="filters" [class.show]="showFilters">
+      <div class="actions btn-wrapper">
+        <button
+          class="btn"
+          [disabled]="resetFiltersDisabled"
+          (click)="reset()"
+          [class.disabled]="resetFiltersDisabled"
+        >
+          Wis filters
+        </button>
+        <button class="toggle-filters btn btn--icon" (click)="toggleFilters()">
+          <app-svg-icon
+            name="close"
+            variant="blue"
+            [width]="10"
+            [height]="10"
+          ></app-svg-icon>
+          <span class="btn-text">Verberg filters</span>
+        </button>
+      </div>
+      <app-collapse label="Periode">
+        <app-range-slider
+          [value]="currentRange"
+          [interval]="histogramInterval"
+          [buckets]="histogramData"
+          (onChange)="handleRangeInputChange($event)"
+        ></app-range-slider>
+      </app-collapse>
+
+      <app-collapse label="Toegangen">
+        <app-archive-list
+          [isHierarchy]="true"
+          type="description"
+          label="Zoek in beschrijvingen..."
+          [showCount]="true"
+          [selectedArchives]="params.descriptions"
+          [archives]="hierarchyData"
+          [pageSize]="20"
+          [params]="params"
+          (onChange)="onChangeCheckbox($event, 'descriptions')"
+        >
+        </app-archive-list>
+      </app-collapse>
+
+      <ng-container *ngIf="nameTypeData">
+        <app-collapse label="Namen filter">
+          <p class="desc">
+            Filter op basis van NER (named entity recognition) herkende termen
+          </p>
+          <ng-container *ngFor="let typeBucket of nameTypeData">
+            <div class="list-item">
+              <app-checkbox
+                [label]="typeBucket.label"
+                [name]="typeBucket.value"
+                [count]="typeBucket.count"
+                (change)="onTypeChange($event)"
+                [checked]="typeBucket.value | includes: params.nameType"
+              ></app-checkbox>
+            </div>
+          </ng-container>
+        </app-collapse>
+      </ng-container>
+
+      <app-collapse label="Inventarisnummer">
+        <p class="desc">Voer een specifiek inventarisnummer in</p>
+        <form (submit)="onSubmitInventory()">
+          <input
+            class="input"
+            placeholder="Nummer..."
+            type="text"
+            aria-label="Voer een inventarisnummer in"
+            [formControl]="inventory"
+            [value]="params.inventory || ''"
+          />
+          <button class="btn" type="submit">Ga</button>
+        </form>
+      </app-collapse>
+    </aside>
+  </div>
+  <main class="results" id="main-content">
+    <h1 class="visually-hidden">Zoeken in archieven</h1>
+    <div class="search-form">
+      <app-search-box
+        [value]="params.query"
+        (changeQuery)="changeQuery($event)"
+      ></app-search-box>
+    </div>
+
+    <div class="search-tools">
+      <div class="search-tools-left">
+        <button class="toggle-filters btn btn--icon" (click)="toggleFilters()">
+          <app-svg-icon
+            name="filter"
+            variant="blue"
+            [width]="10"
+            [height]="10"
+          ></app-svg-icon>
+          <span class="btn-text">Toon filters</span>
+        </button>
+
+        <button class="btn btn--icon" (click)="openDialog()">
+          <app-svg-icon
+            name="info"
+            variant="blue"
+            [width]="10"
+            [height]="10"
+          ></app-svg-icon>
+          <span class="btn-text">Zoekhulp</span>
+        </button>
+
+        <p class="tools-text visually-hidden-sm">
+          <span
+            *ngIf="
+              !error && totalHits && (!resetFiltersDisabled || params.query)
+            "
+          >
+            Resultaten gevonden in
+            <strong>{{ totalHits }}</strong> inventarisnummers
+          </span>
+        </p>
+      </div>
+
+      <div class="sort">
+        <p class="tools-text visually-hidden-sm">Sorteren op:</p>
+        <select
+          class="select"
+          (change)="onSortChange($event)"
+          aria-label="Sorteren"
+        >
+          <option
+            [selected]="sortOption.value === params.sort"
+            *ngFor="let sortOption of sortOptions"
+            [value]="sortOption.value"
+            >{{ sortOption.name }}</option
+          >
+        </select>
+      </div>
+    </div>
+
+    <app-query-expansions
+      (changeExpansions)="onChangeExpansions($event)"
+      [selectedExpansions]="params.expansions || allExpansions"
+      [expansions]="expansions"
+    ></app-query-expansions>
+
+    <div class="hits">
+      <app-list
+        #list
+        (onFetchData)="onFetchMoreData()"
+        [items]="hits"
+        [loading]="loading"
+        [error]="error"
+        [query]="params.query"
+        [hasActiveFilters]="!resetFiltersDisabled"
+      ></app-list>
+    </div>
+  </main>
+</div>

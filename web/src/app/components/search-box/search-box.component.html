@@ -1,0 +1,35 @@
+<form class="search-form" (submit)="onSearch($event)">
+  <input
+    placeholder="Voer uw zoekopdracht in..."
+    aria-label="Voer uw zoekopdracht in..."
+    class="search"
+    type="text"
+    [formControl]="search"
+    autofocus
+  />
+  <div class="search-actions">
+    <button
+      *ngIf="search.value && search.value.length > 0"
+      class="search-button"
+      type="button"
+      (click)="onReset()"
+      title="Wis zoekopdracht"
+      aria-label="Wis zoekopdracht"
+    >
+      <app-svg-icon
+        name="close"
+        width="18"
+        height="18"
+        variant="blue"
+      ></app-svg-icon>
+    </button>
+    <button class="search-button" type="submit" title="Zoeken" aria-label="Zoeken">
+      <app-svg-icon
+        name="search"
+        width="18"
+        height="18"
+        variant="blue"
+      ></app-svg-icon>
+    </button>
+  </div>
+</form>

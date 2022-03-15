@@ -1,0 +1,38 @@
+:host {
+  width: 100%;
+}
+
+.input {
+  display: flex;
+  align-items: flex-start;
+}
+
+.checkbox {
+  margin: 2px 0 0 0;
+}
+
+.label {
+  display: flex;
+  align-items: flex-start;
+  padding-left: 6px;
+  flex: 1;
+  user-select: none;
+  font-size: 12px;
+}
+
+.inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex: 1;
+}
+
+.label-title {
+  flex: 1;
+}
+
+.label-count {
+  font-weight: bold;
+  color: var(--primary-color);
+  padding-left: 10px;
+}

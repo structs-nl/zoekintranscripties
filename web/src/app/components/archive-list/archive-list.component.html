@@ -1,0 +1,131 @@
+<div class="list">
+  <form
+    class="search"
+    [class.focus]="hasFocus"
+    (submit)="onSubmitQuery($event)"
+  >
+    <input
+      class="search-input"
+      type="text"
+      (focus)="onFocus()"
+      (blur)="onBlur()"
+      [formControl]="search"
+      [placeholder]="label || ''"
+      [attr.aria-label]="label"
+    />
+    <button
+      *ngIf="search.value"
+      class="search-btn"
+      aria-label="Wis archieven zoekopdracht"
+      type="button"
+      (click)="onReset()"
+    >
+      <app-svg-icon
+        name="close"
+        variant="blue"
+        width="14"
+        height="14"
+      ></app-svg-icon>
+    </button>
+    <button aria-label="Zoeken naar archieven" type="submit" class="search-btn">
+      <app-svg-icon
+        name="search"
+        variant="blue"
+        width="14"
+        height="14"
+      ></app-svg-icon>
+    </button>
+  </form>
+
+  <div [class.hidden]="isSearchMode">
+    <ng-container *ngIf="isHierarchy">
+      <tree-root
+        #tree
+        [(state)]="state"
+        (initialized)="initTree()"
+        [nodes]="archives"
+        [options]="options"
+      >
+        <ng-template #loadingTemplate>
+          <p class="loading">Laden....</p>
+        </ng-template>
+
+        <ng-template #treeNodeWrapperTemplate let-node let-index="index">
+          <div class="hierarchy-item">
+            <button
+              type="button"
+              class="hierarchy-toggle"
+              title="Klik om toegang open te klappen"
+              (click)="node.mouseAction('click', $event)"
+            >
+              <app-svg-icon
+                [width]="18"
+                [height]="18"
+                [name]="node.isExpanded ? 'chevron-down' : 'chevron-right'"
+              ></app-svg-icon>
+            </button>
+            <input
+              class="hierarchy-checkbox"
+              type="checkbox"
+              title="Klik om deze toegang te selecteren"
+              [checked]="node.isSelected"
+              [name]="node.data.value"
+              [id]="node.data.value"
+              [indeterminate]="node.isPartiallySelected"
+              (change)="onClickHierarchy($event, node)"
+            />
+            <label
+              [for]="node.data.value"
+              class="hierarchy-label"
+              title="Klik om toegang open te klappen"
+              (click)="onClickLabel($event, node)"
+              >{{ node.data.label }}</label
+            >
+            <span
+              class="hierarchy-count"
+              [title]="'In deze toegang zijn ' +
+              node.data.count +
+              ' inventarisnummers gevonden die voldoen aan de zoekopdracht'"
+              [matTooltip]="
+                'In deze toegang zijn ' +
+                node.data.count +
+                ' inventarisnummers gevonden die voldoen aan de zoekopdracht'
+              "
+              >{{ node.data.count }}</span
+            >
+          </div>
+        </ng-template>
+      </tree-root>
+    </ng-container>
+
+    <ng-container *ngIf="!isHierarchy">
+      <div class="list-item" *ngFor="let item of archives">
+        <app-checkbox
+          [label]="item.label"
+          [name]="item.label"
+          [count]="showCount ? item.count : undefined"
+          [checked]="item.value | includes: selectedArchives"
+          (change)="onCheckboxChange($event)"
+        ></app-checkbox>
+      </div>
+    </ng-container>
+  </div>
+
+  <ng-container *ngIf="isSearchMode">
+    <ng-container *ngIf="searchResult.length > 0">
+      <div class="list-item" *ngFor="let item of searchResult">
+        <app-checkbox
+          [label]="item.label"
+          [name]="item.value"
+          [count]="showCount ? item.count : undefined"
+          [checked]="item.value | includes: selectedArchives"
+          (change)="onCheckboxChange($event)"
+        ></app-checkbox>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="searchResult.length === 0">
+      <p class="message">{{ emptyText }}</p>
+    </ng-container>
+  </ng-container>
+</div>

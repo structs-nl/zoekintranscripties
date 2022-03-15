@@ -1,0 +1,138 @@
+.document {
+  flex: 1;
+  position: relative;
+}
+
+.toolbar {
+  height: 58px;
+  background-color: var(--secondary-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.back {
+  margin: 0 10px;
+}
+
+.search-text {
+  margin: 0;
+  font-size: 12px;
+  padding-right: 10px;
+}
+
+.search-tools {
+  display: flex;
+  align-items: center;
+  margin: 0 20px;
+  overflow-y: auto;
+}
+
+.search-form {
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.error {
+  padding: 40px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 6px;
+  height: 34px;
+  font-size: 16px;
+  box-sizing: border-box;
+  border-radius: 0;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border: 1px solid var(--primary-color);
+}
+
+.search-button {
+  background-color: var(--primary-color);
+  color: #fff;
+  border: 0;
+  height: 34px;
+  width: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.link-group {
+  background-color: #fff;
+  border: 1px solid var(--primary-color);
+  border-radius: 4px;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.link {
+  text-decoration: none;
+  color: #000;
+  padding: 9px 10px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  border: 0;
+}
+
+.active {
+  background-color: var(--primary-color);
+  color: #fff;
+  border-radius: 3px;
+  font-weight: 500;
+}
+
+.active .link-text {
+  text-decoration: underline;
+}
+
+.meta {
+  display: none;
+}
+
+.main {
+  display: flex;
+  position: relative;
+  min-height: calc(100vh - 190px);
+}
+
+.result-count {
+  text-decoration: none !important;
+  margin-left: 5px;
+}
+
+.error-message {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  margin: 20px;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.viewer {
+  display: block;
+  flex: 1;
+}
+
+@media (min-width: 600px) {
+  .link-group {
+    overflow: hidden;
+  }
+
+  .main {
+    min-height: calc(100vh - 190px);
+  }
+
+  .search-tools {
+    margin: 0;
+  }
+}

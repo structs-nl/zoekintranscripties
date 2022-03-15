@@ -1,0 +1,30 @@
+.link-group {
+  display: flex;
+  background-color: #fff;
+  border: 1px solid var(--primary-color);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.link {
+  display: flex;
+  border: 0;
+  background-color: #fff;
+  text-decoration: none;
+  padding: 9px 10px;
+  font-size: 12px;
+  align-items: center;
+  border-right: 1px solid #ddd;
+}
+
+.link:last-of-type {
+  border-right: 0;
+}
+
+.active {
+  font-weight: 600;
+}
+
+.select {
+  max-width: 200px;
+}

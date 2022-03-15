@@ -1,0 +1,81 @@
+<ng-container *ngIf="expansions">
+  <button
+    *ngIf="!isOpen"
+    class="expansions-toggle"
+    (click)="onToggle()"
+    title="Bekijk zoekterm suggesties"
+    [attr.aria-expanded]="isOpen"
+    [attr.aria-controls]="'expansies'"
+  >
+    <p class="text">
+      <span *ngIf="noSelectedExpansions"
+        >Er zijn synoniemen beschikbaar voor de volgende zoekterm(en):
+      </span>
+      <span *ngIf="!noSelectedExpansions"
+        >Er worden synoniemen gebruikt voor de volgende zoekterm(en):
+      </span>
+      <strong *ngIf="expansionTerms">{{ expansionTerms }}</strong>
+    </p>
+    <p class="text"><strong>Wijzigen</strong></p>
+  </button>
+
+  <div *ngIf="isOpen" id="expansies" class="expansions-content">
+    <div class="expansions-header">
+      <button class="close" (click)="onToggle()" title="Sluit suggesties">
+        <app-svg-icon name="close"></app-svg-icon>
+      </button>
+    </div>
+
+    <div class="terms">
+      <ng-container *ngFor="let term of expansions | keyvalue">
+        <div class="term">
+          <h2 class="title">{{ term.key }}</h2>
+          <ng-container *ngFor="let list of term.value">
+            <div class="expansions-list">
+              <p class="description">
+                Bron:
+                <a [href]="list.link" target="_blank" nofollow>{{
+                  list.source
+                }}</a>
+              </p>
+              <div class="expansions-tools">
+                <div class="expansion">
+                  <app-checkbox
+                    [checked]="
+                      list.synonym
+                        | includesMany
+                          : (selectedExpansions
+                              ? selectedExpansions[term.key]
+                              : [])
+                    "
+                    [name]="term.key + ' ' + list.source"
+                    label="Selecteer allen"
+                    (change)="onSelectAll($event, term.key, list.source)"
+                  ></app-checkbox>
+                </div>
+              </div>
+
+              <div class="expansions">
+                <div class="expansion" *ngFor="let synonym of list.synonym">
+                  <app-checkbox
+                    [name]="synonym"
+                    [label]="synonym"
+                    [checked]="
+                      synonym
+                        | includes
+                          : (selectedExpansions
+                              ? selectedExpansions[term.key]
+                              : [])
+                    "
+                    (change)="onSelect($event, term.key)"
+                  ></app-checkbox>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </ng-container>
+    </div>
+    <button (click)="onSubmit()" class="submit" type="button">Toepassen</button>
+  </div>
+</ng-container>

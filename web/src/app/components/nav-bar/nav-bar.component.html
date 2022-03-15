@@ -1,0 +1,69 @@
+<nav class="nav">
+  <div class="archive">
+    <a
+      class="item link"
+      [routerLink]="['/zoeken']"
+      queryParamsHandling="merge"
+      [queryParams]="{
+        tab: undefined,
+        scan: undefined
+      }"
+      >Zoeken</a
+    >
+
+    <app-svg-icon
+      *ngIf="document"
+      width="20"
+      height="20"
+      name="chevron-right"
+      variant="light"
+    ></app-svg-icon>
+  </div>
+  <div
+    class="nav-links"
+    *ngIf="document && document.hierarchies && document.hierarchies.length > 0"
+  >
+    <h1 class="archive" *ngIf="document">
+      <span class="item">
+        {{ document.hierarchies[0].access }} -
+        {{ document.hierarchies[0].archives[0].title }}
+      </span>
+
+      <app-svg-icon
+        width="20"
+        height="20"
+        name="chevron-right"
+        variant="light"
+      ></app-svg-icon>
+
+      <span class="item" [title]="document.hierarchies[0].title">
+        {{ document.hierarchies[0].title }}
+      </span>
+
+      <app-svg-icon
+        width="20"
+        height="20"
+        name="chevron-right"
+        variant="light"
+      ></app-svg-icon>
+
+      <span class="item" [title]="document.hierarchies[0].inventory">
+        {{ document.hierarchies[0].inventory }}
+      </span>
+    </h1>
+  </div>
+  <div class="archive">
+    <a
+      class="item link"
+      [routerLink]="['/']"
+      queryParamsHandling="merge"
+      [queryParams]="{
+        tab: undefined,
+        scan: undefined
+      }"
+    >
+      <app-svg-icon name="info" variant="light"></app-svg-icon>
+      <span class="item-text visually-hidden-sm">Over deze site</span>
+    </a>
+  </div>
+</nav>
