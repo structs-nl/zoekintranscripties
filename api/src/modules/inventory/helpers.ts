@@ -1,9 +1,10 @@
 import { InventoryParams } from './model';
-import { Canvas, Word } from '../entity/model';
+import { Canvas } from '../entity/model';
 import { termsQueryFactory } from '../search/helpers';
 import { client } from '../../helpers';
 import config from '../../config';
 import { RawHit, RawInnerHit } from '../search/model';
+import { findQueryTokens } from '../entity/helpers';
 
 /**
  * Fetch canvases by id and add a list with tokens (words) that match query
@@ -22,45 +23,15 @@ export const fetchCanvasEntities = async (
 
   if (scansResponse) {
     scansResponse.body.docs.forEach((doc: { _source: { entity: Canvas } }) => {
+      const { tokens } = findQueryTokens(doc._source.entity, queryTerms);
+
       canvasList.push({
         ...doc._source.entity,
-        queryTokens:
-          queryTerms !== undefined
-            ? filterQueryTokens(doc._source.entity as Canvas, queryTerms)
-            : undefined,
+        queryTokens: queryTerms !== undefined ? tokens : undefined,
       });
     });
   }
   return canvasList;
-};
-
-export const filterQueryTokens = (
-  canvas: Canvas,
-  queryStrings: Array<string | undefined>
-): Word[] => {
-  const tokens: Word[] = [];
-  const terms = queryStrings.map((val) => val?.toLowerCase().trim());
-
-  canvas.annotations[0].items.forEach((item) => {
-    item.body.regions.forEach((region) => {
-      region.lines.forEach((line) => {
-        line.words.forEach((token) => {
-          const modernized = (token.modernized || '')
-            .toLowerCase()
-            .replace(/[^\w\s]/gi, '');
-          const original = token.original
-            .toLowerCase()
-            .replace(/[^\w\s]/gi, '');
-
-          if (terms.includes(modernized || original)) {
-            tokens.push(token);
-          }
-        });
-      });
-    });
-  });
-
-  return tokens;
 };
 
 export interface TranscriptionResults {
