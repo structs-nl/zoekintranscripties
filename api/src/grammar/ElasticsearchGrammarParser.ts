@@ -448,7 +448,10 @@ export class ElasticsearchGrammarParser extends Parser {
   }
   // @RuleVersion(0)
   public clauseOr(): ClauseOrContext {
-    const _localctx: ClauseOrContext = new ClauseOrContext(this._ctx, this.state);
+    const _localctx: ClauseOrContext = new ClauseOrContext(
+      this._ctx,
+      this.state
+    );
     this.enterRule(_localctx, 8, ElasticsearchGrammarParser.RULE_clauseOr);
     try {
       let _alt: number;
@@ -902,7 +905,10 @@ export class ElasticsearchGrammarParser extends Parser {
   }
   // @RuleVersion(0)
   public anything(): AnythingContext {
-    const _localctx: AnythingContext = new AnythingContext(this._ctx, this.state);
+    const _localctx: AnythingContext = new AnythingContext(
+      this._ctx,
+      this.state
+    );
     this.enterRule(_localctx, 22, ElasticsearchGrammarParser.RULE_anything);
     try {
       this.enterOuterAlt(_localctx, 1);
@@ -1299,7 +1305,10 @@ export class ElasticsearchGrammarParser extends Parser {
   }
   // @RuleVersion(0)
   public modifier(): ModifierContext {
-    const _localctx: ModifierContext = new ModifierContext(this._ctx, this.state);
+    const _localctx: ModifierContext = new ModifierContext(
+      this._ctx,
+      this.state
+    );
     this.enterRule(_localctx, 38, ElasticsearchGrammarParser.RULE_modifier);
     let _la: number;
     try {

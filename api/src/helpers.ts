@@ -4,6 +4,9 @@ import winston, { format } from 'winston';
 import { Request, Response, NextFunction } from 'express';
 import config from './config';
 
+export const clean = (str: string): string =>
+  str.toLowerCase().replace(/[^\w\s]/gi, '');
+
 const myFormat = format.printf(({ level, message, timestamp }) => {
   return `${timestamp} ${level}: ${message}`;
 });
