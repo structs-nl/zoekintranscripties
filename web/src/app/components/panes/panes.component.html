@@ -76,12 +76,19 @@
             <h3>Archiefinstelling</h3>
             <p>{{ inventory.hierarchies[0].archive }}</p>
             <h3>Toegang</h3>
-            <p>{{ inventory.hierarchies[0].access }} - {{ inventory.hierarchies[0].archives[0].title }}</p>
+            <p>
+              {{ inventory.hierarchies[0].access }} -
+              {{ inventory.hierarchies[0].archives[0].title }}
+            </p>
             <h3>Inventarisnummer</h3>
             <p>{{ inventory.hierarchies[0].inventory }}</p>
             <ng-container *ngIf="transcription$ | async as transcription">
               <h3>Volgnummer</h3>
               <p>{{ transcription.label }}</p>
+              <ng-container *ngIf="transcription.filename">
+                <h3>Bestandsnaam</h3>
+                <p>{{ transcription.filename }}</p>
+              </ng-container>
             </ng-container>
             <ng-container *ngIf="inventory.hierarchies | tree as hierarchy">
               <h3>Reeksen</h3>
