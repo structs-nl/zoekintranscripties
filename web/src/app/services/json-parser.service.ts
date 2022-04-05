@@ -94,6 +94,8 @@ export class JsonParserService {
       image: painting.body.service['@id'],
       defaultImage: painting.body['@id'],
       label: canvas.label,
+      source: canvas['dcterms:source'],
+      filename: canvas.items[0].items[0].body?.filename,
       queryTokens: !canvas.queryTokens
         ? []
         : canvas.queryTokens.map((token) => ({

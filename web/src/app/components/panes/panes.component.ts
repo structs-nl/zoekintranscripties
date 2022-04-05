@@ -17,6 +17,7 @@ export class PanesComponent {
   inventory$: Observable<IInventory | undefined>;
   pane$: Observable<string>;
   transcription$: Observable<ITranscription | undefined>;
+  source$: Observable<string | undefined>;
   @ViewChild('panes') panes?: ElementRef;
 
   constructor(
@@ -32,6 +33,27 @@ export class PanesComponent {
     this.pane$ = this.route.queryParamMap.pipe(
       distinctUntilChanged(),
       map((params) => params.get('tab') as string)
+    );
+
+    this.source$ = this.transcription$.pipe(
+      map((transcription) => {
+        const validSourceValues = ['OCR', 'HTR', 'Handmatig'];
+        const source = transcription?.source;
+
+        if (!source) {
+          return undefined;
+        }
+
+        if (
+          validSourceValues.some((value) =>
+            source.toLocaleLowerCase().includes(value.toLocaleLowerCase())
+          )
+        ) {
+          return source;
+        }
+
+        return undefined;
+      })
     );
   }
 

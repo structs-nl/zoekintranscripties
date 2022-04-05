@@ -28,6 +28,7 @@ export interface EntityPlace {
 export interface Canvas {
   '@id': string;
   '@type': 'Canvas';
+  'dcterms:source'?: string;
   label: string;
   height: number;
   width: number;
@@ -72,6 +73,7 @@ export interface AnnotationImageBody {
     '@type': string;
     profile: string;
   };
+  filename: string;
   height: string; // TODO: should be number
   width: string; // TODO: should be number
 }
