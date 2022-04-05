@@ -89,6 +89,10 @@
                 <h3>Bestandsnaam</h3>
                 <p>{{ transcription.filename }}</p>
               </ng-container>
+              <ng-container *ngIf="source$ | async as source">
+                <h3>Bron</h3>
+                <p>{{ source }}</p>
+              </ng-container>
             </ng-container>
             <ng-container *ngIf="inventory.hierarchies | tree as hierarchy">
               <h3>Reeksen</h3>

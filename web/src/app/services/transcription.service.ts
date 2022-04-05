@@ -143,6 +143,8 @@ export interface ITranscription {
   image_height: number;
   regions: IRegion[];
   queryTokens: IToken[];
+  filename?: string;
+  source?: string;
 }
 
 @Injectable({
