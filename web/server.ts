@@ -67,7 +67,7 @@ export function app(): express.Express {
     })
   );
 
-  server.get('/sitemap/inventories.xml', async (req, res) => {
+  server.get('/sitemap.xml', async (req, res) => {
     const requestAsync = util.promisify(request);
     const { body } = await requestAsync({
       uri: `${environment.apiBaseUrl}/inventory/list`,
@@ -82,6 +82,13 @@ export function app(): express.Express {
             _attr: {
               xmlns: 'http://www.sitemaps.org/schemas/sitemap/0.9',
             },
+          },
+          {
+            url: [
+              {
+                loc: `https://www.zoekintranscripties.nl/`,
+              },
+            ],
           },
           ...inventories.map((inventory) => ({
             url: [

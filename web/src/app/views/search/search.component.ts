@@ -2,14 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
 import { EMPTY, Observable, Subject } from 'rxjs';
-import {
-  catchError,
-  distinctUntilChanged,
-  filter,
-  switchMap,
-  takeUntil,
-  tap,
-} from 'rxjs/operators';
+import { catchError, filter, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { ListComponent } from 'src/app/components/list/list.component';
 import { InputRangeValue } from 'src/app/components/range-slider/range-slider.component';
 import { SearchParamsService } from 'src/app/services/search-params.service';
