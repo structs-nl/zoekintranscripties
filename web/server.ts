@@ -81,6 +81,10 @@ export function app(): express.Express {
           {
             _attr: {
               xmlns: 'http://www.sitemaps.org/schemas/sitemap/0.9',
+              'xmlns:xhtml': 'http://www.w3.org/1999/xhtml',
+              'xmlns:xsi': 'http://www.w3.org/2001/XMLSchema-instance',
+              'xsi:schemaLocation':
+                'http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd',
             },
           },
           {
@@ -102,7 +106,7 @@ export function app(): express.Express {
     ];
 
     res.set('Content-Type', 'text/xml');
-    res.send(xml(urlset));
+    res.send(xml(urlset, { declaration: true }));
   });
 
   // All regular routes use the Universal engine
