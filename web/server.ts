@@ -68,9 +68,10 @@ export function app(): express.Express {
   );
 
   server.get('/sitemap.xml', async (req, res) => {
-    const requestAsync = util.promisify(request);
+    const requestAsync = util.promisify(request.get);
     const { body } = await requestAsync({
-      uri: `${environment.apiBaseUrl}/inventory/list`,
+      url: `${environment.apiBaseUrl}/inventory/list`,
+      strictSSL: false,
     });
 
     const inventories = JSON.parse(body) as string[];
