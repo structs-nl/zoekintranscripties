@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /documentation/
+
+Sitemap: https://zoekintranscripties.nl/sitemap.xml
