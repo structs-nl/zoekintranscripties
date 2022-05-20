@@ -18,6 +18,7 @@ import { FormControl } from '@angular/forms';
 import { isPlatformBrowser } from '@angular/common';
 import { catchError, map, takeUntil, tap } from 'rxjs/operators';
 import { BehaviorSubject, Subject, throwError } from 'rxjs';
+import { getIdFromParams, Parameters } from 'src/app/views/scan/scan.component';
 
 /**
  * The collection viewer shows the scans of an entire inventory
@@ -67,7 +68,7 @@ export class CollectionViewerComponent implements OnInit, OnChanges, OnDestroy {
     private transcriptionService: TranscriptionService,
     @Inject(PLATFORM_ID) private platformId: string
   ) {
-    this.documentId = this.route.snapshot.queryParams.id;
+    this.documentId = getIdFromParams(this.route.snapshot.params as Parameters);
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
 
@@ -151,14 +152,21 @@ export class CollectionViewerComponent implements OnInit, OnChanges, OnDestroy {
         const target = (event as any).originalEvent.target;
 
         if (target.matches('a')) {
-          this.router.navigate(['/zoeken/scan'], {
-            queryParams: {
-              scan: target.dataset.id,
-              tab: undefined,
-            },
-            relativeTo: this.route,
-            queryParamsHandling: 'merge',
-          });
+          this.router.navigate(
+            [
+              '/document',
+              this.manifest.archiveName,
+              this.manifest.accessId,
+              this.manifest.inventoryId,
+              target.dataset.id,
+            ],
+            {
+              queryParams: {
+                tab: undefined,
+              },
+              queryParamsHandling: 'merge',
+            }
+          );
         }
       }
     });
@@ -171,10 +179,11 @@ export class CollectionViewerComponent implements OnInit, OnChanges, OnDestroy {
       total: this.manifest.totalPages,
       items: this.transcriptions,
       onChangeIndex: (index: number) => this.handleChangePage(index),
-      getScanUrl: (id: string) =>
-        `/zoeken/scan?id=${this.documentId}&scan=${encodeURI(id)}&query=${
-          this.query
-        }`,
+      getScanUrl: (id: string) => {
+        const baseUrl = `/document/${this.manifest.archiveName}/${this.manifest.accessId}/${this.manifest.inventoryId}/${id}`;
+
+        return baseUrl + `?query=${this.query}`;
+      },
     });
 
     setTimeout(() => {

@@ -18,6 +18,14 @@ import { DocumentQuery } from 'src/app/state/document.query';
 import { DocumentStore } from 'src/app/state/document.store';
 import { SearchParamsService } from 'src/app/services/search-params.service';
 
+export const getIdFromParams = (params: Params): string => {
+  if (params.archiveName === 'NL-HaNA') {
+    return `https://archief.nl/doc/transcriptie/${params.accessId}/${params.inventoryId}`.toLowerCase();
+  }
+
+  return `https://archief.nl/doc/transcriptie/${params.archiveName}/${params.accessId}/${params.inventoryId}`.toLowerCase();
+};
+
 @Component({
   selector: 'app-document',
   templateUrl: './document.component.html',
@@ -58,20 +66,27 @@ export class DocumentComponent implements OnDestroy {
     this.loading$ = this.documentQuery.isLoading();
     this.error$ = this.documentQuery.getError();
 
+    if (!this.route.firstChild) {
+      return;
+    }
+
     combineLatest([
+      this.route.firstChild.params,
       this.route.queryParams,
       this.limit$,
       this.offset$,
       this.searchParams.params$,
     ])
       .pipe(
-        map(([params, limit, offset, searchParams]) => ({
-          limit,
-          offset,
-          query: params.query as string,
-          id: params.id as string,
-          expansions: searchParams.expansions,
-        })),
+        map(([params, queryParams, limit, offset, searchParams]) => {
+          return {
+            limit,
+            offset,
+            query: queryParams.query as string,
+            id: getIdFromParams(params),
+            expansions: searchParams.expansions,
+          };
+        }),
         tap((params) => {
           this.search.setValue(params.query);
           this.hasQuery = params.query ? params.query.length > 0 : false;
@@ -141,7 +156,7 @@ export class DocumentComponent implements OnDestroy {
   }
 
   updateQueryParams(params: Record<string, unknown>): void {
-    this.router.navigate(['/zoeken/document'], {
+    this.router.navigate(['/document'], {
       queryParams: params,
       relativeTo: this.route,
       queryParamsHandling: 'merge',

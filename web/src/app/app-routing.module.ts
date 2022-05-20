@@ -16,16 +16,16 @@ const routes: Routes = [
     component: SearchComponent,
   },
   {
-    path: 'zoeken',
+    path: 'document',
     component: DocumentComponent,
     children: [
       {
-        path: 'scan',
-        component: ScanComponent,
+        path: ':archiveName/:accessId/:inventoryId',
+        component: InventoryComponent,
       },
       {
-        path: 'document',
-        component: InventoryComponent,
+        path: ':archiveName/:accessId/:inventoryId/:scanId',
+        component: ScanComponent,
       },
     ],
   },

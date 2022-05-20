@@ -84,13 +84,16 @@ export const normalizeHighlights = (rawHits: any): Highlight[] => {
         .sort()
         .forEach(([key, value]) => {
           value.forEach((highlight: string) => {
+            const page =
+              scan.fields &&
+              scan.fields['nest.page_id'] &&
+              scan.fields['nest.page_id'][0];
+
             highlights.push({
               type: highlightTypeMapping[key] as Highlight['type'],
-              page:
-                scan.fields &&
-                scan.fields['nest.page_id'] &&
-                scan.fields['nest.page_id'][0],
+              pageNr: page && page.slice(page.lastIndexOf('/') + 1),
               text: highlight,
+              page,
             });
           });
         });
@@ -131,6 +134,8 @@ export const normalizeHit = (expansions: string[]) => (
     access: hit.fields?.access_title?.[0] || '',
     archive: hit.fields?.archive_title?.[0] || '',
     inventory: hit.fields?.inventory_id?.[0] || '',
+    accessId: hit.fields?.access_id?.[0] || '',
+    archiveId: hit.fields?.archive_id?.[0] || '',
     date: normalizeDate(hit.fields?.date),
     totalHits: hit.inner_hits.nest.hits.total.value,
     highlights: normalizeHighlights(hit.inner_hits.nest.hits.hits),

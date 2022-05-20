@@ -5,166 +5,197 @@
     </div>
   </ng-template>
   <ng-container *ngIf="transcription$ | async as transcription; else loading">
-    <ng-container *ngIf="activeViews$ | async as activeViews">
-      <div class="actions">
-        <div class="action-buttons">
-          <a
-            *ngIf="transcription.previousResultId"
-            title="Ga naar vorige zoekresultaat"
-            data-testid="viewer-previous-result"
-            class="action action-btn"
-            [routerLink]="[]"
-            [queryParams]="{
-              scan: transcription.previousResultId,
-              tab: undefined
-            }"
-            queryParamsHandling="merge"
-          >
-            <app-svg-icon name="backward"></app-svg-icon>
-            <span class="action-label visually-hidden-sm">
-              Vorige hit
-            </span>
-          </a>
-          <a
-            *ngIf="transcription.previousId"
-            data-testid="viewer-previous"
-            class="action action-btn"
-            [routerLink]="[]"
-            [queryParams]="{ scan: transcription.previousId, tab: undefined }"
-            queryParamsHandling="merge"
-          >
-            <app-svg-icon name="chevron-left"></app-svg-icon>
-            <span class="action-label visually-hidden-sm">
-              Vorige scan
-            </span>
-          </a>
-          <form
-            (submit)="onSubmitChangePage($event)"
-            class="action page-selector"
-          >
-            <input
-              aria-label="Huidige pagina"
-              class="page-input"
-              [formControl]="page"
-              type="number"
-              min="1"
-              [value]="transcription.currentIndex + 1"
-              [max]="totalPages$ | async"
-              data-testid="viewer-page-input"
-            />
-            <button
-              class="visually-hidden-sm page-button"
-              data-testid="viewer-page-button"
-              title="Ga naar pagina"
+    <ng-container *ngIf="inventory$ | async as inventory; else loading">
+      <ng-container *ngIf="activeViews$ | async as activeViews">
+        <div class="actions">
+          <div class="action-buttons">
+            <a
+              *ngIf="transcription.previousResultScanId"
+              title="Ga naar vorige zoekresultaat"
+              data-testid="viewer-previous-result"
+              class="action action-btn"
+              [routerLink]="[
+                '/document',
+                inventory.archiveName,
+                inventory.accessId,
+                inventory.inventoryId,
+                transcription.previousResultScanId
+              ]"
+              [queryParams]="{
+                tab: undefined
+              }"
+              queryParamsHandling="merge"
             >
-              Ga
-            </button>
-            <span
-              class="page-total visually-hidden-sm"
-              data-testid="viewer-total"
-              >van {{ totalPages$ | async }}</span
+              <app-svg-icon name="backward"></app-svg-icon>
+              <span class="action-label visually-hidden-sm">
+                Vorige hit
+              </span>
+            </a>
+            <a
+              *ngIf="transcription.previousScanId"
+              data-testid="viewer-previous"
+              class="action action-btn"
+              [routerLink]="[
+                '/document',
+                inventory.archiveName,
+                inventory.accessId,
+                inventory.inventoryId,
+                transcription.previousScanId
+              ]"
+              [queryParams]="{ tab: undefined }"
+              queryParamsHandling="merge"
             >
-          </form>
-          <a
-            *ngIf="transcription.nextId"
-            data-testid="viewer-next"
-            class="action action-btn"
-            [routerLink]="[]"
-            [queryParams]="{ scan: transcription.nextId, tab: undefined }"
-            queryParamsHandling="merge"
-          >
-            <span class="action-label visually-hidden-sm">
-              Volgende scan
-            </span>
-            <app-svg-icon name="chevron-right"></app-svg-icon>
-          </a>
-          <a
-            *ngIf="transcription.nextResultId"
-            data-testid="viewer-next-result"
-            class="action action-btn"
-            title="Ga naar volgend zoekresultaat"
-            [routerLink]="[]"
-            [queryParams]="{ scan: transcription.nextResultId, tab: undefined }"
-            queryParamsHandling="merge"
-          >
-            <span class="action-label visually-hidden-sm">
-              Volgende hit
-            </span>
-            <app-svg-icon name="forward"></app-svg-icon>
-          </a>
+              <app-svg-icon name="chevron-left"></app-svg-icon>
+              <span class="action-label visually-hidden-sm">
+                Vorige scan
+              </span>
+            </a>
+            <form
+              (submit)="onSubmitChangePage($event)"
+              class="action page-selector"
+            >
+              <input
+                aria-label="Huidige pagina"
+                class="page-input"
+                [formControl]="page"
+                type="number"
+                min="1"
+                [value]="transcription.currentIndex + 1"
+                [max]="totalPages$ | async"
+                data-testid="viewer-page-input"
+              />
+              <button
+                class="visually-hidden-sm page-button"
+                data-testid="viewer-page-button"
+                title="Ga naar pagina"
+              >
+                Ga
+              </button>
+              <span
+                class="page-total visually-hidden-sm"
+                data-testid="viewer-total"
+                >van {{ totalPages$ | async }}</span
+              >
+            </form>
+            <a
+              *ngIf="transcription.nextScanId"
+              data-testid="viewer-next"
+              class="action action-btn"
+              [routerLink]="[
+                '/document',
+                inventory.archiveName,
+                inventory.accessId,
+                inventory.inventoryId,
+                transcription.nextScanId
+              ]"
+              [queryParams]="{ tab: undefined }"
+              queryParamsHandling="merge"
+            >
+              <span class="action-label visually-hidden-sm">
+                Volgende scan
+              </span>
+              <app-svg-icon name="chevron-right"></app-svg-icon>
+            </a>
+            <a
+              *ngIf="transcription.nextResultScanId"
+              data-testid="viewer-next-result"
+              class="action action-btn"
+              title="Ga naar volgend zoekresultaat"
+              [routerLink]="[
+                '/document',
+                inventory.archiveName,
+                inventory.accessId,
+                inventory.inventoryId,
+                transcription.nextResultScanId
+              ]"
+              [queryParams]="{
+                tab: undefined
+              }"
+              queryParamsHandling="merge"
+            >
+              <span class="action-label visually-hidden-sm">
+                Volgende hit
+              </span>
+              <app-svg-icon name="forward"></app-svg-icon>
+            </a>
+          </div>
         </div>
-      </div>
-      <div class="content">
-        <div class="toolbar">
-          <app-responsive-multi-select
-            [options]="views"
-            [activeOptions]="activeViews"
-            (changeOptions)="onToggleView($event)"
-          ></app-responsive-multi-select>
+        <div class="content">
+          <div class="toolbar">
+            <app-responsive-multi-select
+              [options]="views"
+              [activeOptions]="activeViews"
+              (changeOptions)="onToggleView($event)"
+            ></app-responsive-multi-select>
 
-          <a
-            [routerLink]="['/zoeken/document']"
-            [queryParams]="{
-              scan: undefined,
-              tab: undefined,
-              index: transcription.currentIndex + 1
-            }"
-            queryParamsHandling="merge"
-            [attr.aria-label]="'Terug naar inventaris'"
-            class="close button"
-          >
-            <app-svg-icon
-              width="12"
-              height="12"
-              variant="light"
-              name="close"
-            ></app-svg-icon>
-            <span class="button-text visually-hidden-sm"
-              >Terug naar inventaris</span
+            <a
+              [routerLink]="[
+                '/document',
+                inventory.archiveName,
+                inventory.accessId,
+                inventory.inventoryId
+              ]"
+              [queryParams]="{
+                tab: undefined,
+                index: transcription.currentIndex + 1
+              }"
+              queryParamsHandling="merge"
+              [attr.aria-label]="'Terug naar inventaris'"
+              class="close button"
             >
-          </a>
-        </div>
-        <div class="main">
-          <div class="viewer" *ngIf="'scan' | includes: activeViews">
-            <div [class.sticky]="isSticky">
-              <app-document-viewer
-                [src]="transcription.image"
+              <app-svg-icon
+                width="12"
+                height="12"
+                variant="light"
+                name="close"
+              ></app-svg-icon>
+              <span class="button-text visually-hidden-sm"
+                >Terug naar inventaris</span
+              >
+            </a>
+          </div>
+          <div class="main">
+            <div class="viewer" *ngIf="'scan' | includes: activeViews">
+              <div [class.sticky]="isSticky">
+                <app-document-viewer
+                  [src]="transcription.image"
+                  [regions]="transcription.regions"
+                  [activeToken]="activeToken"
+                  [activeRegion]="activeRegion"
+                  [queryTokens]="transcription.queryTokens"
+                  [originalWidth]="transcription.image_width"
+                  [originalHeight]="transcription.image_height"
+                  [activeViews]="activeViews"
+                  (changeActiveToken)="updateActiveToken($event)"
+                ></app-document-viewer>
+              </div>
+            </div>
+            <article class="column" *ngIf="'original' | includes: activeViews">
+              <h2>Transcriptie</h2>
+              <app-text-regions
                 [regions]="transcription.regions"
+                [queryTokens]="transcription.queryTokens"
                 [activeToken]="activeToken"
                 [activeRegion]="activeRegion"
-                [queryTokens]="transcription.queryTokens"
-                [originalWidth]="transcription.image_width"
-                [originalHeight]="transcription.image_height"
-                [activeViews]="activeViews"
                 (changeActiveToken)="updateActiveToken($event)"
-              ></app-document-viewer>
-            </div>
+                (changeActiveRegion)="updateActiveRegion($event)"
+              ></app-text-regions>
+            </article>
+            <article class="column" *ngIf="'modern' | includes: activeViews">
+              <h2>Verrijkte transcriptie</h2>
+              <app-text-regions
+                [regions]="transcription.regions"
+                [queryTokens]="transcription.queryTokens"
+                [activeToken]="activeToken"
+                [activeRegion]="activeRegion"
+                [modernized]="true"
+                (changeActiveToken)="updateActiveToken($event)"
+                (changeActiveRegion)="updateActiveRegion($event)"
+              ></app-text-regions>
+            </article>
           </div>
-          <article class="column" *ngIf="'original' | includes: activeViews">
-            <h2>Transcriptie</h2>
-            <app-text-regions
-              [regions]="transcription.regions"
-              [queryTokens]="transcription.queryTokens"
-              [activeToken]="activeToken"
-              [activeRegion]="activeRegion"
-              (changeActiveToken)="updateActiveToken($event)"
-              (changeActiveRegion)="updateActiveRegion($event)"
-            ></app-text-regions>
-          </article>
-          <article class="column" *ngIf="'modern' | includes: activeViews">
-            <h2>Verrijkte transcriptie</h2>
-            <app-text-regions
-              [regions]="transcription.regions"
-              [queryTokens]="transcription.queryTokens"
-              [activeToken]="activeToken"
-              [activeRegion]="activeRegion"
-              [modernized]="true"
-              (changeActiveToken)="updateActiveToken($event)"
-              (changeActiveRegion)="updateActiveRegion($event)"
-            ></app-text-regions>
-          </article>
         </div>
-      </div>
+      </ng-container>
     </ng-container>
   </ng-container>
 </div>

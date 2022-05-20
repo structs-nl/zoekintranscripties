@@ -251,8 +251,8 @@ export class NaViewer {
       this.addTokenOverlays(transcription, itemBounds);
       this.addScanOverlay({
         itemBounds,
-        href: this.getScanUrl(transcription.id),
-        id: transcription.id,
+        href: this.getScanUrl(transcription.label),
+        id: transcription.label,
         isActive: index === this.activeIndex,
       });
     });

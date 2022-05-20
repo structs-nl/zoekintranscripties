@@ -687,6 +687,9 @@
 					"page": {
 						"type": "string"
 					},
+					"pageNr": {
+						"type": "string"
+					},
 					"text": {
 						"type": "string"
 					},
@@ -700,6 +703,7 @@
 					}
 				},
 				"required": [
+					"pageNr",
 					"text",
 					"type"
 				],
@@ -723,7 +727,13 @@
 					"archive": {
 						"type": "string"
 					},
+					"archiveId": {
+						"type": "string"
+					},
 					"access": {
+						"type": "string"
+					},
+					"accessId": {
 						"type": "string"
 					},
 					"inventory": {
@@ -745,7 +755,9 @@
 					"title",
 					"date",
 					"archive",
+					"archiveId",
 					"access",
+					"accessId",
 					"inventory",
 					"highlights"
 				],

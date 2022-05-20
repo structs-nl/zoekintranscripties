@@ -35,6 +35,7 @@ export interface Bucket {
 
 export interface Highlight {
   page?: string;
+  pageNr: string;
   text: string;
   type: 'modern' | 'original' | 'description';
 }
@@ -44,7 +45,9 @@ export interface SearchResult {
   title: string;
   date: string[];
   archive: string;
+  archiveId: string;
   access: string;
+  accessId: string;
   inventory: string;
   totalHits?: number;
   highlights: Highlight[];
@@ -86,6 +89,8 @@ export interface RawHit {
     archive_title: string[];
     inventory_title: string[];
     inventory_id: string[];
+    archive_id: string[];
+    access_id: string[];
     date: string[];
   };
   inner_hits: {

@@ -37,7 +37,9 @@ export interface Canvas {
   queryTokens?: Word[];
   currentIndex?: number;
   nextId?: string;
+  nextResultId?: string;
   previousId?: string;
+  previousResultId?: string;
 }
 
 export interface AnnotationPage<Annotation> {

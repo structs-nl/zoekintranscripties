@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 import { Meta } from '@angular/platform-browser';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import {
@@ -23,6 +23,7 @@ import {
   ITranscription,
   IToken,
   IRegion,
+  IInventory,
 } from '../../services/transcription.service';
 
 interface Pair {
@@ -35,6 +36,57 @@ enum Views {
   Origineel = 'original',
   Gemoderniseerd = 'modern',
 }
+
+export interface Parameters {
+  archiveName: string;
+  accessId: string;
+  inventoryId: string;
+  scanId?: string;
+}
+
+export const getIdFromParams = (params: Parameters): string => {
+  const path = [
+    params.archiveName,
+    params.accessId,
+    params.inventoryId,
+    params.scanId,
+  ]
+    .filter(Boolean)
+    .join('/');
+
+  if (params.archiveName === 'NL-HaNA') {
+    return `https://archief.nl/doc/transcriptie/${[
+      params.accessId,
+      params.inventoryId,
+      params.scanId,
+    ]
+      .filter(Boolean)
+      .join('/')}`.toLowerCase();
+  }
+
+  return `https://archief.nl/doc/transcriptie/${path}`.toLowerCase();
+};
+
+export const getParamsFromUrl = (url: string): Parameters => {
+  const parts = url.slice(url.lastIndexOf('transcriptie')).split('/').slice(1);
+
+  // TODO: do something proper when id is nationaal archief.
+  if (url.includes('1.04.02')) {
+    return {
+      archiveName: 'NL-HaNA',
+      accessId: parts[0],
+      inventoryId: parts[1],
+      scanId: parts[2] || undefined,
+    };
+  }
+
+  return {
+    archiveName: parts[0],
+    accessId: parts[1],
+    inventoryId: parts[2],
+    scanId: parts[3] || undefined,
+  };
+};
 
 @Component({
   selector: 'app-scan',
@@ -49,6 +101,7 @@ export class ScanComponent implements OnDestroy {
 
   destroy$: Subject<boolean> = new Subject<boolean>();
   transcription$: Observable<ITranscription | undefined> = new Observable();
+  inventory$: Observable<IInventory | undefined> = new Observable();
   totalPages$: Observable<number> = new Observable();
 
   activeToken: IToken | undefined;
@@ -69,9 +122,10 @@ export class ScanComponent implements OnDestroy {
     private meta: Meta
   ) {
     this.totalPages$ = this.documentQuery.getTotalPages();
+    this.inventory$ = this.documentQuery.getDocument();
 
-    this.transcription$ = this.route.queryParamMap.pipe(
-      map((params: ParamMap) => params.get('scan') || undefined),
+    this.transcription$ = this.route.params.pipe(
+      map((params: Params) => getIdFromParams(params as Parameters)),
       filter((id) => id !== undefined),
       distinctUntilChanged(),
       switchMap((scanId) => this.service.getTranscription(scanId as string))
@@ -116,9 +170,20 @@ export class ScanComponent implements OnDestroy {
       return;
     }
 
-    this.updateQueryParams({
-      scan: state.document.items[this.page.value - 1],
-    });
+    const params = getParamsFromUrl(state.document.items[this.page.value - 1]);
+
+    this.router.navigate(
+      [
+        '/document',
+        params.archiveName,
+        params.accessId,
+        params.inventoryId,
+        params.scanId,
+      ],
+      {
+        queryParamsHandling: 'merge',
+      }
+    );
   }
 
   updateActiveToken(token?: IToken): void {
@@ -127,12 +192,5 @@ export class ScanComponent implements OnDestroy {
 
   updateActiveRegion(region?: IRegion): void {
     this.activeRegion = region;
-  }
-
-  updateQueryParams(params: Record<string, unknown>): void {
-    this.router.navigate([], {
-      queryParams: params,
-      queryParamsHandling: 'merge',
-    });
   }
 }
