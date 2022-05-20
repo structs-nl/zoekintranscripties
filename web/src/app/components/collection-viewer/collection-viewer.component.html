@@ -137,11 +137,14 @@
     <li *ngFor="let transcription of transcriptions">
       <h2>
         <a
-          routerLink="/zoeken/scan"
-          [queryParams]="{
-            scan: transcription.id,
-            tab: undefined
-          }"
+          [routerLink]="[
+            '/document',
+            manifest.archiveName,
+            manifest.accessId,
+            manifest.inventoryId,
+            transcription.label
+          ]"
+          [queryParams]="{ tab: undefined }"
           queryParamsHandling="merge"
           [attr.tabindex]="-1"
         >

@@ -4,9 +4,13 @@
       <a
         class="title-link"
         [attr.aria-label]="'Bekijk het inventarisnummer'"
-        [routerLink]="['document']"
+        [routerLink]="[
+          '/document',
+          result.archiveId,
+          result.accessId,
+          result.inventory
+        ]"
         [queryParams]="{
-          id: result.id,
           index: 1,
           tab:
             result.highlights.length > 0 &&
@@ -55,9 +59,13 @@
           <a
             class="highlight"
             *ngIf="highlight.type === 'description'"
-            [routerLink]="['document']"
+            [routerLink]="[
+              '/document',
+              result.archiveId,
+              result.accessId,
+              result.inventory
+            ]"
             [queryParams]="{
-              id: result.id,
               tab: 'meta'
             }"
             queryParamsHandling="merge"
@@ -71,11 +79,13 @@
           <a
             class="highlight"
             *ngIf="highlight.type !== 'description'"
-            [routerLink]="['scan']"
-            [queryParams]="{
-              id: result.id,
-              scan: highlight.page
-            }"
+            [routerLink]="[
+              '/document',
+              result.archiveId,
+              result.accessId,
+              result.inventory,
+              highlight.pageNr
+            ]"
             queryParamsHandling="merge"
           >
             <span class="highlight-text" [innerHTML]="highlight.text"></span>
@@ -92,10 +102,12 @@
         [attr.aria-label]="
           'Bekijk alle zoekresultaten binnen dit inventarisnummer'
         "
-        [routerLink]="['document']"
-        [queryParams]="{
-          id: result.id
-        }"
+        [routerLink]="[
+          '/document',
+          result.archiveId,
+          result.accessId,
+          result.inventory
+        ]"
         queryParamsHandling="merge"
       >
         Bekijk alle {{ result.totalHits }} scans met resultaten

@@ -370,6 +370,7 @@ const models: TsoaRoute.Models = {
     dataType: 'refObject',
     properties: {
       page: { dataType: 'string' },
+      pageNr: { dataType: 'string', required: true },
       text: { dataType: 'string', required: true },
       type: {
         dataType: 'union',
@@ -395,7 +396,9 @@ const models: TsoaRoute.Models = {
         required: true,
       },
       archive: { dataType: 'string', required: true },
+      archiveId: { dataType: 'string', required: true },
       access: { dataType: 'string', required: true },
+      accessId: { dataType: 'string', required: true },
       inventory: { dataType: 'string', required: true },
       totalHits: { dataType: 'double' },
       highlights: {

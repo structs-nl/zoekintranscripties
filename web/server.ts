@@ -13,6 +13,7 @@ import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
 import domino from 'domino';
+import { getParamsFromUrl } from 'src/app/views/scan/scan.component';
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
@@ -76,6 +77,12 @@ export function app(): express.Express {
 
     const inventories = JSON.parse(body) as string[];
 
+    const getUrlFromId = (id: string): string => {
+      const params = getParamsFromUrl(id);
+
+      return `https://www.zoekintranscripties.nl/document/${params.archiveName}/${params.accessId}/${params.inventoryId}/0001`;
+    };
+
     const urlset = [
       {
         urlset: [
@@ -95,24 +102,10 @@ export function app(): express.Express {
               },
             ],
           },
-          {
-            url: [
-              {
-                loc: `https://www.zoekintranscripties.nl/zoeken/scan?id=https:%2F%2Farchief.nl%2Fdoc%2Ftranscriptie%2F1.04.02%2F7943&scan=https:%2F%2Farchief.nl%2Fdoc%2Ftranscriptie%2F1.04.02%2F7943%2F0010`,
-              },
-            ],
-          },
-          {
-            url: [
-              {
-                loc: `https://www.zoekintranscripties.nl/zoeken/scan?id=https:%2F%2Farchief.nl%2Fdoc%2Ftranscriptie%2F1.04.02%2F7943&scan=https:%2F%2Farchief.nl%2Fdoc%2Ftranscriptie%2F1.04.02%2F7943%2F0011`,
-              },
-            ],
-          },
           ...inventories.map((inventory) => ({
             url: [
               {
-                loc: `https://www.zoekintranscripties.nl/zoeken/document?id=${inventory}`,
+                loc: getUrlFromId(inventory),
               },
             ],
           })),

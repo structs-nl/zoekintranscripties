@@ -56,9 +56,12 @@ export interface ISearchResult {
   date: string[];
   archive: string;
   access: string;
+  accessId: string;
+  archiveId: string;
   totalHits?: number;
   highlights: {
     page?: string;
+    pageNr: string;
     text: string;
     type: 'modern' | 'original' | 'description';
   }[];
@@ -121,6 +124,9 @@ export interface IInventory {
   queryTerms?: string[];
   resultIds?: string[];
   hierarchies: IInventoryHierarchy[];
+  archiveName: string;
+  accessId: string;
+  inventoryId: string;
 }
 
 export interface IToken {
@@ -145,6 +151,10 @@ export interface ITranscription {
   queryTokens: IToken[];
   filename?: string;
   source?: string;
+  nextScanId?: string;
+  nextResultScanId?: string;
+  previousScanId?: string;
+  previousResultScanId?: string;
 }
 
 @Injectable({

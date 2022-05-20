@@ -9,6 +9,7 @@ import {
   NamedEntity,
 } from '../models/page';
 import { RicoPipe } from '../pipes/rico.pipe';
+import { getParamsFromUrl } from '../views/scan/scan.component';
 import { IInventory, IToken, ITranscription } from './transcription.service';
 
 enum Types {
@@ -62,6 +63,7 @@ export class JsonParserService {
 
   parseInventory(manifest: Manifest): IInventory {
     const rico = this.rico.transform(manifest.seeAlso['rico:RecordSet']);
+    const params = getParamsFromUrl(manifest['@id']);
 
     return {
       id: manifest['@id'],
@@ -71,6 +73,9 @@ export class JsonParserService {
       resultIds: manifest.resultIds,
       hierarchies: rico,
       items: manifest.items.map((item) => item['@id']),
+      accessId: params.accessId,
+      archiveName: params.archiveName,
+      inventoryId: params.inventoryId,
     };
   }
 
@@ -86,6 +91,9 @@ export class JsonParserService {
       throw new Error('No painting or supplement found on Canvas');
     }
 
+    const getScanFromId = (id?: string): string | undefined =>
+      id && id.slice(id.lastIndexOf('/') + 1);
+
     return {
       ...canvas,
       id: canvas['@id'],
@@ -94,6 +102,10 @@ export class JsonParserService {
       image: painting.body.service['@id'],
       defaultImage: painting.body['@id'],
       label: canvas.label,
+      nextScanId: getScanFromId(canvas.nextId),
+      nextResultScanId: getScanFromId(canvas.nextResultId),
+      previousScanId: getScanFromId(canvas.previousId),
+      previousResultScanId: getScanFromId(canvas.previousResultId),
       source: canvas['dcterms:source'],
       filename: canvas.items[0].items[0].body?.filename,
       queryTokens: !canvas.queryTokens
