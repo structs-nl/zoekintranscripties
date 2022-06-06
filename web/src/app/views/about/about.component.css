@@ -20,6 +20,10 @@
   line-height: 1.5;
 }
 
+.section-content h2 {
+  margin-top: 28px;
+}
+
 .link {
   word-wrap: break-word;
 }
