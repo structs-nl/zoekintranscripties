@@ -13,7 +13,12 @@ import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
 import domino from 'domino';
-import { getParamsFromUrl } from 'src/app/views/scan/scan.component';
+import {
+  getIdFromParams,
+  getParamsFromUrl,
+} from 'src/app/views/scan/scan.component';
+
+const requestAsync = util.promisify(request.get);
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
@@ -69,7 +74,6 @@ export function app(): express.Express {
   );
 
   server.get('/sitemap.xml', async (req, res) => {
-    const requestAsync = util.promisify(request.get);
     const { body } = await requestAsync({
       url: `${environment.apiBaseUrl}/inventory/list`,
       strictSSL: false,
@@ -80,8 +84,54 @@ export function app(): express.Express {
     const getUrlFromId = (id: string): string => {
       const params = getParamsFromUrl(id);
 
-      return `https://www.zoekintranscripties.nl/document/${params.archiveName}/${params.accessId}/${params.inventoryId}/0001`;
+      return `https://zoekintranscripties.nl/${params.archiveName}--${params.accessId}--${params.inventoryId}.xml`;
     };
+
+    const sitemaps = [
+      {
+        sitemapindex: [
+          {
+            _attr: {
+              xmlns: 'http://www.sitemaps.org/schemas/sitemap/0.9',
+            },
+          },
+          ...inventories.map((inventory) => ({
+            sitemap: [
+              {
+                loc: getUrlFromId(inventory),
+              },
+            ],
+          })),
+        ],
+      },
+    ];
+
+    res.set('Content-Type', 'text/xml');
+    res.send(xml(sitemaps, { declaration: true }));
+  });
+
+  server.get('/:id.xml', async (req, res) => {
+    const [archiveName, accessId, inventoryId] = req.params.id.split('--');
+    const id = getIdFromParams({
+      archiveName,
+      inventoryId,
+      accessId,
+    });
+
+    const { body } = await requestAsync({
+      url: `${environment.apiBaseUrl}/entity?id=${id}`,
+      strictSSL: false,
+    });
+
+    const document = JSON.parse(body) as any;
+    const manifest = document['@graph'].find(
+      (item: any) => item['@type'] === 'Manifest'
+    );
+
+    if (!manifest) {
+      res.send('error');
+      return;
+    }
 
     const urlset = [
       {
@@ -98,14 +148,14 @@ export function app(): express.Express {
           {
             url: [
               {
-                loc: `https://www.zoekintranscripties.nl/`,
+                loc: `https://zoekintranscripties.nl/document/${archiveName}/${accessId}/${inventoryId}`,
               },
             ],
           },
-          ...inventories.map((inventory) => ({
+          ...manifest.items.map((item: any) => ({
             url: [
               {
-                loc: getUrlFromId(inventory),
+                loc: `https://zoekintranscripties.nl/document/${archiveName}/${accessId}/${inventoryId}/${item.label}`,
               },
             ],
           })),
