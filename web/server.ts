@@ -73,42 +73,37 @@ export function app(): express.Express {
     })
   );
 
-  server.get('/sitemap.xml', async (req, res) => {
-    const { body } = await requestAsync({
-      url: `${environment.apiBaseUrl}/inventory/list`,
-      strictSSL: false,
-    });
-
-    const inventories = JSON.parse(body) as string[];
-
-    const getUrlFromId = (id: string): string => {
-      const params = getParamsFromUrl(id);
-
-      return `https://zoekintranscripties.nl/${params.archiveName}--${params.accessId}--${params.inventoryId}.xml`;
-    };
-
-    const sitemaps = [
-      {
-        sitemapindex: [
-          {
-            _attr: {
-              xmlns: 'http://www.sitemaps.org/schemas/sitemap/0.9',
-            },
-          },
-          ...inventories.map((inventory) => ({
-            sitemap: [
-              {
-                loc: getUrlFromId(inventory),
-              },
-            ],
-          })),
-        ],
-      },
-    ];
-
-    res.set('Content-Type', 'text/xml');
-    res.send(xml(sitemaps, { declaration: true }));
-  });
+  // server.get('/sitemap.xml', async (req, res) => {
+  // const { body } = await requestAsync({
+  //   url: `${environment.apiBaseUrl}/inventory/list`,
+  //   strictSSL: false,
+  // });
+  // const inventories = JSON.parse(body) as string[];
+  // const getUrlFromId = (id: string): string => {
+  //   const params = getParamsFromUrl(id);
+  //   return `https://zoekintranscripties.nl/${params.archiveName}--${params.accessId}--${params.inventoryId}.xml`;
+  // };
+  // const sitemaps = [
+  //   {
+  //     sitemapindex: [
+  //       {
+  //         _attr: {
+  //           xmlns: 'http://www.sitemaps.org/schemas/sitemap/0.9',
+  //         },
+  //       },
+  //       ...inventories.map((inventory) => ({
+  //         sitemap: [
+  //           {
+  //             loc: getUrlFromId(inventory),
+  //           },
+  //         ],
+  //       })),
+  //     ],
+  //   },
+  // ];
+  // res.set('Content-Type', 'text/xml');
+  // res.send(xml(sitemaps, { declaration: true }));
+  // });
 
   server.get('/:id.xml', async (req, res) => {
     const [archiveName, accessId, inventoryId] = req.params.id.split('--');
