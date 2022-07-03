@@ -1,0 +1,54 @@
+{
+  "settings": {
+    "max_inner_result_window": 10000
+  },
+  "mappings": {
+    "_source": { "enabled": true },
+    "properties": {
+      "archive_label": { "type": "keyword", "store": true },
+      "archive_id": { "type": "keyword", "store": true },
+      "archive_title": { "type": "keyword", "store": true },
+
+      "access_label": { "type": "keyword", "store": true },
+      "access_id": { "type": "keyword", "store": true },
+      "access_title": { "type": "keyword", "store": true },
+
+      "inventory_label": { "type": "keyword", "store": true },
+      "inventory_id": { "type": "keyword", "store": true },
+      "inventory_title": { "type": "keyword", "store": true },
+
+      "document_type": { "type": "keyword", "store": true },
+      "date": { "type": "date", "store": true },
+
+      "nest": {
+        "type": "nested",
+        "properties": {
+          "description_path": { "type": "keyword", "store": true },
+          "description_title": { "type": "keyword", "store": true },
+          "description_text": {
+            "type": "text",
+            "store": true,
+            "index_options": "offsets"
+          },
+
+          "entity_person": { "type": "keyword", "store": true },
+          "entity_location": { "type": "keyword", "store": true },
+          "entity_time": { "type": "keyword", "store": true },
+
+          "page_id": { "type": "keyword", "store": true },
+          "page_nr": { "type": "integer", "store": true },
+          "page_text": {
+            "type": "text",
+            "store": true,
+            "index_options": "offsets"
+          },
+          "page_text_modernized": {
+            "type": "text",
+            "store": true,
+            "index_options": "offsets"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+    "mappings": {   
+        "properties": {
+            "suggestion": { "type": "keyword" },
+            "source": { "type": "keyword" },
+            "kind": { "type": "keyword" },
+            "link": { "type": "keyword" },
+            "synonym": { "type": "keyword" }
+        }
+    }
+}

@@ -6,7 +6,6 @@ Op de site zoekt u in de tekst van handgeschreven documenten. De documenten zijn
 
 TODO: intro uitschrijven
 
-- TODO licentie
 - TODO data map toevoegen aan publieke repos
 
 

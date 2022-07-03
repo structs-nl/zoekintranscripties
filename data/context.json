@@ -1,0 +1,54 @@
+{
+    "@context": [
+        "http://iiif.io/api/presentation/3/context.json",
+        {
+            "@version": 1.1,
+            "geo": "https://purl.org/geojson/vocab#",
+            "xsd": "http://www.w3.org/2001/XMLSchema#",
+            "hg": "http://rdf.histograph.io/#",
+            "dcterms":"http://purl.org/dc/terms/#",
+            "rico": "https://www.ica.org/standards/RiC/ontology#",
+            "pnv": "https://w3id.org/pnv#",
+            	    
+	        "geo:coordinates": {
+                "@container": "@list",
+                "@id": "geo:coordinates"
+            },
+
+            "regions": {
+                "@id": "https://archief.nl/def/transcriptie#regions",
+                "@container": "@list"
+            },
+
+            "lines": {
+                "@id": "https://archief.nl/def/transcriptie#lines",
+                "@container": "@list"
+            },
+
+            "words": {
+                "@id": "https://archief.nl/def/transcriptie#words",
+                "@container": "@list"
+            },
+
+            "modernized": {
+                "@id": "https://archief.nl/def/transcriptie#modernized",
+                "@type": "xsd:string"
+            },
+
+            "modernized_no_space": {
+                "@id": "https://archief.nl/def/transcriptie#modernized_no_space",
+                "@type": "xsd:boolean"
+            },
+
+            "original": {
+                "@id": "https://archief.nl/def/transcriptie#original",
+                "@type": "xsd:string"
+            },
+
+            "named_entity":{
+                "@id": "https://archief.nl/def/transcriptie#named_entity",
+                "@type": "@id"
+            }
+        }
+    ]
+}

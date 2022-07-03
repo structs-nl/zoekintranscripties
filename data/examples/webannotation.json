@@ -1,0 +1,38 @@
+
+{
+"type": "AnnotationPage",
+"items": [
+    {
+        "@type": "Annotation",
+        "@id": "word id",
+        "textGranularity": "word",
+        "motivation": "supplementing",
+        "body": {
+            "type": "TextualBody",
+            "value": "Amsterdam"
+        },
+        "target": [ 
+            "urn:uuid:47411c26-9256-11eb-a8b3-0242ac130003",
+            {
+                "source": "https://archief.nl/doc/transcriptie/nl-hana/1.04.02/7660/1",
+                "selector": {
+                    "type": "SvgSelector",
+                    "value": "<svg:svg><svg:polygon points='187,206 187,266 231,266 231,206'/></svg:svg>"
+                }
+            }
+        ]
+    },
+    {
+        "@type": "Annotation",
+        "@id": "urn:uuid:47411c26-9256-11eb-a8b3-0242ac130003",
+        "textGranularity": "line",
+        "motivation": "supplementing",
+        "target": {
+            "source": "https://archief.nl/doc/transcriptie/nl-hana/1.04.02/7660/1",
+            "selector": {
+                "type": "PolygonSelector",
+                "value":  [ [187,206],[187,266],[231,266],[231,206] ]
+            }
+        }
+    }
+]}

@@ -1,0 +1,5 @@
+orjson
+elasticsearch
+google-cloud-storage
+lxml
+pandas
