@@ -41,16 +41,18 @@ De **full text index**, oftewel de inventory index, bevat de geindexeerde tekste
 
 ### User Interface componenten
 
-De **zoekinterface**
+De **zoekinterface** bestaat uit een aantal bekende componenten: een simpel query veld, een histogram waarin een datum range kan worden geselecteerd en een filter op basis van de archiefbeschrijvings hierarchie.
 
-Histogram, hiërarchisch filter
-Query expansie met synoniemen
-Filteren op namen. Geen autocomplete
-Zoekresultaten met hits per pagina binnen een document
+Het **hierarchische filter** maakt het mogelijk om alle documenten van een archief of een deel van de collectie te tonen zonder dat er een zoekterm wordt gebruikt. Op het moment dat er een zoekterm wordt gebruikt zal er binnen de geselecteerde collecties(s) worden gezocht, danwel binnen alle geindexeerde collecties.
 
-De **transcriptie viewer**
+De **zoekresultaten** worden getoond per inventarisnummers. Per inventarisnummer wordt beschrijvende informatie getoond, welke helpt om de hits in de documenten van context te voorzien. Er worden zoekhits getoond in zowel de archiefbeschrijving als de transcripties.
 
-#### Transcriptie viewer
+Bij het zoeken met een query worden de trefwoorden uitgebreid op basis van het historisch woordenboek van het INT en het VOC toponiemenbestand van het Huygens. Na het uitvoeren van de query wordt aan de gebruiker de mogelijkheid gegeven om de **query expansie** te inspecteren en opties uit te zetten. Hierdoor is het met name voor onderzoekers mogelijk om preciezer te zoeken.
+
+De herkende **named entities** zijn opgenomen in de zoekindex. Het bleek niet praktisch om de grote en heterogene lijst met herkende entiteiten via een autocomplete aan te bieden aan de gebruiker. De entiteiten hebben wel een functie bij het zoeken: de gebruiker kan ervoor kiezen dat de gezochte termen voor moeten komen in een named entity veld. Dit maakt het mogelijk om specifieker te zoeken naar herkende entiteiten en daarmee in potentie irrelevante zoekresultaten te reduceren.
+
+TODO De **transcriptie viewer**
+
 
 # Technische informatie
 
