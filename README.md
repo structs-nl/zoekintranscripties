@@ -10,22 +10,14 @@ Op deze website zoekt u in de tekst van handgeschreven documenten. De documenten
 
 De frontend van het IJsberg project bestaat uit de user interface en de zoekmachine. Anders dan wat de naam frontend suggereert kan het project geheel onafhankelijk werken van de backend van het IJsberg project. Alle data die wordt gebruikt door de user interface en via de API wordt aangeboden wordt aangeboden vanuit de Elastic index die onderdeel is van de frontend.
 
-De backend stuurt een JSON-LD bestand met daarin alle inventarisnummer met gelinkte transcriptiepagina’s en de relevante named entities. De **ingest service** zal deze bestanden via een HTTP POST ontvangen, eventueel decomprimeren en controleren op syntactische validiteit. Dit laatste zal worden gedaan met behulp van een JSON Schema check, welke tevens voor de OpenAPI definitie zal worden gebruikt. Na deze syntactische controle zullen we de named entities naar het Elastic cluster sturen en vervolgens het inventarisnummer samen met alle transcriptiepagina’s als één document naar het Elastic cluster sturen. Succesmeldingen en errors worden terug gegeven aan de versturende partij. De ingest service werkt per inventarisnummer en geeft direct een melding terug als de verwerking succesvol of niet is. De service werkt snel en kan met gemak parallel bestanden ontvangen. De bottleneck qua performance ligt bij de Elastic index.
+De backend stuurt een JSON-LD bestand met daarin alle inventarisnummer met gelinkte transcriptiepagina’s en de relevante named entities. De backend genereert de JSON-LD bestanden vanuit de archiefbeschijvingen in de EAD, de PAGE XML's van de transcripties en de METS links. De laatste geven de locaties van de scans op de IIIF server van het Nationaal Archief weer. De **ingest service** zal deze bestanden via een HTTP POST ontvangen, eventueel decomprimeren en controleren op syntactische validiteit. Dit laatste zal worden gedaan met behulp van een JSON Schema check, welke tevens voor de OpenAPI definitie zal worden gebruikt. Na deze syntactische controle zullen we de named entities naar het Elastic cluster sturen en vervolgens het inventarisnummer samen met alle transcriptiepagina’s als één document naar het Elastic cluster sturen. Succesmeldingen en errors worden terug gegeven aan de versturende partij. De ingest service werkt per inventarisnummer en geeft direct een melding terug als de verwerking succesvol of niet is. De service werkt snel en kan met gemak parallel bestanden ontvangen. De bottleneck qua performance ligt bij de Elastic index. De API documentatie van de ingest service: https://ingest.zoekintranscripties.nl/docs/
 
-TODO batch script ingest.
+Wij hebben voor testtoepassingen een Python **batchscript** geschreven dat zeer snel de JSON-LD kan genereren op basis van bestanden die in het filesystem staan opgeslagen. Het testscript kan de ingest service overslaan en direct naar de Elastic indices schrijven of via de ingest service werken. Het script geeft door haar beperkte formaat een goed beeld van de opbouw van de JSON-LD. Het script voegt geen named entity recognition uit, maar het aanroepen van een NER script is zonder veel moeite te realiseren, ook omdat dit o goed als altijd in Python wordt gedaan. Het batchscript is niet een deliverable van het project, maar is voor interne testdoeleinden geschreven. 
 
-De **search service** geeft toegang tot de gegevens in de Elastic index en is verantwoordelijk voor de API’s die worden gebruikt door de projectwebsite user interface. Deze API’s vormen tevens de Linked Data toegangspoort. De zoekresultaten en documenten zullen namelijk als JSON-LD Linked Data worden geformatteerd. Dit is ook het formaat dat intern door de user interface wordt gebruikt. Alle hier genoemde API’s werken via het HTTP protocol.
+De **search service** geeft toegang tot de gegevens in de Elastic index en is verantwoordelijk voor de API’s die worden gebruikt door de projectwebsite user interface. Deze API’s vormen tevens de Linked Data toegangspoort. De zoekresultaten en documenten worden als JSON-LD Linked Data beschikbaar gesteld en ook door de user interface gebruikt. De API documentatie voor de search service: https://api.zoekintranscripties.nl/docs/
 
-- search endpoint
-- document endpoint
-
-TODO OpenAPI
-
-![](img/opzet_diagram.svg)
-
-### JSON-LD
-
-### Elastic indices
+TODO: search en document endpoints.
+TODO: beschrijving van de functionaliteit van de search api
 
 
 De kern van de ‘frontend’ zijn een aantal Elastic indexen. Er zijn drie indexen:
@@ -34,6 +26,15 @@ De kern van de ‘frontend’ zijn een aantal Elastic indexen. Er zijn drie inde
 Full text index met filters: nested document
 Highlights
 
+
+
+
+![](img/opzet_diagram.svg)
+
+
+
+
+### JSON-LD
 
 ### User Interface componenten
 
