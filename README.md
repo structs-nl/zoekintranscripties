@@ -1,42 +1,43 @@
 # Transcripties Zoeken & Tonen
 
-Op deze website zoekt u in de tekst van handgeschreven documenten. De documenten zijn afkomstig uit de archieven van de Verenigde Oost-Indische Compagnie (VOC) uit de 17e en 18e eeuw en archieven van notarissen uit de 19e eeuw.
+TODO Intro
 
-- TODO up to date JSON-LD / WebAnnotations
-- TODO data map toevoegen aan publieke repos
+
+Op de site zoekt u in de tekst van handgeschreven documenten. De documenten zijn afkomstig uit de archieven van de Verenigde Oost-Indische Compagnie (VOC) uit de 17e en 18e eeuw en archieven van notarissen uit de 19e eeuw.
+
 - TODO licentie
+- TODO data map toevoegen aan publieke repos
+
 
 ## Opzet
 
 De frontend van het IJsberg project bestaat uit de user interface en de zoekmachine. Anders dan wat de naam frontend suggereert kan het project geheel onafhankelijk werken van de backend van het IJsberg project. Alle data die wordt gebruikt door de user interface en via de API wordt aangeboden wordt aangeboden vanuit de Elastic index die onderdeel is van de frontend.
 
-De backend stuurt een JSON-LD bestand met daarin alle inventarisnummer met gelinkte transcriptiepagina’s en de relevante named entities. De backend genereert de JSON-LD bestanden vanuit de archiefbeschijvingen in de EAD, de PAGE XML's van de transcripties en de METS links. De laatste geven de locaties van de scans op de IIIF server van het Nationaal Archief weer. De **ingest service** zal deze bestanden via een HTTP POST ontvangen, eventueel decomprimeren en controleren op syntactische validiteit. Dit laatste zal worden gedaan met behulp van een JSON Schema check, welke tevens voor de OpenAPI definitie zal worden gebruikt. Na deze syntactische controle zullen we de named entities naar het Elastic cluster sturen en vervolgens het inventarisnummer samen met alle transcriptiepagina’s als één document naar het Elastic cluster sturen. Succesmeldingen en errors worden terug gegeven aan de versturende partij. De ingest service werkt per inventarisnummer en geeft direct een melding terug als de verwerking succesvol of niet is. De service werkt snel en kan met gemak parallel bestanden ontvangen. De bottleneck qua performance ligt bij de Elastic index. De API documentatie van de ingest service: https://ingest.zoekintranscripties.nl/docs/
+De backend stuurt een JSON-LD bestand met daarin alle inventarisnummer met gelinkte transcriptiepagina’s en de relevante named entities. De backend genereert de JSON-LD bestanden vanuit de archiefbeschijvingen in de EAD, de PAGE XML's van de transcripties en de METS links. De laatste geven de locaties van de scans op de IIIF server van het Nationaal Archief weer. De **ingest service** zal deze bestanden via een HTTP POST ontvangen, eventueel decomprimeren en controleren op syntactische validiteit. Dit laatste zal worden gedaan met behulp van een JSON Schema check. Na deze syntactische controle zullen we de named entities naar het Elastic cluster sturen en vervolgens het inventarisnummer samen met alle transcriptiepagina’s als één document naar het Elastic cluster sturen. Succesmeldingen en errors worden terug gegeven aan de versturende partij. De ingest service werkt per inventarisnummer en geeft direct een melding terug als de verwerking succesvol of niet is. De service werkt snel en kan met gemak parallel bestanden ontvangen. De bottleneck qua performance ligt bij de Elastic index. De API documentatie van de ingest service: https://ingest.zoekintranscripties.nl/docs/
 
 Wij hebben voor testtoepassingen een Python **batchscript** geschreven dat zeer snel de JSON-LD kan genereren op basis van bestanden die in het filesystem staan opgeslagen. Het testscript kan de ingest service overslaan en direct naar de Elastic indices schrijven of via de ingest service werken. Het script geeft door haar beperkte formaat een goed beeld van de opbouw van de JSON-LD. Het script voegt geen named entity recognition uit, maar het aanroepen van een NER script is zonder veel moeite te realiseren, ook omdat dit o goed als altijd in Python wordt gedaan. Het batchscript is niet een deliverable van het project, maar is voor interne testdoeleinden geschreven. 
 
 De **search service** geeft toegang tot de gegevens in de Elastic index en is verantwoordelijk voor de API’s die worden gebruikt door de projectwebsite user interface. Deze API’s vormen tevens de Linked Data toegangspoort. De zoekresultaten en documenten worden als JSON-LD Linked Data beschikbaar gesteld en ook door de user interface gebruikt. De API documentatie voor de search service: https://api.zoekintranscripties.nl/docs/
 
-TODO: search en document endpoints.
 TODO: beschrijving van de functionaliteit van de search api
 
+De kern van de frontend zijn een aantal **Elastic indices**:
 
-De kern van de ‘frontend’ zijn een aantal Elastic indexen. Er zijn drie indexen:
+De **entities index**: de JSON-LD die naar de ingest service wordt gestuurd wordt per entiteit opgeslagen. Iedere entiteit in het JSON-LD bestand (de graph) heeft een URI en onder deze URI worden de entiteiten opgeslagen als JSON objecten. Deze index wordt alleen gebruikt om de entiteiten gemakkelijk en snel ter beschikking te hebben. Elastic slaat de JSON objecten gecomprimeerd op, waardoor het ruimtegebruik ook minimaal is. Het is goed mogelijk en bij zeer grote hoeveelheden data ook aan te raden om voor deze functie een object store te gebruiken.
 
+De **suggestions index** bevat de suggesties voor de interactieve query expansie. Na het versturen van de query wordt er gezocht naar de trefwoorden in de query en wordt een uitgebreide zoekopdracht gedaan. Wij maken gebruik van een index met suggesties en een  query parser / herschrijver omdat we meer controle willen over de query expansie dan mogelijk is met het standaard mechanisme in Elastic. De suggestions index wordt gevuld met het historisch woordenboek van het INT en de VOC toponiemenlijst van het Huygens. Beide kunnen wij niet opnemen in de publiekelijk beschikbare sourcecode.
 
-Full text index met filters: nested document
-Highlights
+De **full text index**, oftewel de inventory index, bevat de geindexeerde teksten en metadata van de inventarisnummers. In deze index is geen JSON object te vinden, maar is de metadata uit de archiefbeschrijving waarop wordt gezocht of gefilterd en de volledige tekst van de transcripties te vinden. De inventarisnummers zijn als 'nested' documents geindexeerd, met de transcriptietekst en de relevante metadata als genest document. De hierarchie en de beschrijvende tekst uit de archiefbeschrijving is op het geneste niveau te vinden, omdat het alleen mogelijk is om op dit niveau queries uit te voeren. De tekstvelden maken gebruik van pre-computed 'offsets' voor het snel vaststellen van de highlights bij het uitvoeren van een query.
 
-
-
-
-![](img/opzet_diagram.svg)
-
-
-
+![](img/opzet_diagram.drawio.svg)
 
 ### JSON-LD
 
+- Up-to-date JSON-LD voorbeeld
+
 ### User Interface componenten
+
+#### Zoekinterface
 
 Histogram, hiërarchisch filter
 Query expansie met synoniemen
@@ -44,10 +45,10 @@ Filteren op namen. Geen autocomplete
 Zoekresultaten met hits per pagina binnen een document
 
 
-#### Zoekinterface
-
-
 #### Transcriptie viewer
+
+
+
 
 
 ## Gebruikte technieken
@@ -77,13 +78,13 @@ Zoekresultaten met hits per pagina binnen een document
 
 ## Mappenstructuur codebase
 
-- **/web** In deze map staat de code voor de frontend. Deze is geschreven in Angular en volgt zoveel mogelijk de standaard Angular patterns. De applicatie maakt gebruik van Angular Universal voor het serverside renderen van de templates en van Datorama Akita voor state management. Daarnaast gebruikt de applicatie OpenSeaDragon voor het tonen van transcripties en de Angular Tree Component voor de boomstructuur in de inventarissenfilter. Zie de gegenereerde Angular documentatie voor een overzicht van alle componenten.
+**/web** In deze map staat de code voor de frontend. Deze is geschreven in Angular en volgt zoveel mogelijk de standaard Angular patterns. De applicatie maakt gebruik van Angular Universal voor het serverside renderen van de templates en van Datorama Akita voor state management. Daarnaast gebruikt de applicatie OpenSeaDragon voor het tonen van transcripties en de Angular Tree Component voor de boomstructuur in de inventarissenfilter. Zie de gegenereerde Angular documentatie voor een overzicht van alle componenten.
 
-- **/api** In deze map staat de code voor de api. De api ontvangt verzoeken van de fronted en praat met ElasticSearch database om de juiste data te tonen. De applicatie maakt gebruikt van Tsoa om op een efficiënte manier documentatie te genereren aan de hand van TypeScript typings.
+**/api** In deze map staat de code voor de api. De api ontvangt verzoeken van de fronted en praat met ElasticSearch database om de juiste data te tonen. De applicatie maakt gebruikt van Tsoa om op een efficiënte manier documentatie te genereren aan de hand van TypeScript typings.
 
-- **/ingest** De ingest applicatie zorgt ervoor dat transcripties in ElasticSearch geladen kunnen worden. In deze applicatie worden een aantal transformaties gedaan voordat de transcriptie naar Elastic gestuurd wordt. Hierdoor wordt het zoeken efficiënter en sneller.
+**/ingest** De ingest applicatie zorgt ervoor dat transcripties in ElasticSearch geladen kunnen worden. In deze applicatie worden een aantal transformaties gedaan voordat de transcriptie naar Elastic gestuurd wordt. Hierdoor wordt het zoeken efficiënter en sneller.
 
-- **/data/elastic** Hier staat beschreven hoe ElasticSearch geconfigureerd moet worden. Door het bestand mapping.sh uit te voeren kan een Elastic instantie worden ingericht. Let hierbij op dat de juiste instantie wordt benaderd.
+**/data/elastic** Hier staat beschreven hoe ElasticSearch geconfigureerd moet worden. Door het bestand mapping.sh uit te voeren kan een Elastic instantie worden ingericht. Let hierbij op dat de juiste instantie wordt benaderd.
 
 ##  Installatie
 
