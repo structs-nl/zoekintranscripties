@@ -8,13 +8,9 @@ Op deze website zoekt u in de tekst van handgeschreven documenten. De documenten
 
 ## Opzet
 
-De frontend van het IJsberg project bestaat uit de user interface en de zoekmachine. Anders dan wat de naam frontend suggereert kan de user interface geheel onafhankelijk werken van de b  ackend van het IJsberg project. Alle data die wordt gebruikt door de frontend en via de API wordt aangeboden wordt door de frontend aangeboden vanuit de Elastic index die onderdeel is van de frontend.
+De frontend van het IJsberg project bestaat uit de user interface en de zoekmachine. Anders dan wat de naam frontend suggereert kan het project geheel onafhankelijk werken van de backend van het IJsberg project. Alle data die wordt gebruikt door de user interface en via de API wordt aangeboden wordt aangeboden vanuit de Elastic index die onderdeel is van de frontend.
 
-De backend stuurt een JSON-LD bestand met daarin het inventarisnummer met gelinkte transcriptiepagina’s en de relevante named entities. Deze bestanden zullen in gecomprimeerde vorm aan worden geboden aan de ingest service via het HTTP protocol.
-
-De **ingest service** zal deze bestanden via het HTTP protocol ontvangen, decomprimeren en controleren op syntactische validiteit. Dit laatste zal worden gedaan met behulp van een JSON Schema check, welke tevens voor de OpenAPI definitie zal worden gebruikt. Na deze syntactische controle zullen we de named entities naar het Elastic cluster sturen en vervolgens het inventarisnummer samen met alle transcriptiepagina’s als één document naar het Elastic cluster sturen. Succesmeldingen en errors zullen terug worden gegeven aan de versturende partij en zullen worden gelogd.
-
-De ingest service werkt per inventarisnummer en geeft direct een melding terug als de verwerking succesvol of niet is. De service werkt snel en kan met gemak parallel bestanden ontvangen. De bottleneck qua performance ligt bij de Elastic index
+De backend stuurt een JSON-LD bestand met daarin alle inventarisnummer met gelinkte transcriptiepagina’s en de relevante named entities. De **ingest service** zal deze bestanden via een HTTP POST ontvangen, eventueel decomprimeren en controleren op syntactische validiteit. Dit laatste zal worden gedaan met behulp van een JSON Schema check, welke tevens voor de OpenAPI definitie zal worden gebruikt. Na deze syntactische controle zullen we de named entities naar het Elastic cluster sturen en vervolgens het inventarisnummer samen met alle transcriptiepagina’s als één document naar het Elastic cluster sturen. Succesmeldingen en errors worden terug gegeven aan de versturende partij. De ingest service werkt per inventarisnummer en geeft direct een melding terug als de verwerking succesvol of niet is. De service werkt snel en kan met gemak parallel bestanden ontvangen. De bottleneck qua performance ligt bij de Elastic index.
 
 TODO batch script ingest.
 
@@ -53,7 +49,7 @@ Zoekresultaten met hits per pagina binnen een document
 #### Transcriptie viewer
 
 
-## Gebruikte techieken
+## Gebruikte technieken
 
 - TypeScript - alle code in dit project is geschreven in deze taal, een variant van JavaScript
 - Angular - het frontend framework dat gebruikt wordt om de user interface te bouwen
@@ -80,13 +76,13 @@ Zoekresultaten met hits per pagina binnen een document
 
 ## Mappenstructuur codebase
 
-- /web In deze map staat de code voor de frontend. Deze is geschreven in Angular en volgt zoveel mogelijk de standaard Angular patterns. De applicatie maakt gebruik van Angular Universal voor het serverside renderen van de templates en van Datorama Akita voor state management. Daarnaast gebruikt de applicatie OpenSeaDragon voor het tonen van transcripties en de Angular Tree Component voor de boomstructuur in de inventarissenfilter. Zie de gegenereerde Angular documentatie voor een overzicht van alle componenten.
+- **/web** In deze map staat de code voor de frontend. Deze is geschreven in Angular en volgt zoveel mogelijk de standaard Angular patterns. De applicatie maakt gebruik van Angular Universal voor het serverside renderen van de templates en van Datorama Akita voor state management. Daarnaast gebruikt de applicatie OpenSeaDragon voor het tonen van transcripties en de Angular Tree Component voor de boomstructuur in de inventarissenfilter. Zie de gegenereerde Angular documentatie voor een overzicht van alle componenten.
 
-- /api In deze map staat de code voor de api. De api ontvangt verzoeken van de fronted en praat met ElasticSearch database om de juiste data te tonen. De applicatie maakt gebruikt van Tsoa om op een efficiënte manier documentatie te genereren aan de hand van TypeScript typings.
+- **/api** In deze map staat de code voor de api. De api ontvangt verzoeken van de fronted en praat met ElasticSearch database om de juiste data te tonen. De applicatie maakt gebruikt van Tsoa om op een efficiënte manier documentatie te genereren aan de hand van TypeScript typings.
 
-- /ingest De ingest applicatie zorgt ervoor dat transcripties in ElasticSearch geladen kunnen worden. In deze applicatie worden een aantal transformaties gedaan voordat de transcriptie naar Elastic gestuurd wordt. Hierdoor wordt het zoeken efficiënter en sneller.
+- **/ingest** De ingest applicatie zorgt ervoor dat transcripties in ElasticSearch geladen kunnen worden. In deze applicatie worden een aantal transformaties gedaan voordat de transcriptie naar Elastic gestuurd wordt. Hierdoor wordt het zoeken efficiënter en sneller.
 
-- /data/elastic Hier staat beschreven hoe ElasticSearch geconfigureerd moet worden. Door het bestand mapping.sh uit te voeren kan een Elastic instantie worden ingericht. Let hierbij op dat de juiste instantie wordt benaderd.
+- **/data/elastic** Hier staat beschreven hoe ElasticSearch geconfigureerd moet worden. Door het bestand mapping.sh uit te voeren kan een Elastic instantie worden ingericht. Let hierbij op dat de juiste instantie wordt benaderd.
 
 ##  Installatie
 
