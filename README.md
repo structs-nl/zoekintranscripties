@@ -2,21 +2,13 @@
 
 Op deze website zoekt u in de tekst van handgeschreven documenten. De documenten zijn afkomstig uit de archieven van de Verenigde Oost-Indische Compagnie (VOC) uit de 17e en 18e eeuw en archieven van notarissen uit de 19e eeuw.
 
-
-
-- TODO up to date JSON-LD bestand
- - named entities
- - 
-- TODO WebAnnotations
+- TODO up to date JSON-LD / WebAnnotations
 - TODO data map toevoegen aan publieke repos
 - TODO licentie
 
-
-
-
 ## Opzet
 
-De frontend van het IJsberg project bestaat uit de user interface en de zoekmachine. Anders dan wat de naam frontend suggereert kan de user interface geheel onafhankelijk werken van de backend van het IJsberg project. Alle data die wordt gebruikt door de frontend en via de API wordt aangeboden wordt door de frontend aangeboden vanuit de Elastic index die onderdeel is van de frontend.
+De frontend van het IJsberg project bestaat uit de user interface en de zoekmachine. Anders dan wat de naam frontend suggereert kan de user interface geheel onafhankelijk werken van de b  ackend van het IJsberg project. Alle data die wordt gebruikt door de frontend en via de API wordt aangeboden wordt door de frontend aangeboden vanuit de Elastic index die onderdeel is van de frontend.
 
 De backend stuurt een JSON-LD bestand met daarin het inventarisnummer met gelinkte transcriptiepagina’s en de relevante named entities. Deze bestanden zullen in gecomprimeerde vorm aan worden geboden aan de ingest service via het HTTP protocol.
 
@@ -36,12 +28,6 @@ TODO OpenAPI
 ![](img/opzet_diagram.svg)
 
 ### JSON-LD
-
-
-
-### Duurzame identifiers
-
-
 
 ### Elastic indices
 
@@ -74,7 +60,8 @@ Zoekresultaten met hits per pagina binnen een document
 - NodeJS - de taal voor de backend
 - OpenApi - voor het documenteren van de rest api
 - Elastic - opslag en doorzoeken van transcripties
-- Opensea Dragon - 
+- Opensea Dragon - IIIF viewer voor zowel de collection view als de individuele scans
+
 ## Overzicht links
 
 - Productie url: https://zoekintranscripties.nl/
