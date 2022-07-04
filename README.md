@@ -18,32 +18,25 @@ De **suggestions index** bevat de suggesties voor de interactieve query expansie
 
 De **full text index**, oftewel de inventory index, bevat de geindexeerde teksten en metadata van de inventarisnummers. In deze index is geen JSON object te vinden, maar is de metadata uit de archiefbeschrijving waarop wordt gezocht of gefilterd en de volledige tekst van de transcripties te vinden. De inventarisnummers zijn als 'nested' documents geindexeerd, met de transcriptietekst en de relevante metadata als genest document. De hierarchie en de beschrijvende tekst uit de archiefbeschrijving is op het geneste niveau te vinden, omdat het alleen mogelijk is om op dit niveau queries uit te voeren. De tekstvelden maken gebruik van pre-computed 'offsets' voor het snel vaststellen van de highlights bij het uitvoeren van een query.
 
+
+
 De **search service** geeft toegang tot de gegevens in de Elastic index en is verantwoordelijk voor de API’s die worden gebruikt door de projectwebsite user interface. Deze API’s vormen tevens de Linked Data toegangspoort. De zoekresultaten en documenten worden als JSON-LD Linked Data beschikbaar gesteld en ook door de user interface gebruikt. De API documentatie voor de search service: https://api.zoekintranscripties.nl/docs/
 
 **https://api.zoekintranscripties.nl/entity** geeft de opgeslagen entiteit uit de JSON-LD graph weer. Deze call wordt gebruikt voor het tonen van de transcriptie
 
 **https://api.zoekintranscripties.nl/inventory** wordt gebruikt om een inventaris op te vragen en hier eventueel binnen te zoeken. Deze call geeft de JSON-LD van het inventarisnummer, met daarin de metadata, de links naar alle scans en de detail JSON-LD van een aantal scans voor het tonen van de beelden in de collectionview. Via deze call kan er binnen het inventory worden gezocht door het meegeven van een querystring. Hierbij wordt  gebruik gemaakt van de query expansie. De API geeft aan op welke scans resultaten zijn gevonden en per scan waar de hits zich bevinden.
 
-**https://api.zoekintranscripties.nl/search** wordt gebruikt door de zoekpagina. Een lege query wordt gebruikt voor het weergeven van de initiele filters (histogram en hierarchie). Standaard Lucene queries kunnen worden uitgevoerd. Het resultaat geeft weer welke query expansies zijn uitgevoerd. Deze worden in de UI gebruikt om een selectie te maken van deze expansies. De resultaten zijn gegroepeerd per inventarisnummmer.
+**https://api.zoekintranscripties.nl/search** wordt gebruikt door de zoekpagina. Een lege query wordt gebruikt voor het weergeven van de initiele filters (histogram en hierarchie). Standaard Lucene queries kunnen worden uitgevoerd. Het resultaat geeft weer welke query expansies zijn uitgevoerd. Deze worden in de UI gebruikt om een selectie te maken van deze expansies op basis van het historisch woordenboek van het INT en het VOC toponiemenbestand van het Huygens. De resultaten zijn gegroepeerd per inventarisnummmer. Er worden zoekhits getoond in zowel de archiefbeschrijving als de transcripties.  De gebruiker kan ervoor kiezen dat de gezochte termen voor moeten komen in een named entity veld. Dit maakt het mogelijk om specifieker te zoeken naar herkende entiteiten en daarmee in potentie irrelevante zoekresultaten te reduceren.
 
 ### JSON-LD
 
-TODO Up-to-date JSON-LD voorbeeld
+Een volldig voorbeeld van de JSON-LD kan [hier](data/examples/example.json) worden gevonden.
 
-### User Interface componenten
+De JSON-LD is gebaseerd op de [IIIF presentation API](https://iiif.io/api/presentation/3.0/). In deze standaard wordt gebruikg gemaakt van annotaties op een canvas. De scan, een IIIF Image, is een annotatie op het canvas. Deze informatie is uit de zogenaamde METS files gehaa.d
 
-De **zoekinterface** bestaat uit een aantal bekende componenten: een simpel query veld, een histogram waarin een datum range kan worden geselecteerd en een filter op basis van de archiefbeschrijvings hierarchie.
+De transcriptie is ook een annotatie op het canvas. Hier hebben wij ervoor gekozen om één annotatie te maken die de region, line en word structuur van de transcriptie weergeeft en de coordinaten voor een region, line en word direct weergeeft. Per word kan een referentie naar een named entity worden gegeven. Deze worden als aparte entiteiten in de JSON-LD opgenomen. Een geneste annotatiestructuur zou in de toekomst een goede verfijning zijn en een aanzet tot een standaard voor transcripties in IIIF kunnen zijn.
 
-Het **hierarchische filter** maakt het mogelijk om alle documenten van een archief of een deel van de collectie te tonen zonder dat er een zoekterm wordt gebruikt. Op het moment dat er een zoekterm wordt gebruikt zal er binnen de geselecteerde collecties(s) worden gezocht, danwel binnen alle geindexeerde collecties.
-
-De **zoekresultaten** worden getoond per inventarisnummers. Per inventarisnummer wordt beschrijvende informatie getoond, welke helpt om de hits in de documenten van context te voorzien. Er worden zoekhits getoond in zowel de archiefbeschrijving als de transcripties.
-
-Bij het zoeken met een query worden de trefwoorden uitgebreid op basis van het historisch woordenboek van het INT en het VOC toponiemenbestand van het Huygens. Na het uitvoeren van de query wordt aan de gebruiker de mogelijkheid gegeven om de **query expansie** te inspecteren en opties uit te zetten. Hierdoor is het met name voor onderzoekers mogelijk om preciezer te zoeken.
-
-De herkende **named entities** zijn opgenomen in de zoekindex. Het bleek niet praktisch om de grote en heterogene lijst met herkende entiteiten via een autocomplete aan te bieden aan de gebruiker. De entiteiten hebben wel een functie bij het zoeken: de gebruiker kan ervoor kiezen dat de gezochte termen voor moeten komen in een named entity veld. Dit maakt het mogelijk om specifieker te zoeken naar herkende entiteiten en daarmee in potentie irrelevante zoekresultaten te reduceren.
-
-TODO De **transcriptie viewer**
-
+In de manifest van het IIIF presentation document is in de seeAlso eigenschap gebruikt voor de archiefbeschrijving voor het inventarisnummer uit de EAD. Deze hebben we geconverteerd naar de RICO standaard. Idealiter zou dit een aparte entiteit zijn met een referentie vanuit het IIIF manifest.
 
 # Technische informatie
 

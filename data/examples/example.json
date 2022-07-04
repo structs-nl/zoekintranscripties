@@ -1,85 +1,80 @@
 {    
-    "versie": "0.9.15, 12 januari 2021, Robert Goené",
-    "@context": "http://cleancode.nl/na/context.json",
+    "@context": "https://archief.nl/def/transcriptie/context.json",
     "@graph": [
         {   
             "@id": "https://archief.nl/doc/transcriptie/1.04.02/7660",
             "@type": "Manifest",
-
             "label": "7660",
             "dcterms:created": "datestring",
             "dcterms:modified": "datestring",
             "seeAlso": {
-                "rico:RecordSet":{
-                    "rico:includes": [
-                        {
-                            "rico:RecordSet": {
-                                "rico:hasRecordSetType": "https://www.ica.org/standards/RiC/vocabularies/recordSetTypes#File",
-                                "rico:identifier": "7660",
-                                "rico:date": "1682-03-06/1683-01-10",
-                                "rico:title": "Kopie-dagelijkse aantekeningen gehouden door Davidt de Vicq, secretaris van de commandant van Bantam, en Isaac de Saint Martin",
-                                
+                "rico:RecordSet": {
+                  "rico:includes": [
+                    {
+                      "rico:RecordSet": {
+                        "rico:identifier": "7943",
+                        "rico:title": "Ambon, 1788 mei 26 - juni 2; Banda, 1788 mei 28  - aug. 31 ",
+                        "rico:date": "1788",
+                        "rico:hasRecordSetType": "https://www.ica.org/standards/RiC/vocabularies/recordSetTypes#File",
+                        "rico:includedIn": {
+                          "rico:RecordSet": {
+                            "rico:identifier": "7903-7947, 8522",
+                            "rico:title": "Kopie-missiven en -rapporten ingekomen bij   gouverneur-generaal en raden uit Ambon. Met bijlagen",
+                            "rico:date": "1682/1792",
+                            "rico:hasRecordSetType": "https://www.ica.org/standards/RiC/vocabularies/recordSetTypes#Series",
+                            "rico:includedIn": {
+                              "rico:RecordSet": {
+                                "rico:identifier": "Deel II/E.5.05",
+                                "rico:title": "Ambon",
+                                "rico:hasRecordSetType": "https://www.ica.org/standards/RiC/vocabularies/recordSetTypes#Series",
                                 "rico:includedIn": {
-                                    "rico:RecordSet": {
+                                  "rico:RecordSet": {
+                                    "rico:identifier": "Deel II/E.5",
+                                    "rico:title": "Kopie-missiven en -rapporten ingekomen bij  gouverneur-generaal en raden van de kantoren in Indië",
+                                    "html:p": "Van ieder kantoor zijn eerst de reeksen kopie-missiven en  -rapporten met bijlagen opgenomen. Dikwijls zijn echter ook van de bijlagen  aparte reeksen gevormd. Dit is weinig consequent geschied en het is daardoor  mogelijk dat stukken die in zo'n reeks bijlagen ontbreken, terug te vinden zijn  in de reeks kopie-missiven en -rapporten met bijlagen. Met name bij stukken van  na omstreeks 1769 is dit het geval. De oorspronkelijke opzet van de  administratie van de kamer Zeeland was blijkbaar de overgekomen brieven en  papieren uit Indië geografisch te ordenen en in één band alleen de  kopie-missiven van één zelfde kantoor op te nemen. Ook dit systeem is echter  verre van consequent volgehouden. Talloze delen bevatten geheel willekeurig  stukken van verschillende kantoren. Indien een band kopie-missiven uit twee of  meer kantoren bevat, wordt deze band bij dat kantoor vermeld waarvan de stukken  het grootste gedeelte van de band innemen, met vermelding van de missiven van  andere kantoren. Verwijzing naar banden in andere reeksen vindt plaats door  middel van een blanco inventarisnummer (----). Bij de rangschikking van de  kantoren is afgeweken van de door de kamer toegepaste volgorde en is die uit de  generale missiven van gouverneur-generaal en raden aangehouden",
+                                    "rico:hasRecordSetType": "https://www.ica.org/standards/RiC/vocabularies/recordSetTypes#Series",
+                                    "rico:includedIn": {
+                                      "rico:RecordSet": {
+                                        "rico:identifier": "Deel II/E",
+                                        "rico:title": "INGEKOMEN STUKKEN VAN GOUVERNEUR-GENERAAL EN RADEN BIJ   DE HEREN XVII EN DE KAMER ZEELAND",
+                                        "html:p": "Voor een toelichting zie hoofdstuk 3, p. .",
                                         "rico:hasRecordSetType": "https://www.ica.org/standards/RiC/vocabularies/recordSetTypes#Series",
-                                        "rico:identifier": "div.nrs.",
-                                        "rico:date": "1681 - 1782 [1789]",
-                                        "rico:title": "Kopie-missiven en -rapporten ingekomen bij gouverneur-generaal en raden uit Bantam. Met bijlagen",
-                                        "rico:physicalOrLogicalExtent": {
-                                            "rico:recordResourceExtent": "71 banden"
-                                        },
-                                        "rico:includedIn":{
-                                            "rico:RecordSet": {
-                                                "rico:hasRecordSetType": "https://www.ica.org/standards/RiC/vocabularies/recordSetTypes#Series",
-                                                "rico:title": "Bantam",
-                                                "rico:identifier": "Deel II/E.5.02",
-                                                "rico:includedIn":{
-                                                    "rico:RecordSet": {
-                                                        "rico:hasRecordSetType": "https://www.ica.org/standards/RiC/vocabularies/recordSetTypes#Series",
-                                                        "rico:title": "Kopie-missiven en -rapporten ingekomen bij  gouverneur-generaal en raden van de kantoren in Indië",
-                                                        "rico:identifier": "Deel II/E.5",
-                                                        "html:p": "Van ieder kantoor zijn eerst de reeksen kopie-missiven en  -rapporten met bijlagen opgenomen. Dikwijls zijn echter ook van de bijlagen  aparte reeksen gevormd. Dit is weinig consequent geschied en het is daardoor  mogelijk dat stukken die in zo'n reeks bijlagen ontbreken, terug te vinden zijn  in de reeks kopie-missiven en -rapporten met bijlagen. Met name bij stukken van  na omstreeks 1769 is dit het geval. De oorspronkelijke opzet van de  administratie van de kamer Zeeland was blijkbaar de overgekomen brieven en  papieren uit Indië geografisch te ordenen en in één band alleen de  kopie-missiven van één zelfde kantoor op te nemen. Ook dit systeem is echter  verre van consequent volgehouden. Talloze delen bevatten geheel willekeurig  stukken van verschillende kantoren. Indien een band kopie-missiven uit twee of  meer kantoren bevat, wordt deze band bij dat kantoor vermeld waarvan de stukken  het grootste gedeelte van de band innemen, met vermelding van de missiven van  andere kantoren. Verwijzing naar banden in andere reeksen vindt plaats door  middel van een blanco inventarisnummer (----). Bij de rangschikking van de  kantoren is afgeweken van de door de kamer toegepaste volgorde en is die uit de  generale missiven van gouverneur-generaal en raden aangehouden",
-                                                        "rico:includedIn":{
-                                                            "rico:RecordSet": {
-                                                                "rico:hasRecordSetType": "https://www.ica.org/standards/RiC/vocabularies/recordSetTypes#Series",
-                                                                "rico:title": "INGEKOMEN STUKKEN VAN GOUVERNEUR-GENERAAL EN RADEN BIJ   DE HEREN XVII EN DE KAMER ZEELAND",
-                                                                "rico:identifier": "Deel II/E",
-                                                                "html:p":"Voor een toelichting zie hoofdstuk 3, p. .",
-                                                                "rico:includedIn":{
-                                                                    "rico:RecordSet": {
-                                                                        "rico:hasRecordSetType": "https://www.ica.org/standards/RiC/vocabularies/recordSetTypes#Series",
-                                                                        "rico:title": "Kamer Zeeland",
-                                                                        "rico:identifier": "Deel II",
-                                                                        "rico:includedIn":{
-                                                                            "rico:RecordSet": {
-                                                                                "rico:hasRecordSetType": "https://www.ica.org/standards/RiC/vocabularies/recordSetTypes#Fonds",
-                                                                                "rico:title": "Verenigde Oostindische Compagnie (VOC)",
-                                                                                "rico:identifier": "152",
-                                                                                "rico:heldBy": "NL-HaNA",
-                                                                                "rico:isDescribedBy": {
-                                                                                    "rico:Record": {
-                                                                                        "rico:hasDocumentaryFormType": "https://www.ica.org/standards/RiC/vocabularies/documentaryFormTypes#FindingAid",
-                                                                                        "rico:identifier": "1.04.02",
-                                                                                        "rico:publishedBy": "Nationaal Archief, Den Haag",
-                                                                                        "rico:managedBy": "NL-HaNA"                                                                                }
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
+                                        "rico:includedIn": {
+                                          "rico:RecordSet": {
+                                            "rico:identifier": "Deel II",
+                                            "rico:title": "Kamer Zeeland",
+                                            "rico:hasRecordSetType": "https://www.ica.org/standards/RiC/vocabularies/recordSetTypes#Series",
+                                            "rico:includedIn": {
+                                              "rico:RecordSet": {
+                                                "rico:hasRecordSetType": "https://www.ica.org/standards/RiC/vocabularies/recordSetTypes#Fonds",
+                                                "rico:title": "Verenigde Oostindische Compagnie (VOC)",
+                                                "rico:identifier": "152",
+                                                "rico:isDescribedBy": {
+                                                  "rico:Record": {
+                                                    "rico:hasDocumentaryFormType": "https://www.ica.org/standards/RiC/vocabularies/documentaryFormTypes#FindingAid",
+                                                    "rico:identifier": "1.04.02",
+                                                    "rico:publishedBy": "Nationaal Archief, Den Haag",
+                                                    "rico:managedBy": "NL-HaNA"
+                                                  }
                                                 }
+                                              },
+                                              "rico:heldBy": "Nationaal Archief"
                                             }
+                                          }
                                         }
+                                      }
                                     }
+                                  }
                                 }
+                              }
                             }
+                          }
                         }
-                    ]
+                      }
+                    }
+                  ]
                 }
-            },
+              },
 
             "items": [
                 {
@@ -94,34 +89,41 @@
                 }
             ]
         },
-        
-        {   "@id": "https://archief.nl/doc/transcriptie/1.04.02/7660/1",
+        { 
+            "@id": "https://archief.nl/doc/transcriptie/hana/1.05.03/311/0001",
             "@type": "Canvas",
-            "label": "p. 1",
-            "height": 1000,
-            "width": 750,
-
-            "items": [ {
-                "type": "AnnotationPage",
-                "items": [
-                    {   "@type": "Annotation",
-                        "motivation": "painting", 
-                        "body": {
-                            "@id": "https://service.archief.nl/iip/b6/70/74/c8/1e/b5/4c/43/bd/9c/6d/ff/da/c9/e7/ef/c5c9cc43-e9bf-4b4c-9d8a-94b74da0a546.jp2/full/max/0/default.jpg",
-                            "@type": "Image",
-                            "format": "image/jpeg",
-                            "service": {
-                                "@id": "https://service.archief.nl/iip/b6/70/74/c8/1e/b5/4c/43/bd/9c/6d/ff/da/c9/e7/ef/c5c9cc43-e9bf-4b4c-9d8a-94b74da0a546.jp2/info.json",
-                                "@type": "ImageService2",
-                                "profile": "http://iiif.io/api/image/2/level2.json"
-                            },
-                            "height":1000,
-                            "width":750
+            "label": "0001",
+            "filename": "NL-HaNA_1.05.03_311_0001.xml",
+            "dcterms:source": "HTR",
+            "dcterms:format": "PAGE XML",
+            "dcterms:relation": "A",
+            "dcterms:contributor": "Q",
+            "height": 4120,
+            "width": 2767,
+            "items": [
+                {
+                  "type": "AnnotationPage",
+                  "items": [
+                    {
+                      "@type": "Annotation",
+                      "motivation": "painting",
+                      "body": {
+                        "@id": "https://service.archief.nl/iip/e6/4d/e3/7a/1a/9c/4b/2b/ae/fb/d9/ca/00/68/b8/50/f9df1628-3398-4776-b4e1-fe07287abf13.jp2/full/max/0/default.jpg",
+                        "@type": "Image",
+                        "format": "image/jpeg",
+                        "service": {
+                          "@id": "https://service.archief.nl/iip/e6/4d/e3/7a/1a/9c/4b/2b/ae/fb/d9/ca/00/68/b8/50/f9df1628-3398-4776-b4e1-fe07287abf13.jp2/info.json",
+                          "@type": "ImageService2",
+                          "profile": "http://iiif.io/api/image/2/level2.json"
                         },
-                        "target": "https://archief.nl/doc/transcriptie/1.04.02/7660/1"
+                        "height": 5507,
+                        "width": 3894
+                      },
+                      "target": "https://archief.nl/doc/transcriptie/hana/1.05.03/311/0001"
                     }
-                ]
-            }],
+                  ]
+                }
+             ],
             "annotations": [{
                 "type": "AnnotationPage",
                 "items": [
@@ -130,8 +132,7 @@
                         "motivation": "supplementing",
                         "body": {
                             "@type": "Text",
-                            "dcterms:created": "datestring",
-                            "dcterms:modified": "datestring",
+        
                             "regions":[
                                 {
                                 "geo:geometry": {
@@ -147,7 +148,7 @@
                                                 "geo:type": "Polygon",
                                                 "geo:coordinates": [ [187,206],[187,266],[231,266],[231,206] ]
                                             },
-                                            "named_entity": "_:Amsterdam" 
+                                            "named_entity": "urn:uuid:550e8400-e29b-41d4-a716-446655440000" 
                                         },
                                         {
                                             "original": "Amsterr",
@@ -157,7 +158,7 @@
                                                 "geo:type": "Polygon",
                                                 "geo:coordinates": [ [187,206],[187,266],[231,266],[231,206] ]
                                             },
-                                            "named_entity": "_:Amsterdam" 
+                                            "named_entity": "urn:uuid:550e8400-e29b-41d4-a716-446655440000" 
                                         },
                                         {
                                             "original": "Dam",
@@ -166,44 +167,24 @@
                                                 "geo:type": "Polygon",
                                                 "geo:coordinates": [ [187,206],[187,266],[231,266],[231,206] ]
                                             },
-                                            "named_entity": "_:Amsterdam"
+                                            "named_entity": "urn:uuid:550e8400-e29b-41d4-a716-446655440000"
                                         }
                                     ]}
                                 ]}
                             ]
                         },
-                        "target": "https://archief.nl/doc/transcriptie/1.04.02/7660/1"
+                        "target": "https://archief.nl/doc/transcriptie/hana/1.05.03/311/0001"
                     }
                 ]
             }]
-        },
-
-        {
-            "@id": "_:Geert Jan Verhoeven Jr.", 
-            "@type": "pnv:PersonName",
-            "literalName": "Geert Jan Verhoeven Jr."
-        },
-        {
-            "@id": "_:'t jaer sestiennhonderdenfijftigch",
-            "dcterms:date": "'t jaer sestiennhonderdenfijftigch"
-        },
-        {
-            "@id": "_:Amsterdam",
-            "@type": "hg:Place",
-            "dataset": "geonames",
-            "uri": "http://sws.geonames.org/2759794",
-            "name": "Amsterdam"
         },
         {
             "@id": "urn:uuid:550e8400-e29b-41d4-a716-446655440000",
             "@type": "hg:Place",
             "name": "Amstelodamus",
+            "dataset": "geonames",
+            "uri": "http://sws.geonames.org/2759794",
             "modern_form": "Amsterdam"
-        },
-        {
-            "@id": "urn:uuid:550e8400-e29b-41d4-a716-446655440000",
-            "@type": "hg:Place",
-            "name": "Amsterdam"
-        }  
+        }
     ]
 }
