@@ -234,7 +234,9 @@ export const transformToElasticBulk = (
     const entity = documentResponse['@graph'][index] as Canvas | Manifest;
 
     bulk.push(
-      { index: { _index: config.entityIndex, _id: entity['@id'] } },
+      {
+        index: { _index: config.entityIndex, _id: entity['@id'].toLowerCase() },
+      },
       { entity }
     );
 
@@ -244,7 +246,7 @@ export const transformToElasticBulk = (
         break;
 
       case 'Manifest': {
-        id = entity['@id'];
+        id = entity['@id'].toLowerCase();
 
         const transcriptionDoc = transformManifest(entity as Manifest);
 
@@ -254,7 +256,7 @@ export const transformToElasticBulk = (
           throw new Error('No valid manifest');
         }
 
-        document.id = id;
+        document.id = id.toLowerCase();
         document.date = transcriptionDoc.date;
         document.archive_label = transcriptionDoc.archive_label;
         document.archive_id = transcriptionDoc.archive_id;
@@ -276,7 +278,7 @@ export const transformToElasticBulk = (
           {
             index: {
               _index: config.entityIndex,
-              _id: entity['@id'],
+              _id: (entity['@id'] as string).toLowerCase(),
             },
           },
           { entity }
@@ -285,7 +287,10 @@ export const transformToElasticBulk = (
     }
   }
 
-  bulk.push({ index: { _index: config.inventoryIndex, _id: id } }, document);
+  bulk.push(
+    { index: { _index: config.inventoryIndex, _id: id?.toLowerCase() } },
+    document
+  );
 
   return { id, bulk };
 };
