@@ -86,9 +86,11 @@ export class EntityService {
     const namedEntityResponse = await namedEntityRequest(namedEntityIds);
 
     const namedEntityMap = namedEntityResponse
-      ? namedEntityResponse.body.docs.map(
-          (doc: { _source: { entity: NamedEntity } }) => doc._source.entity
-        )
+      ? namedEntityResponse.body.docs
+          .filter((doc: any) => doc.found === true)
+          .map(
+            (doc: { _source: { entity: NamedEntity } }) => doc._source.entity
+          )
       : [];
 
     const canvas: Canvas = {
