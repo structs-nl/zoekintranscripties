@@ -8,6 +8,7 @@ import {
   EntityName,
 } from './model';
 import config from '../../config';
+import { BadRequestError } from '../../helpers';
 
 export interface Inventory {
   id: string;
@@ -118,6 +119,10 @@ export const transformCanvas = (entity: Canvas, graph: any[]): NestedPage => {
                     }
                   }
                 }
+              } else {
+                throw new BadRequestError(
+                  `Entity with id=${word.named_entity} was not found in graph`
+                );
               }
             }
           });
