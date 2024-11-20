@@ -1,15 +1,10 @@
-# zoekintranscripties.nl
-
-Het projectarchief van zoekintranscripties.nl
+# zoekintranscripties.nl projectarchief
 
 ## Ontstaansgeschiedenis
 
 ## Lokaal draaien van de site
 
 ## Korte functionele beschrijving
-
-
-<img width="1728" alt="image" src="https://github.com/user-attachments/assets/9b5146b2-ac89-41d6-b330-408ea3dbca62">
 
 
 
@@ -22,5 +17,8 @@ Het projectarchief van zoekintranscripties.nl
 
 <img width="1752" alt="image" src="https://github.com/user-attachments/assets/9a375447-ef00-4b92-a936-7e6af493a82b">
 
+<img width="1470" alt="Scherm­afbeelding 2024-11-20 om 12 25 50" src="https://github.com/user-attachments/assets/c7b9c7eb-5a2e-439f-8db7-fa4dbd0f8244">
 
-<img width="1766" alt="image" src="https://github.com/user-attachments/assets/c74233be-2583-471d-8405-d80a6ede0c05">
+
+
+<img width="1470" alt="Scherm­afbeelding 2024-11-20 om 12 26 01" src="https://github.com/user-attachments/assets/d5795f4c-c932-4016-b178-3f1ef2b907c8">
