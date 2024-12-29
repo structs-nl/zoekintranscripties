@@ -31,15 +31,15 @@ First, the search page. There are several regular features and some less regular
 
 **Figure 1:** Transcriptions are indexed and shown in the search result in the context where they originate from (books or bundles), including relevant metadata.
 
-<img width="1710" alt="image" src="https://github.com/user-attachments/assets/dd7e140b-0dc9-4eb8-8f12-443cefd9f2e3">
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/dd7e140b-0dc9-4eb8-8f12-443cefd9f2e3">
 
 **Figure 2:** Search queries are parsed with an ANTLR parser and expanded with a customisable query expansion dictionary. The expanded query is sent to the search index, but more importantly: the expansions are presented to the user: a researcher can see what expansions are used and can de-select irrelevant ones.
 
 
-<img width="1752" alt="image" src="https://github.com/user-attachments/assets/9a375447-ef00-4b92-a936-7e6af493a82b">
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/9a375447-ef00-4b92-a936-7e6af493a82b">
 
-<img width="1470" alt="Scherm­afbeelding 2024-11-20 om 12 25 50" src="https://github.com/user-attachments/assets/c7b9c7eb-5a2e-439f-8db7-fa4dbd0f8244">
+<img width="500" alt="Scherm­afbeelding 2024-11-20 om 12 25 50" src="https://github.com/user-attachments/assets/c7b9c7eb-5a2e-439f-8db7-fa4dbd0f8244">
 
 
 
-<img width="1470" alt="Scherm­afbeelding 2024-11-20 om 12 26 01" src="https://github.com/user-attachments/assets/d5795f4c-c932-4016-b178-3f1ef2b907c8">
+<img width="500" alt="Scherm­afbeelding 2024-11-20 om 12 26 01" src="https://github.com/user-attachments/assets/d5795f4c-c932-4016-b178-3f1ef2b907c8">
