@@ -13,7 +13,7 @@ The project started with with our participation in an [open SBIR call](https://w
 More than 50 parties pitched and we where selected among two other parties to develop a prototype in a competition for an assignment.
 During the prototype competition, we made a first version of a transcription viewer, tailored search index and trained our own Bert model on historical Dutch. The latter was a very interesing and early experiment, but did not yield better results than an off-the-shelf model. We did not win the NER competition, but did win on the search and user interface aspects. It was decided to split the commission: we would develop the search index and the frontend, while our former competitor would do the CMS for the transcriptions and the NER. We worked decoupled and used our own transcription import script, as the transcription CMS project was heavily delayed. The NER results are part of the index.
 
-The project has not been developed further since May 2021. Since that time, some of the results are developed further by the National Archive and recently the Huygens. both with and without our involvement. The project is for us a good example of how much a small team (two part-timers) can achieve in a relative short period.
+The project has not been developed further since May 2021. Since that time, some of the results are developed further by the National Archive and recently the Huygens. both with and without our involvement.
 
 ## Running the site locally
 
