@@ -7,14 +7,11 @@ webservices and frontend, and can be run without further dependencies.
 The project was developed by us as part of the "IJsberg" project between Sept 2019 and May 2021,
 a national consortium led by the National Archive in the Nederlands.
 The projects [main output](https://zenodo.org/records/11209325) was a large-scale handwritten text recognition corpus on historical material of
-VOC, WIC and notarial deeds archives. This was done by the Transcribus with it's HTR software.
+VOC, WIC and notarial deeds archives. This was done by Transcribus with it's HTR software.
 
-The project started with with our participation in an [open SBIR (small business innovation research) call](https://www.tenderned.nl/aankondigingen/overzicht/171645) for developing a prototype.
-More than 50 parties pitched and we where selected among two other parties to develop a prototype in a competition for an assignment .
-During the prototype competition, we made a first version of a transcription viewer, tailored search index and trained our own Bert model on historical Dutch. The latter was a very interesing and early
-experiment, but did not yield better results than an off-the-shelf model. We did not win the NER competition, but did win on the search and user interface aspects.
-It was decided to split the commission: we would develop the search index and the frontend, while our former competitor would do the CMS for the transcriptions and the NER.
-We worked decoupled and used our own transcription import script, as the transcription CMS project was heavily delayed. The NER results are part of the index.
+The project started with with our participation in an [open SBIR call](https://www.tenderned.nl/aankondigingen/overzicht/171645) for developing a prototype.
+More than 50 parties pitched and we where selected among two other parties to develop a prototype in a competition for an assignment.
+During the prototype competition, we made a first version of a transcription viewer, tailored search index and trained our own Bert model on historical Dutch. The latter was a very interesing and early experiment, but did not yield better results than an off-the-shelf model. We did not win the NER competition, but did win on the search and user interface aspects. It was decided to split the commission: we would develop the search index and the frontend, while our former competitor would do the CMS for the transcriptions and the NER.We worked decoupled and used our own transcription import script, as the transcription CMS project was heavily delayed. The NER results are part of the index.
 
 The project has not been developed further since May 2021. Since that time, some of the results are developed further by the National Archive and recently the Huygens.
 both with and without our involvement. The project is for us a good example of how much a small team (two part-timers) can achieve in a relative short period.
