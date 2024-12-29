@@ -1,6 +1,8 @@
 
 This repository contains the source of the "zoekintranscripties.nl" project website. It consists of a search index,
-webservices and frontend, and can be run without further dependencies. The site itself is discotinued in Q1 of 2025. 
+webservices and frontend, and can be run without further dependencies.
+
+## About the project
 
 The project was developed by us as part of the "IJsberg" project between Sept 2019 and May 2021,
 a national consortium led by the National Archive in the Nederlands.
