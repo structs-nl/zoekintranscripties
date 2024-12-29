@@ -1,9 +1,19 @@
 
 ## Ontstaansgeschiedenis
 
+Transcripties: https://zenodo.org/records/11209325
+
 ## Lokaal draaien van de site
 
+- Download en gunzip de data: https://zenodo.org/records/14568577
+- Laadt de index in Docker: docker load --input zit-data.tar
+
+
+
+
+
 ## Korte functionele beschrijving
+
 
 
 
