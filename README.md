@@ -27,22 +27,22 @@ The site zoekintranscripties.nl has been discontinued in Q1 2025, but it is poss
 The site is basically two pages that work relatively independently: the search page and the transcription viewer.
 First, the search page. There are several regular features and some less regular:
 
-<img width="500" alt="image" src="https://github.com/user-attachments/assets/5d0b4d30-271c-4c62-a5d7-702ad3ea81ab">
+<img width="750" alt="image" src="https://github.com/user-attachments/assets/5d0b4d30-271c-4c62-a5d7-702ad3ea81ab">
 
 **Screen 1:** Transcriptions are indexed and shown in the search result in the context where they originate from (books or bundles), including relevant metadata.
 
-<img width="500" alt="image" src="https://github.com/user-attachments/assets/dd7e140b-0dc9-4eb8-8f12-443cefd9f2e3">
+<img width="750" alt="image" src="https://github.com/user-attachments/assets/dd7e140b-0dc9-4eb8-8f12-443cefd9f2e3">
 
 **Screen 2:** Search queries are parsed with an ANTLR parser and expanded with a customisable query expansion dictionary. The expanded query is sent to the search index, but more importantly: the expansions are presented to the user: a researcher can see what expansions are used and can de-select irrelevant ones.
 
-<img width="500" alt="image" src="https://github.com/user-attachments/assets/9a375447-ef00-4b92-a936-7e6af493a82b">
+<img width="750" alt="image" src="https://github.com/user-attachments/assets/9a375447-ef00-4b92-a936-7e6af493a82b">
 
 **Screen 3:** A hierarchical facet that allows browsing and filtering on the descriptive hierarchies of the works. This was done with the term aggregate of Elastic, a decomposition of the hierarchies in path / value pairs and regular expression filters on the term aggregate.
 
-<img width="500" alt="Scherm­afbeelding 2024-11-20 om 12 25 50" src="https://github.com/user-attachments/assets/c7b9c7eb-5a2e-439f-8db7-fa4dbd0f8244">
+<img width="750" alt="Scherm­afbeelding 2024-11-20 om 12 25 50" src="https://github.com/user-attachments/assets/c7b9c7eb-5a2e-439f-8db7-fa4dbd0f8244">
 
 **Screen 3:** The scan viewer with search support and term highlighting. Based on OpenSeadragon.
 
-<img width="500" alt="Scherm­afbeelding 2024-11-20 om 12 26 01" src="https://github.com/user-attachments/assets/d5795f4c-c932-4016-b178-3f1ef2b907c8">
+<img width="750" alt="Scherm­afbeelding 2024-11-20 om 12 26 01" src="https://github.com/user-attachments/assets/d5795f4c-c932-4016-b178-3f1ef2b907c8">
 
 **Screen 4:** The scan + transcription viewer, with search support and mouseover on both the words in the scan and the words in the text.
