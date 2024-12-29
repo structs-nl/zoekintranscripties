@@ -24,11 +24,10 @@ both with and without our involvement. The project is for us a good example of h
 
 ## Running the site locally
 
-The site zoekintranscripties.nl has been discontinued in Q1 2025. It is possible to run the site locally with little effort:
+The site zoekintranscripties.nl has been discontinued in Q1 2025, but it is possible to run the site locally with little effort:
 
 - Download and gunzip the data index: https://zenodo.org/records/14568577
 - Load the index as an image: docker load --input zit-data.tar
-
 
 ## A short functional description
 
