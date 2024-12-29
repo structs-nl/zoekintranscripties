@@ -11,10 +11,9 @@ VOC, WIC and notarial deeds archives. This was done by Transcribus with it's HTR
 
 The project started with with our participation in an [open SBIR call](https://www.tenderned.nl/aankondigingen/overzicht/171645) for developing a prototype.
 More than 50 parties pitched and we where selected among two other parties to develop a prototype in a competition for an assignment.
-During the prototype competition, we made a first version of a transcription viewer, tailored search index and trained our own Bert model on historical Dutch. The latter was a very interesing and early experiment, but did not yield better results than an off-the-shelf model. We did not win the NER competition, but did win on the search and user interface aspects. It was decided to split the commission: we would develop the search index and the frontend, while our former competitor would do the CMS for the transcriptions and the NER.We worked decoupled and used our own transcription import script, as the transcription CMS project was heavily delayed. The NER results are part of the index.
+During the prototype competition, we made a first version of a transcription viewer, tailored search index and trained our own Bert model on historical Dutch. The latter was a very interesing and early experiment, but did not yield better results than an off-the-shelf model. We did not win the NER competition, but did win on the search and user interface aspects. It was decided to split the commission: we would develop the search index and the frontend, while our former competitor would do the CMS for the transcriptions and the NER. We worked decoupled and used our own transcription import script, as the transcription CMS project was heavily delayed. The NER results are part of the index.
 
-The project has not been developed further since May 2021. Since that time, some of the results are developed further by the National Archive and recently the Huygens.
-both with and without our involvement. The project is for us a good example of how much a small team (two part-timers) can achieve in a relative short period.
+The project has not been developed further since May 2021. Since that time, some of the results are developed further by the National Archive and recently the Huygens. both with and without our involvement. The project is for us a good example of how much a small team (two part-timers) can achieve in a relative short period.
 
 ## Running the site locally
 
@@ -28,11 +27,7 @@ The site zoekintranscripties.nl has been discontinued in Q1 2025, but it is poss
 The site is basically two pages that work relatively independently: the search page and the transcription viewer.
 First, the search page. There are several regular features and some less regular:
 
-
-
-
-
-<img width="1706" alt="image" src="https://github.com/user-attachments/assets/5d0b4d30-271c-4c62-a5d7-702ad3ea81ab">
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/5d0b4d30-271c-4c62-a5d7-702ad3ea81ab">
 
 **Figure 1:** Transcriptions are indexed and shown in the search result in the context where they originate from (books or bundles), including relevant metadata.
 
