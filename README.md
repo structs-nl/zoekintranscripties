@@ -1,21 +1,23 @@
 
-## Ontstaansgeschiedenis
 
-Transcripties: https://zenodo.org/records/11209325
+This repository contains the source of the "zoekintranscripties" project website. It consists of a search index, webservices and frontend, and can be run without further dependencies. The site itself 
 
-## Lokaal draaien van de site
+The project was developed by us as part of the "IJsberg" project between Sept 2019 and May 2021, a national consortium led by the National Archive in the Nederlands. The projects main output was a large-scale handwritten text recognition corpus on historical material of VOC, WIC and notarial deeds archives. This was done by the Transcribus with it's HTR software. Both the ground truth and HTR results can be found at https://zenodo.org/records/11209325. The presentation of the results (May 2021) can be found here (in Dutch): https://www.nationaalarchief.nl/beleven/nieuws/kijk-symposium-de-ijsberg-zichtbaar-maken-terug
 
-- Download en gunzip de data: https://zenodo.org/records/14568577
-- Laadt de index in Docker: docker load --input zit-data.tar
+TODO: 
+
+- SBIR prototype competition, project website assignment / commission
+- Experiences continue to find their way at the NA and Huygens / Globalise
+
+## Running the site locally
+
+The site zoekintranscripties.nl has been discontinued in Q1 2025. It is possible to run the site locally with little effort:
+
+- Download and gunzip the data index: https://zenodo.org/records/14568577
+- Load the index as an image: docker load --input zit-data.tar
 
 
-
-
-
-## Korte functionele beschrijving
-
-
-
+## A short functional description
 
 <img width="1706" alt="image" src="https://github.com/user-attachments/assets/5d0b4d30-271c-4c62-a5d7-702ad3ea81ab">
 
