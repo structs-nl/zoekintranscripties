@@ -31,9 +31,15 @@ The site zoekintranscripties.nl has been discontinued in Q1 2025, but it is poss
 
 ## A short functional description
 
+The site is basically two pages that work relatively independently: the search page and the transcription viewer.
+First, the search page. There are several regular features and some less regular:
+
+
+Transcriptions are indexed and shown in the search result in the context where they originate from (books or bundles), including relevant metadata:
+
 <img width="1706" alt="image" src="https://github.com/user-attachments/assets/5d0b4d30-271c-4c62-a5d7-702ad3ea81ab">
 
-
+Search queries are parsed with an ANTLR parser and expanded with a customisable query expansion dictionary. The expanded query is sent to the search index, but more importantly: the expansions are presented to the user: a researcher can see what expansions are used and can de-select irrelevant ones:
 
 <img width="1710" alt="image" src="https://github.com/user-attachments/assets/dd7e140b-0dc9-4eb8-8f12-443cefd9f2e3">
 
