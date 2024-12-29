@@ -21,6 +21,7 @@ The site zoekintranscripties.nl has been discontinued in Q1 2025, but it is poss
 
 - Download and gunzip the data index: https://zenodo.org/records/14568577
 - Load the index as an image: docker load --input zit-data.tar
+- Run docker compose up in this cloned git repos
 
 ## A short functional description
 
