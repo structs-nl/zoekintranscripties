@@ -36,7 +36,7 @@ The site is basically two pages that work relatively independently: the search p
 
 <img width="750" alt="image" src="https://github.com/user-attachments/assets/9a375447-ef00-4b92-a936-7e6af493a82b">
 
-**Screen 3 (transcription viewer):** A hierarchical facet that allows browsing and filtering on the descriptive hierarchies of the works. This was done with a decomposition of the hierarchies in path / value pairs and regular expression filters on the standard term aggregate.
+**Screen 3 (search page):** A hierarchical facet that allows browsing and filtering on the descriptive hierarchies of the works. This was done with a decomposition of the hierarchies in path / value pairs and regular expression filters on the standard term aggregate.
 
 <img width="750" alt="Scherm­afbeelding 2024-11-20 om 12 25 50" src="https://github.com/user-attachments/assets/c7b9c7eb-5a2e-439f-8db7-fa4dbd0f8244">
 
@@ -44,4 +44,4 @@ The site is basically two pages that work relatively independently: the search p
 
 <img width="750" alt="Scherm­afbeelding 2024-11-20 om 12 26 01" src="https://github.com/user-attachments/assets/d5795f4c-c932-4016-b178-3f1ef2b907c8">
 
-**Screen 4:** The scan + transcription viewer, with search support and mouseover on both the words in the scan and the words in the text.
+**Screen 4 (transcription viewer):** The scan + transcription viewer, with search support and mouseover on both the words in the scan and the words in the text.
