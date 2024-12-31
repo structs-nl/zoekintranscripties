@@ -25,7 +25,6 @@ The site zoekintranscripties.nl has been discontinued in Q1 2025, but it is poss
 ## A short functional description
 
 The site is basically two pages that work relatively independently: the search page and the transcription viewer.
-First, the search page. There are several regular features and some less regular:
 
 <img width="750" alt="image" src="https://github.com/user-attachments/assets/5d0b4d30-271c-4c62-a5d7-702ad3ea81ab">
 
