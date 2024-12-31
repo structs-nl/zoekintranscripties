@@ -37,7 +37,7 @@ First, the search page. There are several regular features and some less regular
 
 <img width="750" alt="image" src="https://github.com/user-attachments/assets/9a375447-ef00-4b92-a936-7e6af493a82b">
 
-**Screen 3:** A hierarchical facet that allows browsing and filtering on the descriptive hierarchies of the works. This was done with the term aggregate of Elastic, a decomposition of the hierarchies in path / value pairs and regular expression filters on the term aggregate.
+**Screen 3:** A hierarchical facet that allows browsing and filtering on the descriptive hierarchies of the works. This was done with a decomposition of the hierarchies in path / value pairs and regular expression filters on the standard term aggregate.
 
 <img width="750" alt="Scherm­afbeelding 2024-11-20 om 12 25 50" src="https://github.com/user-attachments/assets/c7b9c7eb-5a2e-439f-8db7-fa4dbd0f8244">
 
