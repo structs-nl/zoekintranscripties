@@ -40,7 +40,7 @@ The site is basically two pages that work relatively independently: the search p
 
 <img width="750" alt="Scherm­afbeelding 2024-11-20 om 12 25 50" src="https://github.com/user-attachments/assets/c7b9c7eb-5a2e-439f-8db7-fa4dbd0f8244">
 
-**Screen 3 (transcription viewer):** The scan viewer with search support and term highlighting. Based on OpenSeadragon.
+**Screen 3 (transcription viewer):** The scan viewer with search support and term highlighting.
 
 <img width="750" alt="Scherm­afbeelding 2024-11-20 om 12 26 01" src="https://github.com/user-attachments/assets/d5795f4c-c932-4016-b178-3f1ef2b907c8">
 
