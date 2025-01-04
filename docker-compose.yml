@@ -14,12 +14,21 @@ services:
     environment:
       - "discovery.type=single-node"
     volumes:
-      - esdata1:/usr/share/elasticsearch/data:rw   
+      - esdata1:/usr/share/elasticsearch/data:rw
 
   web-api:
-    build: 
-      context: .
-      dockerfile: ./api/Dockerfile
+    container_name: zit-api
+    build: api
+    ports:
+      - 8080:8080
+    environment:
+     - NODE_ENV=production
+     - NODE_PORT=8080
+     - ELASTIC_URL=http://elasticsearch:9200
+    links:
+        - elasticsearch
+    depends_on:
+        - elasticsearch
 
 volumes:
   esdata1:
