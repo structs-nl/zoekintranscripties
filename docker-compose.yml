@@ -22,13 +22,35 @@ services:
     ports:
       - 8080:8080
     environment:
-     - NODE_ENV=production
-     - NODE_PORT=8080
-     - ELASTIC_URL=http://elasticsearch:9200
+      - NODE_ENV=production
+      - ELASTIC_URL=http://elasticsearch:9200
     links:
-        - elasticsearch
+      - elasticsearch
     depends_on:
-        - elasticsearch
+      - elasticsearch
+
+  web-ingest:
+    container_name: zit-ingest
+    build: ingest
+    ports:
+      - 6000:6000
+    environment:
+      - NODE_ENV=production
+      - ELASTIC_URL=http://elasticsearch:9200
+    links:
+      - elasticsearch
+    depends_on:
+      - elasticsearch
+
+  web-app:
+    container_name: zit-webapp
+    build: web
+    ports:
+      - 4000:4000
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - 'web-api'
 
 volumes:
   esdata1:
