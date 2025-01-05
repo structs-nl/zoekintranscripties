@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'https://api.zoekintranscripties.nl',
-  // apiBaseUrl: 'https://api-test.zoekintranscripties.nl/',
+  apiBaseUrl: 'http://localhost:8080',
+  // apiBaseUrl: 'https://api.zoekintranscripties.nl',
 };

@@ -13,4 +13,4 @@ The architecture of this server is identical to the `/api` server. For more info
 
 # Environment
 
-By default, the app runs on port 5000 and it needs a link to an elastic server. This can be configured with environment variables. See a list of all environment variables in the file: `.env.sample`
+By default, the app runs on port 6000 and it needs a link to an elastic server. This can be configured with environment variables. See a list of all environment variables in the file: `.env.sample`

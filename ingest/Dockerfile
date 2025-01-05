@@ -6,6 +6,6 @@ COPY . .
 RUN npm run generate:docs
 RUN npm run build
 
-EXPOSE 5000
+EXPOSE 6000
 
 CMD [ "node", "build/index.js" ]

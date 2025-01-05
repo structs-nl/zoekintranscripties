@@ -86,8 +86,22 @@ Om deze applicatie te lokaal te draaien heb je NodeJS 14 of hoger en eventueel D
 
 - The web app runs on http://localhost:4200
 - The api runs on http://localhost:8080
-- The ingest runs on http://localhost:5000
+- The ingest runs on http://localhost:6000
 
+## Project draaien
+
+Dit kan door middel van docker. Zorg ervoor dat je 'Disk image size' minimaal 50GB is, want de hele dataset wordt ingeladen. Zie [Zenodo](https://zenodo.org/records/14568577) voor meer informatie over de dataset.
+
+Voor het volgende commando uit om de dataset te downloaden. Het is ongeveer 20GB dus het kan even duren.
+`curl -O https://zenodo.org/records/14568577/files/zit-data.tar.gz`
+
+Het volgende commando is om de dataset in te laden in docker
+`docker load --input zit-data.tar.gz`
+
+Draai dit commando vanuit de root van de repository om alle applicaties in 1 keer op te starten.
+`docker compose up -d --no-deps --build`
+
+Ga naar [https://localhost:4000](https://localhost:4000) om de site te bekijken
 
 ## Deployment
 
