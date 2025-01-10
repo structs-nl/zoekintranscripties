@@ -1,0 +1,43 @@
+services:
+
+  zit-data:
+    image: zit-data:latest
+    volumes:
+      - esdata1:/volume-data/:rw
+
+  elasticsearch:
+    container_name: zit-elastic
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.12.1
+    ports:
+      - '9200:9200'
+      - '9300:9300'
+    environment:
+      - "discovery.type=single-node"
+    volumes:
+      - esdata1:/usr/share/elasticsearch/data:rw
+
+  web-api:
+    container_name: zit-api
+    image: zit-github-web-api:latest
+    ports:
+      - 8080:8080
+    environment:
+      - NODE_ENV=production
+      - ELASTIC_URL=http://elasticsearch:9200
+    links:
+      - elasticsearch
+    depends_on:
+      - elasticsearch
+  web-app:
+    container_name: zit-webapp
+    image: zit-github-web-app:latest
+    ports:
+      - 4000:4000
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - 'web-api'
+
+volumes:
+  esdata1:
+    driver: local
