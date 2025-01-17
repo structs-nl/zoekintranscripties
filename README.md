@@ -18,10 +18,14 @@ The source has not been developed further since May 2021. Since that time, some 
 
 The site zoekintranscripties.nl has been discontinued in Q1 2025, but it is possible to run the site locally with little effort:
 
-- Download the data index: https://zenodo.org/records/14568577
-- Load the index as an image: docker load --input zit-data.tar.gz
-- Run docker compose up in this cloned git repos
+- Download the files from from https://zenodo.org/records/14628950
+- docker load --input zit-data.tar.gz
+- docker load --input web-api.tar.gz
+- docker load --input web-app.tar.gz
+- Run docker compose up from zenodo.
 
+One can also build the source from this repos by running docker compose up from this repo. The zit-data.tar.gz image needs to be loaded as well.
+  
 ## A short functional description
 
 The site is basically two pages that work relatively independently: the search page and the transcription viewer.
